@@ -25,6 +25,12 @@
   "settings": {
     "import/resolver": {
       "typescript": {}
+    },
+    "react": {
+      "version": "detect" // 설치된 React 버전을 자동으로 감지
     }
+  },
+  "rules": {
+    "react/react-in-jsx-scope": "off"
   }
 }
