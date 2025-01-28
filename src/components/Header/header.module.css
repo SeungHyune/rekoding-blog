@@ -32,7 +32,6 @@
 .header .headerNavigation .navigation ul {
   display: flex;
   gap: 3.5rem;
-  list-style: none;
 }
 
 .header .headerNavigation .navigation ul li {
@@ -45,5 +44,4 @@
   display: flex;
   gap: 1.6rem;
   margin-right: 2.8rem;
-  list-style: none;
 }
