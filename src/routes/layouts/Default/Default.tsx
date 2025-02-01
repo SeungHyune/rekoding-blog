@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { Footer, Header } from "@/components";
+import { Header } from "@/components";
 
 const DefaultLayout = () => {
   return (
@@ -8,7 +8,6 @@ const DefaultLayout = () => {
       <main id="app">
         <Outlet />
       </main>
-      <Footer />
     </>
   );
 };
