@@ -24,4 +24,5 @@ a {
 #app {
   max-width: 144rem;
   margin: 0 auto;
+  padding-top: 10rem;
 }

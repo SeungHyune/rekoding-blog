@@ -8,10 +8,10 @@ const Header = () => {
     <header className={styles.header}>
       <section className={styles.headerContainer}>
         <article className={styles.headerNavigation}>
-          <h1>
+          <Link className={styles.logo} to="/" title="Logo">
             <span>REKODING</span>
             <span>DEV</span>
-          </h1>
+          </Link>
           <nav className={styles.navigation}>
             <ul>
               <li>
