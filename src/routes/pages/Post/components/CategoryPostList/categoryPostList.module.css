@@ -1,0 +1,29 @@
+.category {
+  display: inline-block;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.categoryPostList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.categoryPostList > li > a {
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 1.6rem;
+  color: #ccc;
+}
+
+.categoryPostList > li > a:hover {
+  color: #999;
+}
+
+.categoryPostList > li > a[class="active"] {
+  font-weight: 600;
+  color: #ffaa00;
+}
