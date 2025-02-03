@@ -1,0 +1,56 @@
+.rootSection.dark header {
+  background-color: #121212;
+  color: #fff;
+  border-bottom: 0.1rem solid #4f4f4f;
+}
+
+.rootSection.dark header > section > article > a {
+  color: #c8c8c8;
+}
+
+.rootSection.dark .leftSidebar {
+  border-right: 0.1rem solid #4f4f4f;
+}
+
+.rootSection .leftSidebar::before {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 3.5rem;
+  content: "";
+  pointer-events: none;
+  transition: background-color 0.2s ease;
+}
+
+.rootSection.dark .leftSidebar > ul > li > ul > li > a {
+  color: #828282;
+}
+
+.rootSection.dark .leftSidebar > ul > li > ul > li > a:hover {
+  color: #a5a5a5;
+}
+
+.rootSection.dark .leftSidebar > ul > li > ul > li > a[class="active"] {
+  color: #ffaa00;
+}
+
+.rootSection.dark .rightSidebar {
+  color: #828282;
+}
+
+.rootSection.dark .rightSidebar > div > button > svg > path {
+  fill: #828282;
+}
+
+.rootSection.dark .rightSidebar > div > button > span {
+  color: #828282;
+}
+
+.rootSection.dark .rightSidebar > div > button:hover > svg > path {
+  fill: #ffaa00;
+}
+
+.rootSection.dark .rightSidebar > div > button:hover > span {
+  color: #ffaa00;
+}

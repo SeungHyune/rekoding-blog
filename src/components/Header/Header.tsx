@@ -1,11 +1,20 @@
 import { Link, NavLink } from "react-router-dom";
-import { GithubIcon, EmailIcon } from "@/components/icons";
+import {
+  GithubIcon,
+  EmailIcon,
+  EmailDarkIcon,
+  GithubDarkIcon,
+} from "@/components/icons";
 import { SwitchButton, SearchBar } from "./components";
 import styles from "./header.module.css";
+import useThemeStore from "@/stores/useThemeStore/useThemeStore";
 
 const Header = () => {
+  const { theme } = useThemeStore();
   return (
-    <header className={styles.header}>
+    <header
+      className={`${styles.header} ${theme === "DARK" ? "dark" : "light"}`}
+    >
       <section className={styles.headerContainer}>
         <article className={styles.headerNavigation}>
           <Link className={styles.logo} to="/" title="Logo">
@@ -17,9 +26,6 @@ const Header = () => {
               <li>
                 <NavLink to="/">Home</NavLink>
               </li>
-              <li>
-                <NavLink to="/profile">Profile</NavLink>
-              </li>
             </ul>
           </nav>
         </article>
@@ -27,12 +33,12 @@ const Header = () => {
           <ul className={styles.infoList}>
             <li>
               <Link to="https://github.com/SeungHyune" target="_blank">
-                <GithubIcon />
+                {theme === "DARK" ? <GithubDarkIcon /> : <GithubIcon />}
               </Link>
             </li>
             <li>
               <Link to="mailto:tmdgus7820@naver.com">
-                <EmailIcon />
+                {theme === "DARK" ? <EmailDarkIcon /> : <EmailIcon />}
               </Link>
             </li>
           </ul>

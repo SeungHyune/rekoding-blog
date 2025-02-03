@@ -1,12 +1,16 @@
-import { useState } from "react";
 import { LightIcon, DarkIcon } from "@components/icons";
 import styles from "./switchButton.module.css";
+import useThemeStore from "@/stores/useThemeStore/useThemeStore";
 
 const SwitchButton = () => {
-  const [isToggle, setIsToggle] = useState(false);
+  const { theme, setTheme } = useThemeStore();
 
   const handleToggle = () => {
-    setIsToggle((isToggle) => !isToggle);
+    if (theme === "LIGHT") {
+      setTheme("DARK");
+    } else {
+      setTheme("LIGHT");
+    }
   };
 
   return (
@@ -14,15 +18,16 @@ const SwitchButton = () => {
       <LightIcon />
       <div
         className={styles.switch}
-        style={{ background: isToggle ? "#FFC800" : "#e2e8f0" }}
+        style={{ background: theme === "DARK" ? "#FFC800" : "#e2e8f0" }}
         onClick={handleToggle}
       >
         <div
           className={styles.circle}
           style={{
-            transform: isToggle
-              ? "translate(3rem, 0.2rem)"
-              : "translate(0.2rem, 0.2rem)",
+            transform:
+              theme === "DARK"
+                ? "translate(3rem, 0.2rem)"
+                : "translate(0.2rem, 0.2rem)",
           }}
         />
       </div>

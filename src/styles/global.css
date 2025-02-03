@@ -27,7 +27,23 @@ a {
   color: inherit;
 }
 
+.rootSection {
+  transition: all 0.2s;
+}
+
+.rootSection.light {
+  background-color: #fff;
+  color: #000;
+}
+
+.rootSection.dark {
+  background-color: #121212;
+  color: #fff;
+}
+
 #app {
+  height: calc(100% - 10rem);
+  min-height: calc(100dvh - 10rem);
   max-width: 144rem;
   margin: 0 auto;
   padding-top: 10rem;

@@ -11,7 +11,7 @@ import {
 const Post = () => {
   return (
     <section className={styles.postContainer}>
-      <aside className={styles.leftSidebar}>
+      <aside className={`${styles.leftSidebar} leftSidebar`}>
         <ul>
           <li>
             <strong>REACT</strong>
@@ -189,7 +189,7 @@ const Post = () => {
           ))}
         </article>
       </section>
-      <aside className={styles.rightSidebar}>
+      <aside className={`${styles.rightSidebar} rightSidebar`}>
         <div className={styles.socialButtons}>
           <button type="button">
             <LikeIcon />

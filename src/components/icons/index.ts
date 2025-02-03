@@ -8,3 +8,5 @@ export { default as ShareIcon } from "./ShareIcon/ShareIcon";
 export { default as LikeIcon } from "./LikeIcon/LikeIcon";
 export { default as ArrowUpIcon } from "./ArrowUpIcon/ArrowUpIcon";
 export { default as ArrowDownIcon } from "./ArrowDownIcon/ArrowDownIcon";
+export { default as EmailDarkIcon } from "./EmailDarkIcon/EmailDarkIcon";
+export { default as GithubDarkIcon } from "./GithubDarkIcon/GithubDarkIcon";
