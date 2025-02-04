@@ -85,8 +85,15 @@ const Post = () => {
       <section className={`${styles.postContent} postContent`}>
         <article className={styles.titleBox}>
           <h1>{POST_DETAIL.title}</h1>
-          <div>
-            <span>{POST_DETAIL.dateAt}</span>
+          <div className={styles.infoBox}>
+            <ul className={styles.hashTagList}>
+              {POST_DETAIL.hashTag.map((tag) => (
+                <li key={tag}>#{tag}</li>
+              ))}
+            </ul>
+            <div>
+              <span>{POST_DETAIL.dateAt}</span>
+            </div>
           </div>
         </article>
         <article className={`${styles.contentBox} contentBox`}>
