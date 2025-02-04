@@ -1,5 +1,6 @@
-import { NavLink } from "react-router-dom";
-import styles from "./post.module.css";
+import { useMemo } from "react";
+import ReactMarkdown from "react-markdown";
+import rehypeSlug from "rehype-slug";
 import {
   ArrowUpIcon,
   ArrowDownIcon,
@@ -7,193 +8,103 @@ import {
   LikeIcon,
   ShareIcon,
 } from "@components/icons";
+import { CategoryPostList } from "./components";
+import { POSTS_DETAIL, POST_LIST, CATEGORY_LIST } from "@/constants/dummy";
+import styles from "./post.module.css";
+import { useParams } from "react-router-dom";
+import NotFound from "../NotFound/NotFound";
+
+function extractTitles(markdown: string) {
+  const titles = markdown.match(/^(#+)\s+(.*)$/gm);
+  if (!titles) return [];
+
+  return titles.map((title) => {
+    const text = title
+      .replace(/^(#+)\s+/, "")
+      .replace(/\./g, "")
+      .trim();
+    const textLowerCase = text.toLowerCase();
+    const gapRemoveText = textLowerCase.replace(/\s+/g, "-");
+
+    return { text, gapRemoveText }; // 레벨, 텍스트, HTML 태그 포함
+  });
+}
 
 const Post = () => {
+  const { id } = useParams();
+
+  const postList = useMemo(() => {
+    return CATEGORY_LIST.map((title) => {
+      const posts = POST_LIST.filter(
+        ({ category }) => category.toUpperCase() === title,
+      );
+
+      return {
+        category: title,
+        posts,
+      };
+    });
+  }, [POST_LIST]);
+
+  const POST_DETAIL = POSTS_DETAIL[id];
+
+  if (!POST_DETAIL) {
+    return <NotFound />;
+  }
+
+  const TOC_LIST = extractTitles(POST_DETAIL.content);
+
+  const smoothScrollTo = (targetId: string) => {
+    const targetElement = document.getElementById(targetId);
+
+    window.scrollTo({
+      top: targetElement?.offsetTop,
+      behavior: "smooth",
+    });
+  };
+
+  const handleTocClick = (event: React.MouseEvent) => {
+    event.preventDefault();
+
+    const targetId = event.currentTarget.getAttribute("href")?.substring(1);
+    smoothScrollTo(targetId);
+  };
+
   return (
     <section className={styles.postContainer}>
       <aside className={`${styles.leftSidebar} leftSidebar`}>
         <ul>
-          <li>
-            <strong>REACT</strong>
-            <ul>
-              <li>
-                <NavLink className={styles.post} to="/post/1" title="">
-                  내가 보려고 작성한, 처음 맥북 세팅하기
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/post/2" title="">
-                  구글 크롬 원격 데스크톱 설치 및 사용 가이드
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/" title="">
-                  내가 보려고 작성한, 처음 맥북 세팅하기
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/" title="">
-                  내가 보려고 작성한, 처음 맥북 세팅하기
-                </NavLink>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <strong>NEXT.JS</strong>
-            <ul>
-              <li>
-                <NavLink to="/" title="">
-                  내가 보려고 작성한, 처음 맥북 세팅하기
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/" title="">
-                  구글 크롬 원격 데스크톱 설치 및 사용 가이드
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/" title="">
-                  내가 보려고 작성한, 처음 맥북 세팅하기
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/" title="">
-                  내가 보려고 작성한, 처음 맥북 세팅하기
-                </NavLink>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <strong>프론트엔드</strong>
-            <ul>
-              <li>
-                <NavLink to="/" title="">
-                  내가 보려고 작성한, 처음 맥북 세팅하기
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/" title="">
-                  구글 크롬 원격 데스크톱 설치 및 사용 가이드
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/" title="">
-                  내가 보려고 작성한, 처음 맥북 세팅하기
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/" title="">
-                  내가 보려고 작성한, 처음 맥북 세팅하기
-                </NavLink>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <strong>DB</strong>
-            <ul>
-              <li>
-                <NavLink to="/" title="">
-                  99%가 모른다는 DB Connection 누수 문제
-                </NavLink>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <strong>기타</strong>
-            <ul>
-              <li>
-                <NavLink to="/" title="">
-                  내가 보려고 작성한, 처음 맥북 세팅하기
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/" title="">
-                  구글 크롬 원격 데스크톱 설치 및 사용 가이드
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/" title="">
-                  내가 보려고 작성한, 처음 맥북 세팅하기
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/" title="">
-                  내가 보려고 작성한, 처음 맥북 세팅하기
-                </NavLink>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <strong>기타2</strong>
-            <ul>
-              <li>
-                <NavLink to="/" title="">
-                  내가 보려고 작성한, 처음 맥북 세팅하기
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/" title="">
-                  구글 크롬 원격 데스크톱 설치 및 사용 가이드
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/" title="">
-                  내가 보려고 작성한, 처음 맥북 세팅하기
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/" title="">
-                  내가 보려고 작성한, 처음 맥북 세팅하기
-                </NavLink>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <strong>기타3</strong>
-            <ul>
-              <li>
-                <NavLink to="/" title="">
-                  내가 보려고 작성한, 처음 맥북 세팅하기
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/" title="">
-                  구글 크롬 원격 데스크톱 설치 및 사용 가이드
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/" title="">
-                  내가 보려고 작성한, 처음 맥북 세팅하기
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/" title="">
-                  내가 보려고 작성한, 처음 맥북 세팅하기
-                </NavLink>
-              </li>
-            </ul>
-          </li>
+          {postList.map(({ category, posts }) => (
+            <CategoryPostList
+              key={category}
+              category={category}
+              posts={posts}
+            />
+          ))}
         </ul>
       </aside>
 
       <section className={styles.postContent}>
         <article className={styles.titleBox}>
-          <h1>99%가 모른다는 DB Connection 누수 문제</h1>
+          <h1>{POST_DETAIL.title}</h1>
           <div>
-            <span>2025.01.20</span>
+            <span>{POST_DETAIL.dateAt}</span>
           </div>
         </article>
         <article className={styles.contentBox}>
-          {Array.from({ length: 150 }).map((_, idx) => (
-            <li key={idx}>{idx}</li>
-          ))}
+          <div className={styles.thumbnailBox}>
+            <img src={POST_DETAIL.thumbnailUrl} alt={POST_DETAIL.title} />
+          </div>
+          <ReactMarkdown rehypePlugins={[rehypeSlug]}>
+            {POST_DETAIL.content}
+          </ReactMarkdown>
         </article>
       </section>
       <aside className={`${styles.rightSidebar} rightSidebar`}>
         <div className={styles.socialButtons}>
           <button type="button">
             <LikeIcon />
-            <span>9</span>
+            <span>{POST_DETAIL.likeCount}</span>
           </button>
           <button type="button">
             <ShareIcon />
@@ -203,10 +114,17 @@ const Post = () => {
           </button>
         </div>
         <ul className={styles.tocList}>
-          <li>프로젝트 KPT 회고</li>
-          <li>프로젝트 KPT 회고</li>
-          <li>프로젝트 KPT 회고</li>
-          <li>프로젝트 KPT 회고</li>
+          {TOC_LIST.map(({ text, gapRemoveText }) => (
+            <li key={`${gapRemoveText}`}>
+              <a
+                href={`#${gapRemoveText}`}
+                title={`${text} 타이틀로 이동`}
+                onClick={handleTocClick}
+              >
+                {text}
+              </a>
+            </li>
+          ))}
         </ul>
       </aside>
 
