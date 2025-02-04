@@ -8,3 +8,16 @@ export interface PostListResponse {
   category: string;
   categoryColor: string;
 }
+
+interface Post {
+  title: string;
+  thumbnailUrl: string;
+  content: string;
+  dateAt: string;
+  hashTag: string[];
+  likeCount: number;
+}
+
+export interface PostsDetailResponse {
+  [key: number]: Post;
+}
