@@ -1,10 +1,43 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { PostItem } from "./components";
 import styles from "./home.module.css";
-import { POST_LIST, CATEGORY_LIST } from "../../../constants/dummy";
+import { PostListResponse } from "@/types/response/post";
 
 const Home = () => {
+  const [posts, setPosts] = useState<PostListResponse[]>([]);
+  const [categoryList, setCategoryList] = useState<string[]>([]);
   const [tab, setTab] = useState("TOTAL");
+
+  useEffect(() => {
+    const getPosts = async () => {
+      try {
+        const response = await fetch("/posts");
+        const postList = await response.json();
+        setPosts(postList);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    const getCategoryList = async () => {
+      try {
+        const response = await fetch("/categoryList");
+        const categoryList = await response.json();
+        setCategoryList(categoryList);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getPosts();
+    getCategoryList();
+  }, []);
+
+  const postList = useMemo(() => {
+    return posts.filter(({ category }) => {
+      return category.toUpperCase() === tab || tab === "TOTAL";
+    });
+  }, [tab, posts]);
 
   const handleClickTab = (newTab: string) => {
     if (tab === newTab) {
@@ -15,12 +48,6 @@ const Home = () => {
 
     setTab(newTab);
   };
-
-  const postList = useMemo(() => {
-    return POST_LIST.filter(({ category }) => {
-      return category.toUpperCase() === tab || tab === "TOTAL";
-    });
-  }, [tab]);
 
   const tabActiveStyle = {
     backgroundColor: "#fef0d3",
@@ -48,7 +75,7 @@ const Home = () => {
         >
           전체
         </button>
-        {CATEGORY_LIST.map((category) => (
+        {categoryList.map((category) => (
           <button
             type="button"
             key={category}

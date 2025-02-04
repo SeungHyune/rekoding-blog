@@ -9,7 +9,7 @@ export interface PostListResponse {
   categoryColor: string;
 }
 
-interface Post {
+export interface PostResponse {
   title: string;
   thumbnailUrl: string;
   content: string;
@@ -19,5 +19,5 @@ interface Post {
 }
 
 export interface PostsDetailResponse {
-  [key: number]: Post;
+  [key: number]: PostResponse;
 }

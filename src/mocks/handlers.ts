@@ -1,9 +1,9 @@
 import { http, HttpResponse } from "msw";
-import { POST_LIST, POSTS_DETAIL } from "./dummy/dummy";
+import { CATEGORY_LIST, POST_LIST, POSTS_DETAIL } from "./dummy/dummy";
 
 export const handlers = [
   http.get("/posts", () => {
-    return HttpResponse.json({ POST_LIST });
+    return HttpResponse.json(POST_LIST);
   }),
   http.get("/posts/:id", ({ params }) => {
     const { id } = params;
@@ -18,5 +18,8 @@ export const handlers = [
       status: 404,
       statusText: "Post not found",
     });
+  }),
+  http.get("/categoryList", () => {
+    return HttpResponse.json(CATEGORY_LIST);
   }),
 ];

@@ -1,12 +1,12 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import rehypeSlug from "rehype-slug";
 import { CommentIcon, LikeIcon, ShareIcon } from "@components/icons";
 import { CategoryPostList } from "./components";
-import { POSTS_DETAIL, POST_LIST, CATEGORY_LIST } from "@/constants/dummy";
 import styles from "./post.module.css";
 import { useParams } from "react-router-dom";
 import NotFound from "../NotFound/NotFound";
+import { PostListResponse, PostResponse } from "@/types/response/post";
 
 function extractTitles(markdown: string) {
   const titles = markdown.match(/^(#+)\s+(.*)$/gm);
@@ -22,28 +22,68 @@ function extractTitles(markdown: string) {
 }
 
 const Post = () => {
+  const [posts, setPosts] = useState<PostListResponse[]>([]);
+  const [categoryList, setCategoryList] = useState<string[]>([]);
+  const [postDetail, setPostDetail] = useState<PostResponse | null>(null);
+
   const { id } = useParams();
 
+  useEffect(() => {
+    const getPosts = async () => {
+      try {
+        const response = await fetch("/posts");
+        const postList = await response.json();
+        setPosts(postList);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    const getCategoryList = async () => {
+      try {
+        const response = await fetch("/categoryList");
+        const categoryList = await response.json();
+        setCategoryList(categoryList);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getPosts();
+    getCategoryList();
+  }, []);
+
+  useEffect(() => {
+    const getPostDetail = async () => {
+      try {
+        const response = await fetch(`/posts/${id}`);
+        const postDetail = await response.json();
+        setPostDetail(postDetail);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getPostDetail();
+  }, [id]);
+
   const postList = useMemo(() => {
-    return CATEGORY_LIST.map((title) => {
-      const posts = POST_LIST.filter(
+    return categoryList.map((title) => {
+      const postList = posts.filter(
         ({ category }) => category.toUpperCase() === title,
       );
 
       return {
         category: title,
-        posts,
+        posts: postList,
       };
     });
-  }, [POST_LIST]);
+  }, [posts]);
 
-  const POST_DETAIL = POSTS_DETAIL[id];
-
-  if (!POST_DETAIL) {
+  if (!postDetail) {
     return <NotFound />;
   }
 
-  const TOC_LIST = extractTitles(POST_DETAIL.content);
+  const TOC_LIST = extractTitles(postDetail.content);
 
   const smoothScrollTo = (targetId: string) => {
     const targetElement = document.getElementById(targetId);
@@ -66,7 +106,7 @@ const Post = () => {
     smoothScrollTo(targetId);
   };
 
-  console.log(POST_DETAIL);
+  console.log(postDetail);
 
   return (
     <section className={styles.postContainer}>
@@ -84,24 +124,24 @@ const Post = () => {
 
       <section className={`${styles.postContent} postContent`}>
         <article className={styles.titleBox}>
-          <h1>{POST_DETAIL.title}</h1>
+          <h1>{postDetail.title}</h1>
           <div className={styles.infoBox}>
             <ul className={styles.hashTagList}>
-              {POST_DETAIL.hashTag.map((tag) => (
+              {postDetail.hashTag.map((tag) => (
                 <li key={tag}>#{tag}</li>
               ))}
             </ul>
             <div>
-              <span>{POST_DETAIL.dateAt}</span>
+              <span>{postDetail.dateAt}</span>
             </div>
           </div>
         </article>
         <article className={`${styles.contentBox} contentBox`}>
           <div className={styles.thumbnailBox}>
-            <img src={POST_DETAIL.thumbnailUrl} alt={POST_DETAIL.title} />
+            <img src={postDetail.thumbnailUrl} alt={postDetail.title} />
           </div>
           <ReactMarkdown rehypePlugins={[rehypeSlug]}>
-            {POST_DETAIL.content}
+            {postDetail.content}
           </ReactMarkdown>
         </article>
       </section>
@@ -109,7 +149,7 @@ const Post = () => {
         <div className={styles.socialButtons}>
           <button type="button">
             <LikeIcon />
-            <span>{POST_DETAIL.likeCount}</span>
+            <span>{postDetail.likeCount}</span>
           </button>
           <button type="button">
             <ShareIcon />
