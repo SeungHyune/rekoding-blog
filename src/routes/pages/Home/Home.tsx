@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import PostItem from "./components/PostItem/PostItem";
+import { PostItem } from "./components";
 import styles from "./home.module.css";
 import { POST_LIST, CATEGORY_LIST } from "../../../constants/dummy";
 
