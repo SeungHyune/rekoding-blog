@@ -8,6 +8,16 @@
   color: #c8c8c8;
 }
 
+.rootSection.light {
+  background-color: #fff;
+  color: #000;
+}
+
+.rootSection.dark {
+  background-color: #121212;
+  color: #fff;
+}
+
 .rootSection.dark .leftSidebar {
   border-right: 0.1rem solid #4f4f4f;
 }
@@ -33,6 +43,18 @@
 
 .rootSection.dark .leftSidebar > ul > li > ul > li > a[class="active"] {
   color: #ffaa00;
+}
+
+.rootSection.dark .postContent .contentBox {
+  color: #ececec;
+}
+
+.rootSection.dark .postContent .contentBox code {
+  background-color: #363636;
+}
+
+.rootSection.dark .postContent .contentBox blockquote {
+  background-color: #333;
 }
 
 .rootSection.dark .rightSidebar {

@@ -1,13 +1,7 @@
 import { useMemo } from "react";
 import ReactMarkdown from "react-markdown";
 import rehypeSlug from "rehype-slug";
-import {
-  ArrowUpIcon,
-  ArrowDownIcon,
-  CommentIcon,
-  LikeIcon,
-  ShareIcon,
-} from "@components/icons";
+import { CommentIcon, LikeIcon, ShareIcon } from "@components/icons";
 import { CategoryPostList } from "./components";
 import { POSTS_DETAIL, POST_LIST, CATEGORY_LIST } from "@/constants/dummy";
 import styles from "./post.module.css";
@@ -19,11 +13,8 @@ function extractTitles(markdown: string) {
   if (!titles) return [];
 
   return titles.map((title) => {
-    const text = title
-      .replace(/^(#+)\s+/, "")
-      .replace(/\./g, "")
-      .trim();
-    const textLowerCase = text.toLowerCase();
+    const text = title.replace(/^(#+)\s+/, "").trim();
+    const textLowerCase = text.replace(/[.()\\/]/g, "").toLowerCase();
     const gapRemoveText = textLowerCase.replace(/\s+/g, "-");
 
     return { text, gapRemoveText }; // 레벨, 텍스트, HTML 태그 포함
@@ -67,8 +58,15 @@ const Post = () => {
     event.preventDefault();
 
     const targetId = event.currentTarget.getAttribute("href")?.substring(1);
+
+    if (!targetId) {
+      return;
+    }
+
     smoothScrollTo(targetId);
   };
+
+  console.log(POST_DETAIL);
 
   return (
     <section className={styles.postContainer}>
@@ -84,14 +82,14 @@ const Post = () => {
         </ul>
       </aside>
 
-      <section className={styles.postContent}>
+      <section className={`${styles.postContent} postContent`}>
         <article className={styles.titleBox}>
           <h1>{POST_DETAIL.title}</h1>
           <div>
             <span>{POST_DETAIL.dateAt}</span>
           </div>
         </article>
-        <article className={styles.contentBox}>
+        <article className={`${styles.contentBox} contentBox`}>
           <div className={styles.thumbnailBox}>
             <img src={POST_DETAIL.thumbnailUrl} alt={POST_DETAIL.title} />
           </div>
@@ -127,15 +125,6 @@ const Post = () => {
           ))}
         </ul>
       </aside>
-
-      <div className={styles.scrollButtons}>
-        <button className={styles.up} type="button">
-          <ArrowUpIcon />
-        </button>
-        <button className={styles.down} type="button">
-          <ArrowDownIcon />
-        </button>
-      </div>
     </section>
   );
 };
