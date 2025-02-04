@@ -49,6 +49,7 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:846227830d74dd11c294504238d7f9a2ec054467159131a68f6203664f9ab2f83101a4a8dc82cdf1ebd4ce3ccd6a4b8a48a55a37b6473f3c9070152cd3d737f0#npm:18.3.1"],\
           ["react-markdown", "virtual:846227830d74dd11c294504238d7f9a2ec054467159131a68f6203664f9ab2f83101a4a8dc82cdf1ebd4ce3ccd6a4b8a48a55a37b6473f3c9070152cd3d737f0#npm:9.0.3"],\
           ["react-router-dom", "virtual:846227830d74dd11c294504238d7f9a2ec054467159131a68f6203664f9ab2f83101a4a8dc82cdf1ebd4ce3ccd6a4b8a48a55a37b6473f3c9070152cd3d737f0#npm:7.1.3"],\
+          ["rehype-slug", "npm:6.0.0"],\
           ["typescript", "patch:typescript@npm%3A5.6.3#optional!builtin<compat/typescript>::version=5.6.3&hash=8c6c40"],\
           ["typescript-eslint", "virtual:846227830d74dd11c294504238d7f9a2ec054467159131a68f6203664f9ab2f83101a4a8dc82cdf1ebd4ce3ccd6a4b8a48a55a37b6473f3c9070152cd3d737f0#npm:8.21.0"],\
           ["vite", "virtual:846227830d74dd11c294504238d7f9a2ec054467159131a68f6203664f9ab2f83101a4a8dc82cdf1ebd4ce3ccd6a4b8a48a55a37b6473f3c9070152cd3d737f0#npm:6.0.11"],\
@@ -3141,6 +3142,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["github-slugger", [\
+      ["npm:2.0.0", {\
+        "packageLocation": "../AppData/Local/Yarn/Berry/cache/github-slugger-npm-2.0.0-3afba76e6c-10c0.zip/node_modules/github-slugger/",\
+        "packageDependencies": [\
+          ["github-slugger", "npm:2.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["glob", [\
       ["npm:10.4.5", {\
         "packageLocation": "../AppData/Local/Yarn/Berry/cache/glob-npm-10.4.5-8c63175f05-10c0.zip/node_modules/glob/",\
@@ -3316,6 +3326,16 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["hast-util-heading-rank", [\
+      ["npm:3.0.0", {\
+        "packageLocation": "../AppData/Local/Yarn/Berry/cache/hast-util-heading-rank-npm-3.0.0-13dfda4ac8-10c0.zip/node_modules/hast-util-heading-rank/",\
+        "packageDependencies": [\
+          ["hast-util-heading-rank", "npm:3.0.0"],\
+          ["@types/hast", "npm:3.0.4"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["hast-util-to-jsx-runtime", [\
       ["npm:2.3.2", {\
         "packageLocation": "../AppData/Local/Yarn/Berry/cache/hast-util-to-jsx-runtime-npm-2.3.2-caf0b36156-10c0.zip/node_modules/hast-util-to-jsx-runtime/",\
@@ -3336,6 +3356,16 @@ const RAW_RUNTIME_STATE =
           ["style-to-object", "npm:1.0.8"],\
           ["unist-util-position", "npm:5.0.0"],\
           ["vfile-message", "npm:4.0.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["hast-util-to-string", [\
+      ["npm:3.0.1", {\
+        "packageLocation": "../AppData/Local/Yarn/Berry/cache/hast-util-to-string-npm-3.0.1-8d3f3baab6-10c0.zip/node_modules/hast-util-to-string/",\
+        "packageDependencies": [\
+          ["hast-util-to-string", "npm:3.0.1"],\
+          ["@types/hast", "npm:3.0.4"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -5371,6 +5401,20 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["rehype-slug", [\
+      ["npm:6.0.0", {\
+        "packageLocation": "../AppData/Local/Yarn/Berry/cache/rehype-slug-npm-6.0.0-110e571086-10c0.zip/node_modules/rehype-slug/",\
+        "packageDependencies": [\
+          ["rehype-slug", "npm:6.0.0"],\
+          ["@types/hast", "npm:3.0.4"],\
+          ["github-slugger", "npm:2.0.0"],\
+          ["hast-util-heading-rank", "npm:3.0.0"],\
+          ["hast-util-to-string", "npm:3.0.1"],\
+          ["unist-util-visit", "npm:5.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["rekoding-blog", [\
       ["workspace:.", {\
         "packageLocation": "./",\
@@ -5398,6 +5442,7 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:846227830d74dd11c294504238d7f9a2ec054467159131a68f6203664f9ab2f83101a4a8dc82cdf1ebd4ce3ccd6a4b8a48a55a37b6473f3c9070152cd3d737f0#npm:18.3.1"],\
           ["react-markdown", "virtual:846227830d74dd11c294504238d7f9a2ec054467159131a68f6203664f9ab2f83101a4a8dc82cdf1ebd4ce3ccd6a4b8a48a55a37b6473f3c9070152cd3d737f0#npm:9.0.3"],\
           ["react-router-dom", "virtual:846227830d74dd11c294504238d7f9a2ec054467159131a68f6203664f9ab2f83101a4a8dc82cdf1ebd4ce3ccd6a4b8a48a55a37b6473f3c9070152cd3d737f0#npm:7.1.3"],\
+          ["rehype-slug", "npm:6.0.0"],\
           ["typescript", "patch:typescript@npm%3A5.6.3#optional!builtin<compat/typescript>::version=5.6.3&hash=8c6c40"],\
           ["typescript-eslint", "virtual:846227830d74dd11c294504238d7f9a2ec054467159131a68f6203664f9ab2f83101a4a8dc82cdf1ebd4ce3ccd6a4b8a48a55a37b6473f3c9070152cd3d737f0#npm:8.21.0"],\
           ["vite", "virtual:846227830d74dd11c294504238d7f9a2ec054467159131a68f6203664f9ab2f83101a4a8dc82cdf1ebd4ce3ccd6a4b8a48a55a37b6473f3c9070152cd3d737f0#npm:6.0.11"],\
