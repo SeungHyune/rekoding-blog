@@ -1,5 +1,4 @@
 export interface PostListResponse {
-  id: number;
   title: string;
   content: string;
   imageUrl: string;
@@ -7,6 +6,19 @@ export interface PostListResponse {
   hashTag: string[];
   category: string;
   categoryColor: string;
+  likeCount: number;
+}
+
+export interface PostListType {
+  id: string;
+  title: string;
+  content: string;
+  imageUrl: string;
+  dateAt: string;
+  hashTag: string[];
+  category: string;
+  categoryColor: string;
+  likeCount: number;
 }
 
 export interface PostResponse {

@@ -1,8 +1,8 @@
-import { PostListResponse, PostsDetailResponse } from "src/types/response/post";
+import { PostListType, PostsDetailResponse } from "src/types/response/post";
 
-export const POST_LIST: PostListResponse[] = [
+export const POST_LIST: PostListType[] = [
   {
-    id: 1,
+    id: "1",
     title: "React란 무엇인가?",
     content: "현재 진행중인 부트캠프의 커리큘럼상 React를 배울 차례인 것",
     imageUrl:
@@ -11,9 +11,10 @@ export const POST_LIST: PostListResponse[] = [
     hashTag: ["프론트엔드", "React"],
     category: "React",
     categoryColor: "00B2FF",
+    likeCount: 10,
   },
   {
-    id: 2,
+    id: "2",
     title: "Next.js 개념 정리",
     content:
       "Next.js 란 React 를 기반으로하는 웹 개발 프레임워크 React 는 UI를 만들기위한 자바스크립트 라이브러리이며, React 로 작성된 애플리케이션은 SPA(Single Page Application) 이라고 부름 2016년도에 첫 공개 -> Vercel 이라는 회사에서 공개 Next.js 는 리액트를 기반으로 웹 애플리케이션을 개발하는데 필요한 전체적인 틀, 골격, 솔루션을 제공해주는 도구",
@@ -23,9 +24,10 @@ export const POST_LIST: PostListResponse[] = [
     hashTag: ["프론트엔드", "Next.js"],
     category: "Next.js",
     categoryColor: "4F4F4F",
+    likeCount: 7,
   },
   {
-    id: 3,
+    id: "3",
     title: "GraphQL 개념잡기",
     content:
       "GraphQL은 페이스북에서 만든 쿼리 언어입니다. GrpahQL은 요즘 개발자들 사이에서 자주 입에 오르내리고 있으나, 2019년 7월 기준으로 얼리스테이지(early-stage)임은 분명합니다. 국내에서 GraphQL API를 Open API로 공개한 곳은 드뭅니다. 또한, 해외의 경우, Github 사례(Github v4 GraphQL)를 찾을 수는 있지만, 전반적으로 GraphQL API를 Open API로 공개한 곳은 많지 않습니다. 하지만 등장한지 얼마되지 않았음에도 불구하고, GraphQL의 인기는 매우 가파르게 올라가고 있다는 사실을 확인 할 수 있습니다.",
@@ -35,9 +37,10 @@ export const POST_LIST: PostListResponse[] = [
     hashTag: ["프론트엔드", "GraphQL", "API"],
     category: "API",
     categoryColor: "BD3434",
+    likeCount: 8,
   },
   {
-    id: 4,
+    id: "4",
     title: "Yarn Berry 프로젝트에 도입하기",
     content:
       "어느 날 토스 프론트엔드 개발자분들께서 운영하시는 toss.tech를 둘러보던중에 Yarn Berry 관련 아티클을 읽게 되었습니다. 그래서 관심이 생겨 공부해보게 되었고, 이 글은 제가 Yarn Berry로 마이그레이션 하다가 겪은 우여곡절을 공유하고, 그 방법에 대해서 포스팅 했습니다.",
@@ -47,9 +50,10 @@ export const POST_LIST: PostListResponse[] = [
     hashTag: ["React", "Yarn Berry"],
     category: "React",
     categoryColor: "00B2FF",
+    likeCount: 0,
   },
   {
-    id: 5,
+    id: "5",
     title: "zustand persist를 통한 API 호출 최적화",
     content:
       "프로젝트 배포 후 테스트 과정에서, Home 페이지에서 불필요하게 많은 API 호출이 발생한다는 문제를 발견했습니다. 이 페이지는 날씨 정보, 미세먼지 정보, 그리고 현재 위치를 나타내는 정보를 제공해야 하므로 데이터의 정확성이 중요했습니다. 하지만 매번 페이지에 접근할 때마다 잦은 API 호출이 발생하고 있었습니다.",
@@ -59,9 +63,10 @@ export const POST_LIST: PostListResponse[] = [
     hashTag: ["프론트엔드", "Next.js", "Zustand"],
     category: "Next.js",
     categoryColor: "4F4F4F",
+    likeCount: 6,
   },
   {
-    id: 6,
+    id: "6",
     title: "Next.js 15 핵심 정리",
     content:
       "Next.js의 최신 버전은 create-next-app@latest로, 카나리아(Canary) 버전은 create-next-app@canary로 설치합니다.카나리(아) 버전은 안정화 직전의 최신 라이브 테스트 버전으로, 일부 최신 기능이나 이슈 해결이 포함되어 있습니다.",
@@ -71,9 +76,10 @@ export const POST_LIST: PostListResponse[] = [
     hashTag: ["프론트엔드", "Next.js"],
     category: "Next.js",
     categoryColor: "4F4F4F",
+    likeCount: 7,
   },
   {
-    id: 7,
+    id: "7",
     title: "Tanstack Query(react-query) 자세히보기 🔎",
     content:
       "네트워크에서 가져온 데이터를 상태 관리할 수 있게 도와주는 라이브러리중 가장 많이 쓰여지는것이 react-query이다. 근데 react-query가 react뿐만 아니라 vue, svelte, solid에서도 사용이 가능해지면서 네이밍을 Tanstack Query로 변경하였다.",
@@ -83,9 +89,10 @@ export const POST_LIST: PostListResponse[] = [
     hashTag: ["React", "Tanstack Query"],
     category: "React",
     categoryColor: "00B2FF",
+    likeCount: 9,
   },
   {
-    id: 8,
+    id: "8",
     title: "react-virtualized를 사용한 무한 스크롤 최적화",
     content:
       "React 공식 문서에서 소개하는 react-virtualized 라이브러리를 사용한 무한 스크롤 최적화 포스팅입니다. windowing 기법과 크롬 개발자 도구를 활용한 성능 측정 방법에 대해 먼저 알아본 후 react-virtualized 라이브러리 사용 방법을 소개합니다.",
@@ -95,9 +102,10 @@ export const POST_LIST: PostListResponse[] = [
     hashTag: ["프론트엔드", "React"],
     category: "React",
     categoryColor: "00B2FF",
+    likeCount: 1,
   },
   {
-    id: 9,
+    id: "9",
     title: "HTTP와 HTTPS는 무엇일까?",
     content:
       "HTTP (HyperText Transfer Protocol)는 텍스트 기반의 통신 규약으로 인터넷에서 데이터를 주고받을 수 있는 프로토콜입니다. 이렇게 규약을 정해두었기 때문에 모든 프로그램이 이 규약에 맞춰 개발해서 서로 정보를 교환할 수 있게 되었습니다.",
@@ -107,6 +115,7 @@ export const POST_LIST: PostListResponse[] = [
     hashTag: ["HTTP"],
     category: "Http",
     categoryColor: "00B2FF",
+    likeCount: 10,
   },
 ];
 

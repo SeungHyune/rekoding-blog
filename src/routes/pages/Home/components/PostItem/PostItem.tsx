@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styles from "./postItem.module.css";
 
 interface PostItemProps {
-  id: number;
+  id: string;
   title: string;
   content: string;
   imageUrl: string;
@@ -22,6 +22,17 @@ const PostItem = ({
   category,
   categoryColor,
 }: PostItemProps) => {
+  const formatDate = (date: Date): string => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  };
+
+  const postDateAt = new Date(dateAt);
+  const formattedDate = formatDate(postDateAt);
+
   return (
     <li>
       <Link to={`/post/${id}`} title="">
@@ -35,7 +46,7 @@ const PostItem = ({
           <strong>{title}</strong>
           <p>{content}</p>
           <div className={styles.infoBox}>
-            <span>{dateAt}</span>
+            <span>{formattedDate}</span>
             <div className={styles.tagBox}>
               {hashTag.map((tag) => (
                 <span key={tag}>#{tag}</span>

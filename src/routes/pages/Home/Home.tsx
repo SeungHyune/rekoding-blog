@@ -1,36 +1,81 @@
 import { useEffect, useMemo, useState } from "react";
 import { PostItem } from "./components";
 import styles from "./home.module.css";
-import { PostListResponse } from "@/types/response/post";
+import { PostListType, PostListResponse } from "@/types/response/post";
+import { db } from "@/firebase";
+import {
+  collection,
+  CollectionReference,
+  doc,
+  DocumentData,
+  FirestoreDataConverter,
+  getDoc,
+  getDocs,
+} from "firebase/firestore";
+
+// Firestore 데이터 변환기 정의
+const postConverter: FirestoreDataConverter<PostListResponse> = {
+  toFirestore(post: PostListResponse): DocumentData {
+    return {
+      title: post.title,
+      content: post.content,
+      imageUrl: post.imageUrl,
+      hashTag: post.hashTag,
+      dateAt: post.dateAt,
+      category: post.category,
+      categoryColor: post.categoryColor,
+      likeCount: post.likeCount,
+    };
+  },
+  fromFirestore(snapshot): PostListResponse {
+    const data = snapshot.data();
+    return {
+      title: data.title,
+      content: data.content,
+      imageUrl: data.imageUrl,
+      hashTag: data.hashTag,
+      dateAt: data.dateAt.toDate(),
+      category: data.category,
+      categoryColor: data.categoryColor,
+      likeCount: data.likeCount,
+    };
+  },
+};
 
 const Home = () => {
-  const [posts, setPosts] = useState<PostListResponse[]>([]);
+  const [posts, setPosts] = useState<PostListType[]>([]);
   const [categoryList, setCategoryList] = useState<string[]>([]);
   const [tab, setTab] = useState("TOTAL");
 
   useEffect(() => {
     const getPosts = async () => {
-      try {
-        const response = await fetch("/posts");
-        const postList = await response.json();
-        setPosts(postList);
-      } catch (error) {
-        console.error(error);
+      const postsCollectionRef: CollectionReference<PostListResponse> =
+        await collection(db, "posts").withConverter(postConverter);
+
+      const response = await getDocs(postsCollectionRef);
+
+      const postList = response.docs.map((post) => ({
+        ...post.data(),
+        id: post.id,
+      }));
+
+      setPosts(postList);
+    };
+
+    const getCategorys = async () => {
+      const response = await getDoc(
+        doc(db, "categoryList", "yJziodlqS1uKOkGiM6Bm"),
+      );
+
+      const data = response.data();
+
+      if (data && Array.isArray(data.categoryList)) {
+        setCategoryList(data.categoryList);
       }
     };
 
-    const getCategoryList = async () => {
-      try {
-        const response = await fetch("/categoryList");
-        const categoryList = await response.json();
-        setCategoryList(categoryList);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
+    getCategorys();
     getPosts();
-    getCategoryList();
   }, []);
 
   const postList = useMemo(() => {
