@@ -6,7 +6,17 @@ import { CategoryPostList } from "./components";
 import styles from "./post.module.css";
 import { useParams } from "react-router-dom";
 import NotFound from "../NotFound/NotFound";
-import { PostListResponse, PostResponse } from "@/types/response/post";
+import { PostListResponse, PostListType } from "@/types/response/post";
+import {
+  collection,
+  doc,
+  DocumentData,
+  FirestoreDataConverter,
+  getDoc,
+  getDocs,
+} from "firebase/firestore";
+import { db } from "@/firebase";
+import { formatDate } from "@/utils";
 
 function extractTitles(markdown: string) {
   const titles = markdown.match(/^(#+)\s+(.*)$/gm);
@@ -21,18 +31,54 @@ function extractTitles(markdown: string) {
   });
 }
 
+const postConverter: FirestoreDataConverter<PostListResponse> = {
+  toFirestore(post: PostListResponse): DocumentData {
+    return {
+      title: post.title,
+      content: post.content,
+      imageUrl: post.imageUrl,
+      hashTag: post.hashTag,
+      dateAt: post.dateAt,
+      category: post.category,
+      categoryColor: post.categoryColor,
+      likeCount: post.likeCount,
+    };
+  },
+  fromFirestore(snapshot): PostListResponse {
+    const data = snapshot.data();
+    return {
+      title: data.title,
+      content: data.content,
+      imageUrl: data.imageUrl,
+      hashTag: data.hashTag,
+      dateAt: data.dateAt.toDate(),
+      category: data.category,
+      categoryColor: data.categoryColor,
+      likeCount: data.likeCount,
+    };
+  },
+};
+
 const Post = () => {
-  const [posts, setPosts] = useState<PostListResponse[]>([]);
+  const [posts, setPosts] = useState<PostListType[]>([]);
   const [categoryList, setCategoryList] = useState<string[]>([]);
-  const [postDetail, setPostDetail] = useState<PostResponse | null>(null);
+  const [postDetail, setPostDetail] = useState<PostListResponse | null>(null);
 
   const { id } = useParams();
 
   useEffect(() => {
     const getPosts = async () => {
       try {
-        const response = await fetch("/posts");
-        const postList = await response.json();
+        const postsRef = await collection(db, "posts").withConverter(
+          postConverter,
+        );
+        const response = await getDocs(postsRef);
+
+        const postList = response.docs.map((post) => ({
+          ...post.data(),
+          id: post.id,
+        }));
+
         setPosts(postList);
       } catch (error) {
         console.error(error);
@@ -40,9 +86,14 @@ const Post = () => {
     };
     const getCategoryList = async () => {
       try {
-        const response = await fetch("/categoryList");
-        const categoryList = await response.json();
-        setCategoryList(categoryList);
+        const response = await getDoc(
+          doc(db, "categoryList", "yJziodlqS1uKOkGiM6Bm"),
+        );
+        const data = response.data();
+
+        if (data && Array.isArray(data.categoryList)) {
+          setCategoryList(data.categoryList);
+        }
       } catch (error) {
         console.error(error);
       }
@@ -55,9 +106,19 @@ const Post = () => {
   useEffect(() => {
     const getPostDetail = async () => {
       try {
-        const response = await fetch(`/posts/${id}`);
-        const postDetail = await response.json();
-        setPostDetail(postDetail);
+        if (!id) return;
+
+        const postDetailRef = await doc(db, "posts", id).withConverter(
+          postConverter,
+        );
+        const response = await getDoc(postDetailRef);
+        const post = response.data();
+
+        if (!post) {
+          throw new Error("해당 Post는 존재하지 않습니다.");
+        }
+
+        setPostDetail(post);
       } catch (error) {
         console.error(error);
       }
@@ -106,7 +167,8 @@ const Post = () => {
     smoothScrollTo(targetId);
   };
 
-  console.log(postDetail);
+  const postDetailDateAt = new Date(postDetail.dateAt);
+  const postDetailDate = formatDate(postDetailDateAt);
 
   return (
     <section className={styles.postContainer}>
@@ -132,13 +194,13 @@ const Post = () => {
               ))}
             </ul>
             <div>
-              <span>{postDetail.dateAt}</span>
+              <span>{postDetailDate}</span>
             </div>
           </div>
         </article>
         <article className={`${styles.contentBox} contentBox`}>
           <div className={styles.thumbnailBox}>
-            <img src={postDetail.thumbnailUrl} alt={postDetail.title} />
+            <img src={postDetail.imageUrl} alt={postDetail.title} />
           </div>
           <ReactMarkdown rehypePlugins={[rehypeSlug]}>
             {postDetail.content}
