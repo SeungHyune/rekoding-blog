@@ -1,10 +1,10 @@
-import { PostListResponse } from "@/types/response/post";
+import { PostListType } from "@/types/response/post";
 import { NavLink } from "react-router-dom";
 import styles from "./categoryPostList.module.css";
 
 interface CategoryPostListProps {
   category: string;
-  posts: PostListResponse[];
+  posts: PostListType[];
 }
 
 const CategoryPostList = ({ category, posts }: CategoryPostListProps) => {

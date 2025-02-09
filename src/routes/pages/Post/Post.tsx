@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import rehypeSlug from "rehype-slug";
 import { CommentIcon, LikeIcon, ShareIcon } from "@components/icons";
@@ -175,11 +175,15 @@ const Post = () => {
       <aside className={`${styles.leftSidebar} leftSidebar`}>
         <ul>
           {postList.map(({ category, posts }) => (
-            <CategoryPostList
-              key={category}
-              category={category}
-              posts={posts}
-            />
+            <Fragment key={category}>
+              {posts.length > 0 && (
+                <CategoryPostList
+                  key={category}
+                  category={category}
+                  posts={posts}
+                />
+              )}
+            </Fragment>
           ))}
         </ul>
       </aside>
