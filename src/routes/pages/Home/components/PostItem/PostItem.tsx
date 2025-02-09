@@ -30,7 +30,7 @@ const PostItem = ({
     <li>
       <Link to={`/post/${id}`} title="">
         <div className={styles.imgBox}>
-          <img src={imageUrl} alt="" />
+          <img src={imageUrl} alt={`${title} 이미지`} />
           <span style={{ backgroundColor: `#${categoryColor}` }}>
             {category}
           </span>
