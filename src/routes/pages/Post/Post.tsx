@@ -69,10 +69,10 @@ const Post = () => {
   useEffect(() => {
     const getPosts = async () => {
       try {
-        const postsRef = await collection(db, "posts").withConverter(
+        const postsCollection = await collection(db, "posts").withConverter(
           postConverter,
         );
-        const response = await getDocs(postsRef);
+        const response = await getDocs(postsCollection);
 
         const postList = response.docs.map((post) => ({
           ...post.data(),
@@ -84,7 +84,7 @@ const Post = () => {
         console.error(error);
       }
     };
-    const getCategoryList = async () => {
+    const getCategorys = async () => {
       try {
         const response = await getDoc(
           doc(db, "categoryList", "yJziodlqS1uKOkGiM6Bm"),
@@ -99,8 +99,8 @@ const Post = () => {
       }
     };
 
+    getCategorys();
     getPosts();
-    getCategoryList();
   }, []);
 
   useEffect(() => {
@@ -108,10 +108,10 @@ const Post = () => {
       try {
         if (!id) return;
 
-        const postDetailRef = await doc(db, "posts", id).withConverter(
+        const postDetailDoc = await doc(db, "posts", id).withConverter(
           postConverter,
         );
-        const response = await getDoc(postDetailRef);
+        const response = await getDoc(postDetailDoc);
         const post = response.data();
 
         if (!post) {

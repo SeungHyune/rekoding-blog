@@ -49,28 +49,36 @@ const Home = () => {
 
   useEffect(() => {
     const getPosts = async () => {
-      const postsCollectionRef: CollectionReference<PostListResponse> =
-        await collection(db, "posts").withConverter(postConverter);
+      try {
+        const postsCollection: CollectionReference<PostListResponse> =
+          await collection(db, "posts").withConverter(postConverter);
 
-      const response = await getDocs(postsCollectionRef);
+        const response = await getDocs(postsCollection);
 
-      const postList = response.docs.map((post) => ({
-        ...post.data(),
-        id: post.id,
-      }));
+        const postList = response.docs.map((post) => ({
+          ...post.data(),
+          id: post.id,
+        }));
 
-      setPosts(postList);
+        setPosts(postList);
+      } catch (error) {
+        console.error(error);
+      }
     };
 
     const getCategorys = async () => {
-      const response = await getDoc(
-        doc(db, "categoryList", "yJziodlqS1uKOkGiM6Bm"),
-      );
+      try {
+        const response = await getDoc(
+          doc(db, "categoryList", "yJziodlqS1uKOkGiM6Bm"),
+        );
 
-      const data = response.data();
+        const data = response.data();
 
-      if (data && Array.isArray(data.categoryList)) {
-        setCategoryList(data.categoryList);
+        if (data && Array.isArray(data.categoryList)) {
+          setCategoryList(data.categoryList);
+        }
+      } catch (error) {
+        console.error(error);
       }
     };
 
