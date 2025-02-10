@@ -1,5 +1,5 @@
 .rootSection.dark header {
-  background-color: #121212;
+  background-color: rgba(18, 18, 18, 0.75);
   color: #fff;
   border-bottom: 0.1rem solid #4f4f4f;
 }
