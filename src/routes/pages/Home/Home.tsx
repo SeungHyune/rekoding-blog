@@ -1,60 +1,15 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { PostItem } from "./components";
+
+import { useCategorys, usePosts } from "@/hooks";
+
 import styles from "./home.module.css";
-import { PostListType, PostListResponse } from "@/types/response/post";
-import { db } from "@/firebase";
-import {
-  collection,
-  CollectionReference,
-  doc,
-  getDoc,
-  getDocs,
-} from "firebase/firestore";
-import { firebasePostConverter } from "@/utils";
 
 const Home = () => {
-  const [posts, setPosts] = useState<PostListType[]>([]);
-  const [categoryList, setCategoryList] = useState<string[]>([]);
   const [tab, setTab] = useState("TOTAL");
 
-  useEffect(() => {
-    const getPosts = async () => {
-      try {
-        const postsCollection: CollectionReference<PostListResponse> =
-          await collection(db, "posts").withConverter(firebasePostConverter);
-
-        const response = await getDocs(postsCollection);
-
-        const postList = response.docs.map((post) => ({
-          ...post.data(),
-          id: post.id,
-        }));
-
-        setPosts(postList);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    const getCategorys = async () => {
-      try {
-        const response = await getDoc(
-          doc(db, "categoryList", "yJziodlqS1uKOkGiM6Bm"),
-        );
-
-        const data = response.data();
-
-        if (data && Array.isArray(data.categoryList)) {
-          setCategoryList(data.categoryList);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    getCategorys();
-    getPosts();
-  }, []);
+  const { posts } = usePosts();
+  const { categorys } = useCategorys();
 
   const postList = useMemo(() => {
     return posts.filter(({ category }) => {
@@ -64,8 +19,6 @@ const Home = () => {
 
   const handleClickTab = (newTab: string) => {
     if (tab === newTab) {
-      // 현재 tab을 선택한 경우
-      // 리렌더링 방지
       return;
     }
 
@@ -98,7 +51,7 @@ const Home = () => {
         >
           전체
         </button>
-        {categoryList.map((category) => (
+        {categorys.map((category) => (
           <button
             type="button"
             key={category}

@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useMemo, useState } from "react";
+import { Fragment, useMemo } from "react";
 import ReactMarkdown from "react-markdown";
 import rehypeSlug from "rehype-slug";
 import { CommentIcon, LikeIcon, ShareIcon } from "@components/icons";
@@ -6,11 +6,8 @@ import { CategoryPostList } from "./components";
 import styles from "./post.module.css";
 import { useParams } from "react-router-dom";
 import NotFound from "../NotFound/NotFound";
-import { PostListResponse, PostListType } from "@/types/response/post";
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
-import { db } from "@/firebase";
 import { formatDate } from "@/utils";
-import { firebasePostConverter } from "@/utils";
+import { useCategorys, usePosts, usePostDetail } from "@/hooks";
 
 function extractTitles(markdown: string) {
   const titles = markdown.match(/^(#+)\s+(.*)$/gm);
@@ -26,75 +23,14 @@ function extractTitles(markdown: string) {
 }
 
 const Post = () => {
-  const [posts, setPosts] = useState<PostListType[]>([]);
-  const [categoryList, setCategoryList] = useState<string[]>([]);
-  const [postDetail, setPostDetail] = useState<PostListResponse | null>(null);
-
   const { id } = useParams();
 
-  useEffect(() => {
-    const getPosts = async () => {
-      try {
-        const postsCollection = await collection(db, "posts").withConverter(
-          firebasePostConverter,
-        );
-        const response = await getDocs(postsCollection);
-
-        const postList = response.docs.map((post) => ({
-          ...post.data(),
-          id: post.id,
-        }));
-
-        setPosts(postList);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    const getCategorys = async () => {
-      try {
-        const response = await getDoc(
-          doc(db, "categoryList", "yJziodlqS1uKOkGiM6Bm"),
-        );
-        const data = response.data();
-
-        if (data && Array.isArray(data.categoryList)) {
-          setCategoryList(data.categoryList);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    getCategorys();
-    getPosts();
-  }, []);
-
-  useEffect(() => {
-    const getPostDetail = async () => {
-      try {
-        if (!id) return;
-
-        const postDetailDoc = await doc(db, "posts", id).withConverter(
-          firebasePostConverter,
-        );
-        const response = await getDoc(postDetailDoc);
-        const post = response.data();
-
-        if (!post) {
-          throw new Error("해당 Post는 존재하지 않습니다.");
-        }
-
-        setPostDetail(post);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    getPostDetail();
-  }, [id]);
+  const { posts } = usePosts();
+  const { categorys } = useCategorys();
+  const { postDetail } = usePostDetail({ id });
 
   const postList = useMemo(() => {
-    return categoryList.map((title) => {
+    return categorys.map((title) => {
       const postList = posts.filter(
         ({ category }) => category.toUpperCase() === title,
       );
