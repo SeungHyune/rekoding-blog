@@ -18,8 +18,13 @@ const Header = () => {
       <section className={styles.headerContainer}>
         <article className={styles.headerNavigation}>
           <Link className={styles.logo} to="/" title="Logo">
-            <span>REKODING</span>
-            <span>DEV</span>
+            <div className={styles.imgBox}>
+              <img src="/logo.png" alt="블로그 로고 이미지" />
+            </div>
+            <div className={styles.textBox}>
+              <span>REKODING</span>
+              <span>DEV</span>
+            </div>
           </Link>
           <nav className={styles.navigation}>
             <ul>
