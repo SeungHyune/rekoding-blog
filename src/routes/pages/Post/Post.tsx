@@ -7,16 +7,10 @@ import styles from "./post.module.css";
 import { useParams } from "react-router-dom";
 import NotFound from "../NotFound/NotFound";
 import { PostListResponse, PostListType } from "@/types/response/post";
-import {
-  collection,
-  doc,
-  DocumentData,
-  FirestoreDataConverter,
-  getDoc,
-  getDocs,
-} from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { db } from "@/firebase";
 import { formatDate } from "@/utils";
+import { firebasePostConverter } from "@/utils";
 
 function extractTitles(markdown: string) {
   const titles = markdown.match(/^(#+)\s+(.*)$/gm);
@@ -31,34 +25,6 @@ function extractTitles(markdown: string) {
   });
 }
 
-const postConverter: FirestoreDataConverter<PostListResponse> = {
-  toFirestore(post: PostListResponse): DocumentData {
-    return {
-      title: post.title,
-      content: post.content,
-      imageUrl: post.imageUrl,
-      hashTag: post.hashTag,
-      dateAt: post.dateAt,
-      category: post.category,
-      categoryColor: post.categoryColor,
-      likeCount: post.likeCount,
-    };
-  },
-  fromFirestore(snapshot): PostListResponse {
-    const data = snapshot.data();
-    return {
-      title: data.title,
-      content: data.content,
-      imageUrl: data.imageUrl,
-      hashTag: data.hashTag,
-      dateAt: data.dateAt.toDate(),
-      category: data.category,
-      categoryColor: data.categoryColor,
-      likeCount: data.likeCount,
-    };
-  },
-};
-
 const Post = () => {
   const [posts, setPosts] = useState<PostListType[]>([]);
   const [categoryList, setCategoryList] = useState<string[]>([]);
@@ -70,7 +36,7 @@ const Post = () => {
     const getPosts = async () => {
       try {
         const postsCollection = await collection(db, "posts").withConverter(
-          postConverter,
+          firebasePostConverter,
         );
         const response = await getDocs(postsCollection);
 
@@ -109,7 +75,7 @@ const Post = () => {
         if (!id) return;
 
         const postDetailDoc = await doc(db, "posts", id).withConverter(
-          postConverter,
+          firebasePostConverter,
         );
         const response = await getDoc(postDetailDoc);
         const post = response.data();

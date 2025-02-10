@@ -7,40 +7,10 @@ import {
   collection,
   CollectionReference,
   doc,
-  DocumentData,
-  FirestoreDataConverter,
   getDoc,
   getDocs,
 } from "firebase/firestore";
-
-// Firestore 데이터 변환기 정의
-const postConverter: FirestoreDataConverter<PostListResponse> = {
-  toFirestore(post: PostListResponse): DocumentData {
-    return {
-      title: post.title,
-      content: post.content,
-      imageUrl: post.imageUrl,
-      hashTag: post.hashTag,
-      dateAt: post.dateAt,
-      category: post.category,
-      categoryColor: post.categoryColor,
-      likeCount: post.likeCount,
-    };
-  },
-  fromFirestore(snapshot): PostListResponse {
-    const data = snapshot.data();
-    return {
-      title: data.title,
-      content: data.content,
-      imageUrl: data.imageUrl,
-      hashTag: data.hashTag,
-      dateAt: data.dateAt.toDate(),
-      category: data.category,
-      categoryColor: data.categoryColor,
-      likeCount: data.likeCount,
-    };
-  },
-};
+import { firebasePostConverter } from "@/utils";
 
 const Home = () => {
   const [posts, setPosts] = useState<PostListType[]>([]);
@@ -51,7 +21,7 @@ const Home = () => {
     const getPosts = async () => {
       try {
         const postsCollection: CollectionReference<PostListResponse> =
-          await collection(db, "posts").withConverter(postConverter);
+          await collection(db, "posts").withConverter(firebasePostConverter);
 
         const response = await getDocs(postsCollection);
 
