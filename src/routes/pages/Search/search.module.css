@@ -1,0 +1,28 @@
+.search {
+  padding: 3rem 0;
+}
+
+.search h2 {
+  margin: 2.6rem 0 2rem;
+}
+
+.searchPostList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 5.6rem;
+  column-gap: 2rem;
+}
+
+.searchPostList li {
+  width: 100%;
+}
+
+.searchPostList li a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.searchPostList li a:hover img {
+  transform: scale(1.1);
+}
