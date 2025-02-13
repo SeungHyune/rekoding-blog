@@ -2,7 +2,7 @@ export interface PostListResponse {
   title: string;
   content: string;
   imageUrl: string;
-  dateAt: string;
+  dateAt: Date;
   hashTag: string[];
   category: string;
   categoryColor: string;
@@ -14,7 +14,7 @@ export interface PostListType {
   title: string;
   content: string;
   imageUrl: string;
-  dateAt: string;
+  dateAt: Date;
   hashTag: string[];
   category: string;
   categoryColor: string;
@@ -25,7 +25,7 @@ export interface PostResponse {
   title: string;
   thumbnailUrl: string;
   content: string;
-  dateAt: string;
+  dateAt: Date;
   hashTag: string[];
   likeCount: number;
 }
