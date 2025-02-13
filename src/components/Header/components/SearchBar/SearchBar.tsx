@@ -3,6 +3,7 @@ import { SearchIcon } from "@components/icons";
 import styles from "./searchBar.module.css";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useDebounce } from "@/hooks";
+import { ROUTES } from "@/constants/route/route";
 
 const SearchBar = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -16,7 +17,7 @@ const SearchBar = () => {
   useEffect(() => {
     if (
       debouncedValue ||
-      (debouncedValue === "" && location.pathname === "/search")
+      (debouncedValue === "" && location.pathname === ROUTES.SEARCH)
     ) {
       navigate(`/search?search=${debouncedValue}`);
     }
