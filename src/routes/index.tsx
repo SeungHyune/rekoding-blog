@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Home, Post, Search, NotFound } from "./pages";
+import { Home, Post, Search, Editor, NotFound } from "./pages";
 import { DefaultLayout } from "./layouts";
 
 const router = createBrowserRouter([
@@ -17,6 +17,10 @@ const router = createBrowserRouter([
       {
         path: "/search",
         element: <Search />,
+      },
+      {
+        path: "/editor",
+        element: <Editor />,
       },
       {
         path: "*",
