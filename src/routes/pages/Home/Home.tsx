@@ -51,14 +51,14 @@ const Home = () => {
         >
           전체
         </button>
-        {categorys.map((category) => (
+        {categorys.map(({ value }) => (
           <button
             type="button"
-            key={category}
-            style={tab === category ? tabActiveStyle : {}}
-            onClick={() => handleClickTab(category)}
+            key={value}
+            style={tab === value ? tabActiveStyle : {}}
+            onClick={() => handleClickTab(value)}
           >
-            {category}
+            {value}
           </button>
         ))}
       </article>

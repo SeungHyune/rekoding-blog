@@ -3,11 +3,12 @@ import {
   FIREBASE_ID,
 } from "@/constants/firebase/firebase";
 import { db } from "@/firebase";
+import { CategoryResponse } from "@/types/response/category";
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
 const useCategorys = () => {
-  const [categorys, setCategorys] = useState<string[]>([]);
+  const [categorys, setCategorys] = useState<CategoryResponse[]>([]);
 
   useEffect(() => {
     const getCategorys = async () => {

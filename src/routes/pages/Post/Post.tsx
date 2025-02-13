@@ -30,13 +30,13 @@ const Post = () => {
   const { postDetail } = usePostDetail({ id });
 
   const postList = useMemo(() => {
-    return categorys.map((title) => {
+    return categorys.map(({ value }) => {
       const postList = posts.filter(
-        ({ category }) => category.toUpperCase() === title,
+        ({ category }) => category.toUpperCase() === value,
       );
 
       return {
-        category: title,
+        category: value,
         posts: postList,
       };
     });
