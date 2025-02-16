@@ -10,3 +10,4 @@ export { default as ArrowUpIcon } from "./ArrowUpIcon/ArrowUpIcon";
 export { default as ArrowDownIcon } from "./ArrowDownIcon/ArrowDownIcon";
 export { default as EmailDarkIcon } from "./EmailDarkIcon/EmailDarkIcon";
 export { default as GithubDarkIcon } from "./GithubDarkIcon/GithubDarkIcon";
+export { default as CloseCircleIcon } from "./CloseCircleIcon/CloseCircleIcon";
