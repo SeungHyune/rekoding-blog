@@ -8,10 +8,8 @@ import {
 import { SwitchButton, SearchBar } from "./components";
 import styles from "./header.module.css";
 import useThemeStore from "@/stores/useThemeStore/useThemeStore";
-import useLogin from "@/stores/useLogin/useLogin";
 
 const Header = () => {
-  const { isLogin } = useLogin();
   const { theme } = useThemeStore();
   return (
     <header
@@ -33,16 +31,6 @@ const Header = () => {
               <li>
                 <NavLink to="/">Home</NavLink>
               </li>
-              {isLogin && (
-                <>
-                  <li>
-                    <NavLink to="/admin">Admin</NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/editor">Editor</NavLink>
-                  </li>
-                </>
-              )}
             </ul>
           </nav>
         </article>
