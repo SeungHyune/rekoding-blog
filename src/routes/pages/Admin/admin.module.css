@@ -30,7 +30,12 @@
   max-width: 40rem;
   padding: 5rem;
   border-radius: 1rem;
-  text-align: center;
+}
+
+.adminSection .loginContainer a {
+  display: block;
+  text-decoration: underline;
+  margin-bottom: 1rem;
 }
 
 .adminSection .loginContainer h2 {
@@ -44,14 +49,27 @@
   flex-direction: column;
   gap: 1.5rem;
   font-family: "pretendard";
+  text-align: center;
+}
+
+.adminSection form div {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #eee;
+  border-radius: 0.8rem;
+}
+
+.adminSection form div span {
+  cursor: pointer;
 }
 
 .adminSection form input {
-  border-radius: 0.8rem;
-  padding: 1rem;
-  border: 1px solid #eee;
+  flex: 1;
   font-size: 1.4rem;
   line-height: 3rem;
+  border: 0;
+  outline: none;
 }
 
 .adminSection form input::placeholder {
