@@ -1,11 +1,13 @@
 import { auth } from "@/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import styles from "./admin.module.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CloseCircleIcon, EyeIcon, EyeSlashIcon } from "@/components/icons";
+import useLogin from "@/stores/useLogin/useLogin";
 
 const Admin = () => {
+  const { isLogin, setIsLogin } = useLogin();
   const [loginId, setLoginId] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -26,7 +28,7 @@ const Admin = () => {
 
     try {
       await signInWithEmailAndPassword(auth, loginId, loginPassword);
-
+      setIsLogin(true);
       navigate("/");
     } catch (error) {
       setIsError(true);
@@ -53,64 +55,81 @@ const Admin = () => {
     setIsPasswordVisible((isPasswordVisible) => !isPasswordVisible);
   };
 
+  const handleLogout = () => {
+    getAuth().signOut();
+    setIsLogin(false);
+    navigate("/");
+  };
+
   return (
     <section className={styles.adminSection}>
       <article className={styles.imageContainer}>
         <div className={styles.titleBox}>
-          <h2>Administrator Login</h2>
-          <p>관리자 로그인을 진행해주세요.</p>
+          <h2>Administrator {isLogin === false && "Login"}</h2>
+          <p>
+            {isLogin ? "관리자 페이지입니다." : "관리자 로그인을 진행해주세요."}
+          </p>
         </div>
         <img src="public/images/picture.png" alt="admin login picture" />
       </article>
       <article className={styles.loginContainer}>
         <Link to="/" title="메인 페이지로 되돌아가기">
-          되돌아가기
+          메인 페이지로 되돌아가기
         </Link>
-        <form onSubmit={handleLogin}>
-          <div>
-            <input
-              type="text"
-              id="userId"
-              name="userId"
-              placeholder="Id"
-              value={loginId}
-              onChange={handleChangeInput}
-            />
-            {loginId.length > 0 && (
-              <span onClick={handleRemoveLoginId}>
-                <CloseCircleIcon />
-              </span>
-            )}
-          </div>
-          <div>
-            {isPasswordVisible ? (
+        {isLogin ? (
+          <button className={styles.button} onClick={handleLogout}>
+            Logout
+          </button>
+        ) : (
+          <form onSubmit={handleLogin}>
+            <div>
               <input
                 type="text"
-                id="userPw"
-                name="userPw"
-                placeholder="password"
-                value={loginPassword}
+                id="userId"
+                name="userId"
+                placeholder="Id"
+                value={loginId}
                 onChange={handleChangeInput}
               />
-            ) : (
-              <input
-                type="password"
-                id="userPw"
-                name="userPw"
-                placeholder="Password"
-                value={loginPassword}
-                onChange={handleChangeInput}
-              />
-            )}
+              {loginId.length > 0 && (
+                <span onClick={handleRemoveLoginId}>
+                  <CloseCircleIcon />
+                </span>
+              )}
+            </div>
+            <div>
+              {isPasswordVisible ? (
+                <input
+                  type="text"
+                  id="userPw"
+                  name="userPw"
+                  placeholder="password"
+                  value={loginPassword}
+                  onChange={handleChangeInput}
+                />
+              ) : (
+                <input
+                  type="password"
+                  id="userPw"
+                  name="userPw"
+                  placeholder="Password"
+                  value={loginPassword}
+                  onChange={handleChangeInput}
+                />
+              )}
 
-            {loginPassword.length > 0 && (
-              <span onClick={handlePasswordVisibleToggle}>
-                {isPasswordVisible ? <EyeSlashIcon /> : <EyeIcon />}
-              </span>
-            )}
-          </div>
-          <button type="submit">Login</button>
-        </form>
+              {loginPassword.length > 0 && (
+                <span onClick={handlePasswordVisibleToggle}>
+                  {isPasswordVisible ? <EyeSlashIcon /> : <EyeIcon />}
+                </span>
+              )}
+            </div>
+            <button className={styles.button} type="submit">
+              Login
+            </button>
+          </form>
+        )}
+
         {isError && <p className={styles.errorMessage}>{errorMessage}</p>}
       </article>
     </section>

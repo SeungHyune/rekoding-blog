@@ -26,6 +26,8 @@
 }
 
 .adminSection .loginContainer {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   max-width: 40rem;
   padding: 5rem;
@@ -33,7 +35,7 @@
 }
 
 .adminSection .loginContainer a {
-  display: block;
+  display: inline-block;
   text-decoration: underline;
   margin-bottom: 1rem;
 }
@@ -76,7 +78,7 @@
   color: #eee;
 }
 
-.adminSection form button {
+.button {
   background-color: #ffaa00;
   border: 0;
   padding: 1.5rem 1rem;
