@@ -8,7 +8,7 @@ import styles from "./home.module.css";
 const Home = () => {
   const [tab, setTab] = useState("TOTAL");
 
-  const { posts } = usePosts();
+  const { posts = [] } = usePosts();
   const { categorys } = useCategorys();
 
   const postList = useMemo(() => {

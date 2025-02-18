@@ -7,7 +7,7 @@ interface PostItemProps {
   title: string;
   content: string;
   imageUrl: string;
-  dateAt: string;
+  dateAt: Date;
   hashTag: string[];
   category: string;
   categoryColor: string;
