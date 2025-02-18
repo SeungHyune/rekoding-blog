@@ -15,7 +15,7 @@ const Search = () => {
     [searchParams],
   );
 
-  const { posts } = usePosts();
+  const { posts = [] } = usePosts();
 
   const searchPosts = useMemo(() => {
     return posts.filter(

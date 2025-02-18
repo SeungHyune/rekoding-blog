@@ -25,7 +25,7 @@ function extractTitles(markdown: string) {
 const Post = () => {
   const { id } = useParams();
 
-  const { posts } = usePosts();
+  const { posts = [] } = usePosts();
   const { categorys } = useCategorys();
   const { postDetail } = usePostDetail({ id });
 
