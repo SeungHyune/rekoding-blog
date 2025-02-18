@@ -2,11 +2,12 @@ import { useRef, useState } from "react";
 import { useCategorys } from "@/hooks";
 import styles from "./editor.module.css";
 import { IMAGE_TYPES } from "./editor.constants";
-import { db, storage } from "@/firebase";
+import { auth, db, storage } from "@/firebase";
 import { addDoc, collection } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { FIREBASE_COLLECTION } from "@/constants/firebase/firebase";
 import { PostListResponse } from "@/types/response/post";
+import { getAuth } from "firebase/auth";
 
 const Editor = () => {
   const [title, setTitle] = useState("");
@@ -23,7 +24,7 @@ const Editor = () => {
 
   const [dateAt, setDateAt] = useState<Date>(new Date());
 
-  const { categorys } = useCategorys();
+  const { categorys = [] } = useCategorys();
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTitle(event.target.value);
@@ -151,6 +152,14 @@ const Editor = () => {
     fetchStorage();
   };
 
+  const test = auth.currentUser;
+  console.log("test", test);
+
+  const handleLogout = () => {
+    const auth = getAuth();
+    auth.signOut();
+  };
+
   return (
     <section className={styles.editorContainer}>
       <form className={styles.editorFrom} onSubmit={handlePostSubmit}>
@@ -249,6 +258,9 @@ const Editor = () => {
           <button type="submit">작성</button>
         </div>
       </form>
+      <button type="button" onClick={handleLogout}>
+        로그아웃
+      </button>
     </section>
   );
 };

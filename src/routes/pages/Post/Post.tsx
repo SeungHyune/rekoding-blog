@@ -26,7 +26,7 @@ const Post = () => {
   const { id } = useParams();
 
   const { posts = [] } = usePosts();
-  const { categorys } = useCategorys();
+  const { categorys = [] } = useCategorys();
   const { postDetail } = usePostDetail({ id });
 
   const postList = useMemo(() => {

@@ -9,7 +9,7 @@ const Home = () => {
   const [tab, setTab] = useState("TOTAL");
 
   const { posts = [] } = usePosts();
-  const { categorys } = useCategorys();
+  const { categorys = [] } = useCategorys();
 
   const postList = useMemo(() => {
     return posts.filter(({ category }) => {
