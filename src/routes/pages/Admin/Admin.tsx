@@ -127,10 +127,9 @@ const Admin = () => {
             <button className={styles.button} type="submit">
               Login
             </button>
+            {isError && <p className={styles.errorMessage}>{errorMessage}</p>}
           </form>
         )}
-
-        {isError && <p className={styles.errorMessage}>{errorMessage}</p>}
       </article>
     </section>
   );
