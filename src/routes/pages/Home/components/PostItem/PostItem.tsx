@@ -26,6 +26,16 @@ const PostItem = ({
   const postDateAt = new Date(dateAt);
   const formattedDate = formatDate(postDateAt);
 
+  const formatContent = content
+    .replace(/#+\s.*\n/g, "") // 모든 수준의 헤더 제거
+    .replace(/\*\*(.+?)\*\*/g, "$1") // 굵은 글씨 제거
+    .replace(/\*(.+?)\*/g, "$1") // 기울임 글씨 제거
+    .replace(/!\[.*?\]\(.*?\)/g, "") // 이미지 제거
+    .replace(/\[.*?\]\(.*?\)/g, "") // 링크 제거
+    .replace(/- /g, "") // 목록 항목 제거
+    .replace(/`{1,3}/g, "") // 백틱 제거 (시작)
+    .trim(); // 앞뒤 공백 제거
+
   return (
     <li>
       <Link to={`/post/${id}`} title="">
@@ -37,7 +47,7 @@ const PostItem = ({
         </div>
         <div className={styles.contentBox}>
           <strong>{title}</strong>
-          <p>{content}</p>
+          <p>{formatContent}</p>
           <div className={styles.infoBox}>
             <span>{formattedDate}</span>
             <div className={styles.tagBox}>
