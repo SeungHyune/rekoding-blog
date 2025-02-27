@@ -1,13 +1,13 @@
 import { useRef, useState } from "react";
-import { useCategorys } from "@/hooks";
+import { useCategorys, useToggle } from "@/hooks";
 import styles from "./editor.module.css";
 import { IMAGE_TYPES } from "./editor.constants";
-import { auth, db, storage } from "@/firebase";
+import { db, storage } from "@/firebase";
 import { addDoc, collection } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { FIREBASE_COLLECTION } from "@/constants/firebase/firebase";
 import { PostListResponse } from "@/types/response/post";
-import { getAuth } from "firebase/auth";
+import { AlertModal } from "@/components";
 
 const Editor = () => {
   const [title, setTitle] = useState("");
@@ -25,6 +25,8 @@ const Editor = () => {
   const [dateAt, setDateAt] = useState<Date>(new Date());
 
   const { categorys = [] } = useCategorys();
+
+  const { isToggle, handleToggleClose, handleToggleOpen } = useToggle();
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTitle(event.target.value);
@@ -49,6 +51,17 @@ const Editor = () => {
 
       if (hashTagInputRef.current) {
         hashTagInputRef.current.value = "";
+      }
+    }
+
+    if (event.key === "Backspace") {
+      if (!hashTagInputRef.current) {
+        return;
+      }
+
+      if (hashTagInputRef.current.value === "" && hashTagList.length > 0) {
+        const updatedHashTagList = hashTagList.slice(0, -1);
+        setHashTagList(updatedHashTagList);
       }
     }
   };
@@ -142,6 +155,7 @@ const Editor = () => {
         fetchPost(post);
       } catch (error) {
         console.error("업로드 실패:", error);
+        handleToggleOpen();
       }
     };
 
@@ -150,14 +164,6 @@ const Editor = () => {
     };
 
     fetchStorage();
-  };
-
-  const test = auth.currentUser;
-  console.log("test", test);
-
-  const handleLogout = () => {
-    const auth = getAuth();
-    auth.signOut();
   };
 
   return (
@@ -258,9 +264,12 @@ const Editor = () => {
           <button type="submit">작성</button>
         </div>
       </form>
-      <button type="button" onClick={handleLogout}>
-        로그아웃
-      </button>
+      <AlertModal
+        isShow={isToggle}
+        title="게시물을 등록할 권한이 없어요"
+        message={`게시물은 관리자만 등록할 수 있어요. \n 권한을 확인해주세요.`}
+        handleToggleClose={handleToggleClose}
+      />
     </section>
   );
 };
