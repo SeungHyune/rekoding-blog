@@ -18,6 +18,8 @@
   color: #fff;
 }
 
+/* PostDetail 페이지 */
+
 .rootSection.dark .leftSidebar {
   border-right: 0.1rem solid #4f4f4f;
 }
@@ -73,6 +75,23 @@
   fill: #ffaa00;
 }
 
+/* Admin 페이지 */
 .rootSection.dark .rightSidebar > div > button:hover > span {
   color: #ffaa00;
+}
+
+.rootSection.dark .adminSection input {
+  color: #fff;
+  background-color: #000;
+}
+
+/* Editor 페이지 */
+.rootSection.dark .editorSection input[type="text"],
+.rootSection.dark .editorSection textarea {
+  color: #fff;
+  background-color: #121212;
+}
+
+.rootSection.dark .editorSection .textareaBox {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }

@@ -62,7 +62,7 @@ const Admin = () => {
   };
 
   return (
-    <section className={styles.adminSection}>
+    <section className={`${styles.adminSection} adminSection`}>
       <article className={styles.imageContainer}>
         <div className={styles.titleBox}>
           <h2>Administrator {isLogin === false && "Login"}</h2>

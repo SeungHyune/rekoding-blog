@@ -167,9 +167,9 @@ const Editor = () => {
   };
 
   return (
-    <section className={styles.editorContainer}>
+    <section className={`${styles.editorContainer} editorSection`}>
       <form className={styles.editorFrom} onSubmit={handlePostSubmit}>
-        <div className={styles.title}>
+        <div className={`${styles.title} textareaBox`}>
           <textarea
             name="title"
             id="title"
