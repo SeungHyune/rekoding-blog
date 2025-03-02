@@ -1,13 +1,12 @@
 import { Fragment, useMemo } from "react";
-import ReactMarkdown from "react-markdown";
-import rehypeSlug from "rehype-slug";
-import { CommentIcon, LikeIcon, ShareIcon } from "@components/icons";
-import { CategoryPostList } from "./components";
-import styles from "./post.module.css";
 import { useParams } from "react-router-dom";
-import NotFound from "../NotFound/NotFound";
+import { CommentIcon, LikeIcon, ShareIcon } from "@components/icons";
 import { formatDate } from "@/utils";
 import { useCategorys, usePosts, usePostDetail } from "@/hooks";
+import { ReactMarkdownPreview } from "@/components";
+import { CategoryPostList } from "./components";
+import NotFound from "../NotFound/NotFound";
+import styles from "./post.module.css";
 
 function extractTitles(markdown: string) {
   const titles = markdown.match(/^(#+)\s+(.*)$/gm);
@@ -108,9 +107,7 @@ const Post = () => {
           <div className={styles.thumbnailBox}>
             <img src={postDetail.imageUrl} alt={postDetail.title} />
           </div>
-          <ReactMarkdown rehypePlugins={[rehypeSlug]}>
-            {postDetail.content}
-          </ReactMarkdown>
+          <ReactMarkdownPreview content={postDetail.content} />
         </article>
       </section>
       <aside className={`${styles.rightSidebar} rightSidebar`}>

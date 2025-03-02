@@ -7,8 +7,7 @@ import { addDoc, collection } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { FIREBASE_COLLECTION } from "@/constants/firebase/firebase";
 import { PostListResponse } from "@/types/response/post";
-import { AlertModal, ReactEditor } from "@/components";
-import ReactMarkdown from "react-markdown";
+import { AlertModal, ReactEditor, ReactMarkdownPreview } from "@/components";
 
 const Editor = () => {
   const [title, setTitle] = useState("");
@@ -286,9 +285,7 @@ const Editor = () => {
       </article>
       <article className={styles.preview}>
         <h1 className={styles.previewTitle}>{title}</h1>
-        <div>
-          <ReactMarkdown>{contentValue}</ReactMarkdown>
-        </div>
+        <ReactMarkdownPreview content={contentValue} />
       </article>
       <AlertModal
         isShow={isToggle}
