@@ -158,13 +158,6 @@
   box-sizing: border-box;
 }
 
-.date input {
-  padding: 0.5rem 1rem;
-  border-radius: 5rem;
-  border: 0;
-  outline: none;
-}
-
 .contentEditor {
   display: flex;
   flex-direction: column;

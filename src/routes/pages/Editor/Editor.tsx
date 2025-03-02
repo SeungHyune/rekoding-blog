@@ -22,8 +22,6 @@ const Editor = () => {
   const uploadInputRef = useRef<HTMLInputElement | null>(null);
   const hashTagInputRef = useRef<HTMLInputElement | null>(null);
 
-  const [dateAt, setDateAt] = useState<Date>(new Date());
-
   const [contentValue, setContentValue] = useState("");
 
   const { categorys = [] } = useCategorys();
@@ -108,12 +106,6 @@ const Editor = () => {
     setPreview(fileURL);
   };
 
-  const handleChangeDate = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const createDate = new Date(event.target.value);
-
-    setDateAt(createDate);
-  };
-
   const handleInputContent = (event: React.ChangeEvent<HTMLDivElement>) => {
     setContentValue(event.target.innerText);
   };
@@ -154,7 +146,7 @@ const Editor = () => {
           content: contentValue,
           category: category,
           categoryColor: categoryColor,
-          dateAt,
+          dateAt: new Date(),
           likeCount: 0,
         };
 
@@ -256,17 +248,6 @@ const Editor = () => {
                 ref={hashTagInputRef}
                 placeholder="#태그입력"
                 onKeyDown={handleHashTagKeydown}
-              />
-            </div>
-          </article>
-          <article className={styles.date}>
-            <div className={styles.fieldTitle}>날짜</div>
-            <div className={styles.fieldContent}>
-              <input
-                type="date"
-                name="date"
-                id="date"
-                onChange={handleChangeDate}
               />
             </div>
           </article>
