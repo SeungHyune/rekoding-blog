@@ -126,7 +126,6 @@
 
 .contentBox code {
   font-family: "pretendard";
-  font-weight: 400;
   background-color: #e9ecef;
   padding: 0.2rem 0.3rem;
   border-radius: 0.5rem;
@@ -141,6 +140,18 @@
 .contentBox a {
   text-decoration: underline;
   color: #ffaa00;
+}
+
+.contentBox pre {
+  background-color: #fbfcfd;
+  padding: 1em;
+  margin: 0.5em 0px;
+  overflow: auto;
+}
+
+.contentBox pre code {
+  background-color: transparent;
+  padding: 0;
 }
 
 .contentBox blockquote {
