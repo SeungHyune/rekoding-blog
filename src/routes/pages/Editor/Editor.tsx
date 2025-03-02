@@ -7,7 +7,8 @@ import { addDoc, collection } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { FIREBASE_COLLECTION } from "@/constants/firebase/firebase";
 import { PostListResponse } from "@/types/response/post";
-import { AlertModal } from "@/components";
+import { AlertModal, ReactEditor } from "@/components";
+import ReactMarkdown from "react-markdown";
 
 const Editor = () => {
   const [title, setTitle] = useState("");
@@ -23,6 +24,8 @@ const Editor = () => {
   const hashTagInputRef = useRef<HTMLInputElement | null>(null);
 
   const [dateAt, setDateAt] = useState<Date>(new Date());
+
+  const [contentValue, setContentValue] = useState("");
 
   const { categorys = [] } = useCategorys();
 
@@ -112,6 +115,10 @@ const Editor = () => {
     setDateAt(createDate);
   };
 
+  const handleInputContent = (event: React.ChangeEvent<HTMLDivElement>) => {
+    setContentValue(event.target.innerText);
+  };
+
   // 글 작성
   const handlePostSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -145,7 +152,7 @@ const Editor = () => {
           title,
           imageUrl: url,
           hashTag: hashTagList,
-          content: "",
+          content: contentValue,
           category: category,
           categoryColor: categoryColor,
           dateAt,
@@ -168,102 +175,121 @@ const Editor = () => {
 
   return (
     <section className={`${styles.editorContainer} editorSection`}>
-      <form className={styles.editorFrom} onSubmit={handlePostSubmit}>
-        <div className={`${styles.title} textareaBox`}>
-          <textarea
-            name="title"
-            id="title"
-            value={title}
-            placeholder="제목을 입력해주세요."
-            required
-            onChange={handleTitleChange}
-          />
-        </div>
-        <article className={styles.fileUpload}>
-          <div className={styles.fieldTitle}>썸네일</div>
-          <div className={styles.fieldContent}>
-            <input
-              className={styles.uploadName}
-              placeholder="첨부파일"
-              ref={uploadInputRef}
-              onMouseOver={() => setIsPreview(true)}
-              onMouseOut={() => setIsPreview(false)}
+      <article className={styles.editor}>
+        <form className={styles.editorFrom} onSubmit={handlePostSubmit}>
+          <div className={`${styles.title} textareaBox`}>
+            <textarea
+              name="title"
+              id="title"
+              value={title}
+              placeholder="제목을 입력해주세요."
+              required
+              onChange={handleTitleChange}
             />
-            <label htmlFor="file">파일찾기</label>
-            <input type="file" id="file" onChange={handleUploadImage} />
+          </div>
+          <article className={styles.fileUpload}>
+            <div className={styles.fieldTitle}>
+              썸네일 <mark>*</mark>
+            </div>
+            <div className={styles.fieldContent}>
+              <input
+                className={styles.uploadName}
+                placeholder="첨부파일"
+                ref={uploadInputRef}
+                onMouseOver={() => setIsPreview(true)}
+                onMouseOut={() => setIsPreview(false)}
+              />
+              <label htmlFor="file">파일찾기</label>
+              <input type="file" id="file" onChange={handleUploadImage} />
 
-            {isPreview && preview && (
-              <div className={styles.previewImageBox}>
-                <img src={preview} />
-              </div>
-            )}
-          </div>
-        </article>
-        <article className={styles.categorys}>
-          <div className={styles.fieldTitle}>카테고리</div>
-          <div className={styles.fieldContent}>
-            <ul>
-              {categorys.map(({ value, color }) => (
-                <li key={value}>
-                  <input
-                    key={value}
-                    type="radio"
-                    value={value}
-                    name="category"
-                    id={value}
-                    onChange={(event) => handleChangeCategory(event, color)}
-                  />
-                  <label
-                    htmlFor={value}
-                    style={{ backgroundColor: `#${color}` }}
+              {isPreview && preview && (
+                <div className={styles.previewImageBox}>
+                  <img src={preview} />
+                </div>
+              )}
+            </div>
+          </article>
+          <article className={styles.categorys}>
+            <div className={styles.fieldTitle}>
+              카테고리 <mark>*</mark>
+            </div>
+            <div className={styles.fieldContent}>
+              <ul>
+                {categorys.map(({ value, color }) => (
+                  <li key={value}>
+                    <input
+                      key={value}
+                      type="radio"
+                      value={value}
+                      name="category"
+                      id={value}
+                      onChange={(event) => handleChangeCategory(event, color)}
+                    />
+                    <label
+                      htmlFor={value}
+                      style={{ backgroundColor: `#${color}` }}
+                    >
+                      {value}
+                    </label>
+                  </li>
+                ))}
+              </ul>
+              <button type="button">+ 추가하기</button>
+            </div>
+          </article>
+          <article className={styles.hashTagList}>
+            <div className={styles.fieldTitle}>해시태그</div>
+            <div className={styles.fieldContent}>
+              <ul>
+                {hashTagList.map((hashTag, idx) => (
+                  <li
+                    key={`${idx}_${hashTag}`}
+                    onClick={() => handleRemoveHashTag(idx)}
                   >
-                    {value}
-                  </label>
-                </li>
-              ))}
-            </ul>
-            <button type="button">+ 추가하기</button>
-          </div>
-        </article>
-        <article className={styles.hashTagList}>
-          <div className={styles.fieldTitle}>해시태그</div>
-          <div className={styles.fieldContent}>
-            <ul>
-              {hashTagList.map((hashTag, idx) => (
-                <li
-                  key={`${idx}_${hashTag}`}
-                  onClick={() => handleRemoveHashTag(idx)}
-                >
-                  {hashTag}
-                </li>
-              ))}
-            </ul>
-            <input
-              type="text"
-              name="hashTag"
-              id="hashTag"
-              ref={hashTagInputRef}
-              placeholder="#태그입력"
-              onKeyDown={handleHashTagKeydown}
-            />
-          </div>
-        </article>
-        <article className={styles.date}>
-          <div className={styles.fieldTitle}>날짜</div>
-          <div className={styles.fieldContent}>
-            <input
-              type="date"
-              name="date"
-              id="date"
-              onChange={handleChangeDate}
-            />
-          </div>
-        </article>
-        <div className={styles.btnBox}>
-          <button type="button">취소</button>
-          <button type="submit">작성</button>
+                    {hashTag}
+                  </li>
+                ))}
+              </ul>
+              <input
+                type="text"
+                name="hashTag"
+                id="hashTag"
+                ref={hashTagInputRef}
+                placeholder="#태그입력"
+                onKeyDown={handleHashTagKeydown}
+              />
+            </div>
+          </article>
+          <article className={styles.date}>
+            <div className={styles.fieldTitle}>날짜</div>
+            <div className={styles.fieldContent}>
+              <input
+                type="date"
+                name="date"
+                id="date"
+                onChange={handleChangeDate}
+              />
+            </div>
+          </article>
+          <article className={styles.contentEditor}>
+            <ReactEditor handleInputContent={handleInputContent} />
+            <div className={styles.btnBox}>
+              <button className={styles.cancel} type="button">
+                취소하기
+              </button>
+              <button className={styles.submit} type="submit">
+                작성하기
+              </button>
+            </div>
+          </article>
+        </form>
+      </article>
+      <article className={styles.preview}>
+        <h1 className={styles.previewTitle}>{title}</h1>
+        <div>
+          <ReactMarkdown>{contentValue}</ReactMarkdown>
         </div>
-      </form>
+      </article>
       <AlertModal
         isShow={isToggle}
         title="게시물을 등록할 권한이 없어요"
