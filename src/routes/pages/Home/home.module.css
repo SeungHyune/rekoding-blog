@@ -59,3 +59,54 @@
 .mainPosts ul li a:hover img {
   transform: scale(1.1);
 }
+
+@media (max-width: 1280px) {
+  .mainPosts ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .mainTitle h2 {
+    font-size: 2.4rem;
+    line-height: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .mainPostTab button {
+    font-size: 2rem;
+    line-height: 2.4rem;
+  }
+
+  .mainPosts ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 540px) {
+  .mainTitle h2 {
+    font-size: 2.2rem;
+    line-height: 2.8rem;
+    word-break: keep-all;
+  }
+
+  .mainTitle h2 br {
+    display: none;
+  }
+
+  .mainPosts ul {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .mainPostTab {
+    display: block;
+  }
+
+  .mainPostTab button {
+    font-size: 1.8rem;
+    line-height: 2rem;
+  }
+}

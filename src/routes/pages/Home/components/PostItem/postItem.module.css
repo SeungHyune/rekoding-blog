@@ -79,3 +79,29 @@
   line-height: 1.5rem;
   color: #ffaa00;
 }
+
+@media (max-width: 540px) {
+  .contentBox strong {
+    margin-bottom: 1rem;
+  }
+
+  .contentBox p {
+    min-height: auto;
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .contentBox {
+    padding-top: 1rem;
+  }
+
+  .contentBox strong {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .contentBox p {
+    min-height: auto;
+  }
+}

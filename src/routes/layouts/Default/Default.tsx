@@ -11,7 +11,7 @@ const DefaultLayout = () => {
   return (
     <section className={`rootSection ${theme === "LIGHT" ? "light" : "dark"}`}>
       <Header />
-      <main id="app">
+      <main id="app" className={styles.mainSection}>
         <Outlet />
         <div className={styles.scrollButtons}>
           <button
