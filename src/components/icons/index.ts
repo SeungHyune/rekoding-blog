@@ -13,3 +13,5 @@ export { default as GithubDarkIcon } from "./GithubDarkIcon/GithubDarkIcon";
 export { default as CloseCircleIcon } from "./CloseCircleIcon/CloseCircleIcon";
 export { default as EyeIcon } from "./EyeIcon/EyeIcon";
 export { default as EyeSlashIcon } from "./EyeSlashIcon/EyeSlashIcon";
+export { default as NavMenuIcon } from "./NavMenuIcon/NavMenuIcon";
+export { default as NavMenuCloseIcon } from "./NavMenuCloseIcon/NavMenuCloseIcon";
