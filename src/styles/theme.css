@@ -1,3 +1,5 @@
+/* header */
+
 .rootSection.dark header {
   background-color: rgba(18, 18, 18, 0.75);
   color: #fff;
@@ -6,6 +8,24 @@
 
 .rootSection.dark header > section > article > a {
   color: #c8c8c8;
+}
+
+.rootSection.dark header .headerNavigation {
+  background-color: #212121;
+  border-left: 0.1rem solid #4f4f4f;
+}
+
+.rootSection.dark header .headerNavigation .navigation ul li,
+.rootSection.dark header .headerNavigation .infoList li a {
+  border-color: #4f4f4f;
+}
+
+.rootSection.dark header .navMenuBtn {
+  color: #fff;
+}
+
+.rootSection.dark header .navMenuBtn path {
+  stroke: #fff;
 }
 
 .rootSection.light {

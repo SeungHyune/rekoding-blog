@@ -38,10 +38,17 @@
   display: block;
 }
 
-.header .headerNavigation,
-.header .headerInfo {
+.headerInfoContainer {
   display: flex;
   align-items: center;
+  flex: 1;
+}
+
+.header .headerNavigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
 }
 
 .header .headerNavigation .navigation ul {
@@ -55,8 +62,119 @@
   line-height: 2rem;
 }
 
-.header .headerInfo .infoList {
+.header .headerNavigation .infoList {
   display: flex;
   gap: 1.6rem;
   margin-right: 2.8rem;
+}
+
+.header .headerNavigation .infoList li a span {
+  display: none;
+}
+
+.header .headerInfo {
+  display: flex;
+  align-items: center;
+}
+
+.header .navMenuBtn {
+  display: none;
+}
+
+@media (max-width: 1440px) {
+  .header {
+    padding: 0 2rem;
+  }
+}
+
+@media (max-width: 940px) {
+  .header .navMenuBtn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: transparent;
+    border: 0;
+    z-index: 9999;
+  }
+
+  .header .headerNavigation {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 80%;
+    height: 100dvh;
+    flex-direction: column;
+    justify-content: normal;
+    background-color: #f3f3f3;
+    border-left: 0.1rem solid #e8e8e8;
+    z-index: 9999;
+  }
+
+  /* .header .headerNavigation::before {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100dvh;
+    content: "";
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  } */
+
+  .header .headerNavigation .navigation {
+    width: 100%;
+    padding-top: 10rem;
+  }
+
+  .header .headerNavigation .navigation ul li {
+    width: 100%;
+    height: 5rem;
+    line-height: 5rem;
+    border-bottom: 0.1rem solid #e8e8e8;
+    text-align: center;
+  }
+
+  .header .headerNavigation .navigation ul li a {
+    display: block;
+  }
+
+  .header .headerNavigation .navigation ul li:first-child {
+    border-top: 0.1rem solid #e8e8e8;
+  }
+
+  .header .headerNavigation .infoList {
+    width: 100%;
+    flex-direction: column;
+    gap: 0;
+    margin-right: 0;
+  }
+
+  .header .headerNavigation .infoList li a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    height: 5rem;
+    border-bottom: 0.1rem solid #e8e8e8;
+  }
+
+  .header .headerNavigation .infoList li a span {
+    display: inline;
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+
+  .switchButton {
+    position: fixed;
+    top: 3.7rem;
+    right: 10rem;
+  }
+
+  .searchBar {
+    display: none;
+    position: fixed;
+    bottom: 2.5rem;
+    left: 2rem;
+  }
 }
