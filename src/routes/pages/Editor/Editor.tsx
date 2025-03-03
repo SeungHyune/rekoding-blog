@@ -253,7 +253,7 @@ const Editor = () => {
           </article>
           <article className={styles.contentEditor}>
             <ReactEditor handleInputContent={handleInputContent} />
-            <div className={styles.btnBox}>
+            <div className={`${styles.btnBox} contentEditorBtnBox`}>
               <button className={styles.cancel} type="button">
                 취소하기
               </button>
@@ -264,7 +264,7 @@ const Editor = () => {
           </article>
         </form>
       </article>
-      <article className={styles.preview}>
+      <article className={`${styles.preview} editorPreview`}>
         <h1 className={styles.previewTitle}>{title}</h1>
         <ReactMarkdownPreview content={contentValue} />
       </article>

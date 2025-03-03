@@ -8,7 +8,7 @@ interface ReactMarkdownPreviewProps {
 
 const ReactMarkdownPreview = ({ content }: ReactMarkdownPreviewProps) => {
   return (
-    <div className={styles.reactMarkdown}>
+    <div className={`${styles.reactMarkdown} reactMarkdown`}>
       <ReactMarkdown rehypePlugins={[rehypeSlug]}>{content}</ReactMarkdown>
     </div>
   );

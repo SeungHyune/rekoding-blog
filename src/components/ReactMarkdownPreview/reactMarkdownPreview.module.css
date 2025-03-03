@@ -95,3 +95,11 @@
   margin: 2rem 0;
   border-radius: 0.5rem;
 }
+
+.reactMarkdown blockquote h1,
+.reactMarkdown blockquote h2,
+.reactMarkdown blockquote h3,
+.reactMarkdown blockquote h4,
+.reactMarkdown blockquote h5 {
+  padding-top: 2rem;
+}
