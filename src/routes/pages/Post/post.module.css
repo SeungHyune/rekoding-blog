@@ -65,6 +65,10 @@
   line-height: 1.8rem;
 }
 
+.thumbnailBox {
+  margin-top: 2rem;
+}
+
 .thumbnailBox img {
   width: 100%;
   height: auto;
