@@ -1,0 +1,15 @@
+.switch {
+  width: 5rem;
+  height: 2.2rem;
+  border-radius: 99rem;
+  transition: background 0.3s;
+  cursor: pointer;
+}
+
+.circle {
+  width: 1.8rem;
+  height: 1.8rem;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}

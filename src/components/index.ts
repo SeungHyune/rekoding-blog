@@ -4,3 +4,4 @@ export { default as Message } from "./Message/Message";
 export { default as AlertModal } from "./AlertModal/AlertModal";
 export { default as ReactEditor } from "./ReactEditor/ReactEditor";
 export { default as ReactMarkdownPreview } from "./ReactMarkdownPreview/ReactMarkdownPreview";
+export { default as Switch } from "./Switch/Switch";
