@@ -1,10 +1,6 @@
 import { useState } from "react";
 
-interface UseToggleProps {
-  isDefaultToggleValue?: boolean;
-}
-
-const useToggle = ({ isDefaultToggleValue = false }: UseToggleProps) => {
+const useToggle = (isDefaultToggleValue: boolean = false) => {
   const [isToggle, setIsToggle] = useState(isDefaultToggleValue);
 
   const handleToggleOpen = () => {

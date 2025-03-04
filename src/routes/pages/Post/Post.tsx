@@ -37,7 +37,7 @@ const Post = () => {
     isToggle: isPostListNav,
     handleToggleClose: handlePostListNavClose,
     handleToggle: handlePostListNavToggle,
-  } = useToggle({ isDefaultToggleValue: true });
+  } = useToggle(true);
 
   useEffect(() => {
     if (window.innerWidth <= 1260) {

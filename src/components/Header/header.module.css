@@ -95,6 +95,7 @@
     gap: 0.5rem;
     background-color: transparent;
     border: 0;
+    cursor: pointer;
     z-index: 9999;
   }
 
@@ -106,8 +107,11 @@
     height: 100dvh;
     flex-direction: column;
     justify-content: normal;
-    background-color: #f3f3f3;
+    background-color: #fdfdfd;
     border-left: 0.1rem solid #e8e8e8;
+    transition:
+      opacity 0.2s ease-in-out,
+      transform 0.3s ease-in-out;
     z-index: 9999;
   }
 

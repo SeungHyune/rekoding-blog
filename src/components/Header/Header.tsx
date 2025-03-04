@@ -7,7 +7,7 @@ import {
   NavMenuIcon,
   NavMenuCloseIcon,
 } from "@/components/icons";
-import { SwitchButton, SearchBar } from "./components";
+import { SwitchThemeButton, SearchBar } from "./components";
 import styles from "./header.module.css";
 import useThemeStore from "@/stores/useThemeStore/useThemeStore";
 import { useEffect } from "react";
@@ -20,7 +20,7 @@ const Header = () => {
     isToggle: isNavToggle,
     handleToggleClose: handleNavToggleOff,
     handleToggle: handleNavToggle,
-  } = useToggle({ isDefaultToggleValue: true });
+  } = useToggle(true);
 
   useEffect(() => {
     if (window.innerWidth <= 940) {
@@ -48,35 +48,39 @@ const Header = () => {
         </Link>
 
         <article className={styles.headerInfoContainer}>
-          {isNavToggle && (
-            <article className={`${styles.headerNavigation} headerNavigation`}>
-              <nav className={`${styles.navigation} navigation`}>
-                <ul>
-                  <li>
-                    <NavLink to="/">Home</NavLink>
-                  </li>
-                </ul>
-              </nav>
-
-              <ul className={`${styles.infoList} infoList`}>
+          <article
+            className={`${styles.headerNavigation} headerNavigation`}
+            style={{
+              transform: isNavToggle ? `translateX(0)` : `translateX(100%)`,
+              opacity: isNavToggle ? "1" : "0",
+            }}
+          >
+            <nav className={`${styles.navigation} navigation`}>
+              <ul>
                 <li>
-                  <Link to="https://github.com/SeungHyune" target="_blank">
-                    {theme === "DARK" ? <GithubDarkIcon /> : <GithubIcon />}
-                    <span>Github</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link to="mailto:tmdgus7820@naver.com">
-                    {theme === "DARK" ? <EmailDarkIcon /> : <EmailIcon />}
-                    <span>Email</span>
-                  </Link>
+                  <NavLink to="/">Home</NavLink>
                 </li>
               </ul>
-            </article>
-          )}
+            </nav>
+
+            <ul className={`${styles.infoList} infoList`}>
+              <li>
+                <Link to="https://github.com/SeungHyune" target="_blank">
+                  {theme === "DARK" ? <GithubDarkIcon /> : <GithubIcon />}
+                  <span>Github</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="mailto:tmdgus7820@naver.com">
+                  {theme === "DARK" ? <EmailDarkIcon /> : <EmailIcon />}
+                  <span>Email</span>
+                </Link>
+              </li>
+            </ul>
+          </article>
           <article className={styles.headerInfo}>
             <div className={styles.switchButton}>
-              <SwitchButton />
+              <SwitchThemeButton />
             </div>
             <div className={styles.searchBar}>
               <SearchBar />
