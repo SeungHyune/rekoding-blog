@@ -24,7 +24,6 @@ const Header = () => {
 
   useEffect(() => {
     if (window.innerWidth <= 940) {
-      console.log("effect");
       handleNavToggleOff();
     }
   }, []);
@@ -32,8 +31,6 @@ const Header = () => {
   const handleNavShowToggle = () => {
     handleNavToggle();
   };
-
-  console.log("isNavToggle", isNavToggle);
 
   return (
     <header
