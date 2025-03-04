@@ -10,16 +10,6 @@
   color: #c8c8c8;
 }
 
-.rootSection.dark header .headerNavigation {
-  background-color: #212121;
-  border-left: 0.1rem solid #4f4f4f;
-}
-
-.rootSection.dark header .headerNavigation .navigation ul li,
-.rootSection.dark header .headerNavigation .infoList li a {
-  border-color: #4f4f4f;
-}
-
 .rootSection.dark header .navMenuBtn {
   color: #fff;
 }
@@ -150,5 +140,18 @@
   .rootSection.dark .leftSidebar > ul {
     background-color: #121212;
     border-right: 0.1rem solid #4f4f4f;
+  }
+}
+
+@media (max-width: 940px) {
+  /* header */
+  .rootSection.dark header .headerNavigation {
+    background-color: #212121;
+    border-left: 0.1rem solid #4f4f4f;
+  }
+
+  .rootSection.dark header .headerNavigation .navigation ul li,
+  .rootSection.dark header .headerNavigation .infoList li a {
+    border-color: #4f4f4f;
   }
 }
