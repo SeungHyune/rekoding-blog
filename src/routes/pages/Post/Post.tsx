@@ -1,8 +1,13 @@
-import { Fragment, useMemo } from "react";
+import { Fragment, useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
-import { CommentIcon, LikeIcon, ShareIcon } from "@components/icons";
+import {
+  CommentIcon,
+  LikeIcon,
+  NavMenuIcon,
+  ShareIcon,
+} from "@components/icons";
 import { formatDate } from "@/utils";
-import { useCategorys, usePosts, usePostDetail } from "@/hooks";
+import { useCategorys, usePosts, usePostDetail, useToggle } from "@/hooks";
 import { ReactMarkdownPreview } from "@/components";
 import { CategoryPostList } from "./components";
 import NotFound from "../NotFound/NotFound";
@@ -27,6 +32,18 @@ const Post = () => {
   const { posts = [] } = usePosts();
   const { categorys = [] } = useCategorys();
   const { postDetail } = usePostDetail({ id });
+
+  const {
+    isToggle: isPostListNav,
+    handleToggleClose: handlePostListNavClose,
+    handleToggle: handlePostListNavToggle,
+  } = useToggle({ isDefaultToggleValue: true });
+
+  useEffect(() => {
+    if (window.innerWidth <= 1260) {
+      handlePostListNavClose();
+    }
+  }, []);
 
   const postList = useMemo(() => {
     return categorys.map(({ value }) => {
@@ -74,7 +91,11 @@ const Post = () => {
   return (
     <section className={styles.postContainer}>
       <aside className={`${styles.leftSidebar} leftSidebar`}>
-        <ul>
+        <ul
+          style={{
+            transform: `translateX(${isPostListNav ? "0" : "-26rem"})`,
+          }}
+        >
           {postList.map(({ category, posts }) => (
             <Fragment key={category}>
               {posts.length > 0 && (
@@ -87,6 +108,17 @@ const Post = () => {
             </Fragment>
           ))}
         </ul>
+        <button
+          className={`${styles.leftSidebarMenu} leftSiderbarMenu`}
+          style={{
+            transform: `translateX(${isPostListNav ? "0" : "-26rem"})`,
+          }}
+          type="button"
+          onClick={handlePostListNavToggle}
+        >
+          목록
+          <NavMenuIcon />
+        </button>
       </aside>
 
       <section className={`${styles.postContent} postContent`}>

@@ -131,3 +131,24 @@
 .rootSection.dark .editorSection .editorPreview {
   background-color: #0c0c0c;
 }
+
+@media (max-width: 1260px) {
+  .rootSection.dark .leftSiderbarMenu {
+    background-color: #4b4b4b;
+    color: #fff;
+    border-color: #4f4f4f;
+  }
+
+  .rootSection.dark .leftSiderbarMenu path {
+    stroke: #fff;
+  }
+
+  .rootSection.dark .leftSidebar {
+    border: 0;
+  }
+
+  .rootSection.dark .leftSidebar > ul {
+    background-color: #121212;
+    border-right: 0.1rem solid #4f4f4f;
+  }
+}

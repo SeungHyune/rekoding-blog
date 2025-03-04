@@ -129,3 +129,80 @@
   font-weight: 400;
   line-height: 1.8rem;
 }
+
+.leftSidebarMenu {
+  display: none;
+}
+
+@media (max-width: 1440px) {
+  .postContent {
+    padding: 5.2rem 4rem;
+  }
+}
+
+@media (max-width: 1260px) {
+  .leftSidebarMenu {
+    position: relative;
+    display: inline-flex;
+    align-self: baseline;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem;
+    font-family: "pretendard";
+    background-color: #fff;
+    border: 0;
+    border-right: 0.1rem solid #e8e8e8;
+    border-bottom: 0.1rem solid #e8e8e8;
+    border-bottom-right-radius: 0.5rem;
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+    z-index: 9999;
+  }
+
+  .leftSidebar {
+    position: fixed;
+    display: flex;
+    width: auto;
+    border: 0;
+    overscroll-behavior: none;
+  }
+
+  .leftSidebar > ul {
+    width: 26rem;
+    height: 100%;
+    max-height: max-content;
+    background-color: #fff;
+    padding: 2rem;
+    border-right: 0.1rem solid #e8e8e8;
+    transition: transform 0.2s ease-in-out;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 1024px) {
+  .postContainer {
+    display: block;
+  }
+
+  .rightSidebar {
+    position: static;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 5.2rem 0;
+  }
+
+  .rightSidebar .tocList {
+    display: none;
+  }
+
+  .rightSidebar .socialButtons {
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .postContent {
+    padding: 5.2rem 0;
+  }
+}
