@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import {
   GithubIcon,
@@ -7,11 +8,10 @@ import {
   NavMenuIcon,
   NavMenuCloseIcon,
 } from "@/components/icons";
-import { SwitchThemeButton, SearchBar } from "./components";
-import styles from "./header.module.css";
+import { SwitchThemeButton, SearchBar, ThemeButton } from "./components";
 import useThemeStore from "@/stores/useThemeStore/useThemeStore";
-import { useEffect } from "react";
 import { useToggle } from "@/hooks";
+import styles from "./header.module.css";
 
 const Header = () => {
   const { theme } = useThemeStore();
@@ -79,8 +79,11 @@ const Header = () => {
             </ul>
           </article>
           <article className={styles.headerInfo}>
-            <div className={styles.switchButton}>
+            <div className={styles.switchThemeButton}>
               <SwitchThemeButton />
+            </div>
+            <div className={styles.themeButton}>
+              <ThemeButton />
             </div>
             <div className={styles.searchBar}>
               <SearchBar />

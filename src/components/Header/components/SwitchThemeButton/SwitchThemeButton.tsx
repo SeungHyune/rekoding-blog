@@ -1,5 +1,4 @@
 import useThemeStore from "@/stores/useThemeStore/useThemeStore";
-import { LightIcon, DarkIcon } from "@components/icons";
 import { Switch } from "@/components";
 import styles from "./switchThemeButton.module.css";
 
@@ -15,13 +14,13 @@ const SwitchThemeButton = () => {
   };
 
   return (
-    <article className={styles.switchContainer}>
-      <LightIcon />
+    <article className={styles.switchContainer} onClick={handleSwitchToggle}>
+      <img src="/src/assets/images/light-icon.svg" />
       <Switch
         isSwitch={theme === "DARK"}
         handleSwitchToggle={handleSwitchToggle}
       />
-      <DarkIcon />
+      <img src="/src/assets/images/dark-icon.svg" />
     </article>
   );
 };

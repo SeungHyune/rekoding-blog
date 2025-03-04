@@ -81,6 +81,10 @@
   display: none;
 }
 
+.themeButton {
+  display: none;
+}
+
 @media (max-width: 1440px) {
   .header {
     padding: 0 2rem;
@@ -169,7 +173,7 @@
     font-weight: 600;
   }
 
-  .switchButton {
+  .switchThemeButton {
     position: fixed;
     top: 3.7rem;
     right: 10rem;
@@ -180,5 +184,17 @@
     position: fixed;
     bottom: 2.5rem;
     left: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .switchThemeButton {
+    display: none;
+  }
+
+  .themeButton {
+    position: fixed;
+    right: 10rem;
+    display: block;
   }
 }

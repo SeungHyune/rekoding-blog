@@ -1,4 +1,3 @@
-import { DarkIcon, LightIcon } from "@/components/icons";
 import useThemeStore from "@/stores/useThemeStore/useThemeStore";
 import styles from "./themeButton.module.css";
 
@@ -19,7 +18,11 @@ const ThemeButton = () => {
       style={{ backgroundColor: theme === "LIGHT" ? "#f5f5f5" : "#212121" }}
       onClick={handleToggleTheme}
     >
-      {theme === "LIGHT" ? <LightIcon /> : <DarkIcon />}
+      {theme === "LIGHT" ? (
+        <img src="/src/assets/images/light-icon.svg" />
+      ) : (
+        <img src="/src/assets/images/dark-icon.svg" />
+      )}
     </div>
   );
 };
