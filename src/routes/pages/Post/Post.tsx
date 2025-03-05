@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useMemo } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
   CommentIcon,
@@ -33,6 +33,7 @@ const Post = () => {
   const { categorys = [] } = useCategorys();
   const { postDetail } = usePostDetail({ id });
 
+  const [isMobile, setIsMobile] = useState(false);
   const {
     isToggle: isPostListNav,
     handleToggleClose: handlePostListNavClose,
@@ -42,6 +43,7 @@ const Post = () => {
   useEffect(() => {
     if (window.innerWidth <= 1260) {
       handlePostListNavClose();
+      setIsMobile(true);
     }
   }, []);
 
@@ -103,6 +105,9 @@ const Post = () => {
                   key={category}
                   category={category}
                   posts={posts}
+                  handlePostListNavClose={
+                    isMobile ? handlePostListNavClose : undefined
+                  }
                 />
               )}
             </Fragment>
