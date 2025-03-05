@@ -99,3 +99,50 @@
   margin: 0.5rem 0;
   text-align: left;
 }
+
+@media (max-width: 1064px) {
+  .adminSection {
+    display: block;
+    margin: 0;
+    padding: 10rem;
+  }
+
+  .adminSection .imageContainer {
+    text-align: center;
+  }
+
+  .adminSection .loginContainer {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 768px) {
+  .adminSection {
+    padding: 5rem 2rem;
+  }
+
+  .adminSection .loginContainer {
+    padding: 5rem 2rem;
+  }
+}
+
+@media (max-width: 668px) {
+  .adminSection {
+    margin: 2rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .adminSection .imageContainer > img {
+    max-width: 16rem;
+  }
+
+  .adminSection .loginContainer {
+    padding: 5rem 0;
+  }
+
+  .adminSection .loginContainer h2 {
+    font-size: 2.2rem;
+  }
+}
