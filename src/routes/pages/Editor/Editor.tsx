@@ -38,9 +38,10 @@ const Editor = () => {
     if (event.key === "Enter") {
       event.preventDefault();
 
-      const isHashTagCreated = hashTagList.includes(event.currentTarget.value);
+      const hashTagInputValue = event.currentTarget.value.trim();
+      const isHashTagCreated = hashTagList.includes(hashTagInputValue);
 
-      if (isHashTagCreated) {
+      if (isHashTagCreated || hashTagInputValue === "") {
         if (hashTagInputRef.current) {
           hashTagInputRef.current.value = "";
         }
@@ -224,8 +225,11 @@ const Editor = () => {
                     </label>
                   </li>
                 ))}
+                <li>
+                  {" "}
+                  <button type="button">+ 추가하기</button>
+                </li>
               </ul>
-              <button type="button">+ 추가하기</button>
             </div>
           </article>
           <article className={styles.hashTagList}>
@@ -240,15 +244,17 @@ const Editor = () => {
                     {hashTag}
                   </li>
                 ))}
+                <li className={styles.hashTagInput}>
+                  <input
+                    type="text"
+                    name="hashTag"
+                    id="hashTag"
+                    ref={hashTagInputRef}
+                    placeholder="#태그입력"
+                    onKeyDown={handleHashTagKeydown}
+                  />
+                </li>
               </ul>
-              <input
-                type="text"
-                name="hashTag"
-                id="hashTag"
-                ref={hashTagInputRef}
-                placeholder="#태그입력"
-                onKeyDown={handleHashTagKeydown}
-              />
             </div>
           </article>
           <article className={styles.contentEditor}>
