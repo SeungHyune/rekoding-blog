@@ -1,5 +1,6 @@
 .reactMarkdown {
   margin-top: 2rem;
+  word-break: break-word;
   color: #212529;
 }
 
