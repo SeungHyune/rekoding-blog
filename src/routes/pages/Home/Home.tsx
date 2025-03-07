@@ -1,29 +1,10 @@
-import { useMemo, useState } from "react";
 import { PostItem } from "./components";
-
-import { useCategorys, usePosts } from "@/hooks";
-
+import { useTabState, UseFilteredPostByCategoryProps } from "./hooks";
 import styles from "./home.module.css";
 
 const Home = () => {
-  const [tab, setTab] = useState("TOTAL");
-
-  const { posts = [] } = usePosts();
-  const { categorys = [] } = useCategorys();
-
-  const postList = useMemo(() => {
-    return posts.filter(({ category }) => {
-      return category.toUpperCase() === tab || tab === "TOTAL";
-    });
-  }, [tab, posts]);
-
-  const handleClickTab = (newTab: string) => {
-    if (tab === newTab) {
-      return;
-    }
-
-    setTab(newTab);
-  };
+  const { tab, handleClickTab } = useTabState();
+  const { categorys, postList } = UseFilteredPostByCategoryProps({ tab });
 
   const tabActiveStyle = {
     backgroundColor: "#fef0d3",
