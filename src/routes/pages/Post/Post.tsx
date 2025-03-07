@@ -7,7 +7,7 @@ import {
   ShareIcon,
 } from "@components/icons";
 import { formatDate } from "@/utils";
-import { useCategorys, usePosts, usePostDetail, useToggle } from "@/hooks";
+import { useCategorys, usePosts, useToggle, usePostDetailQuery } from "@/hooks";
 import { ReactMarkdownPreview } from "@/components";
 import { CategoryPostList } from "./components";
 import NotFound from "../NotFound/NotFound";
@@ -31,7 +31,7 @@ const Post = () => {
 
   const { posts = [] } = usePosts();
   const { categorys = [] } = useCategorys();
-  const { postDetail } = usePostDetail({ id });
+  const { postDetail } = usePostDetailQuery({ id });
 
   const [isMobile, setIsMobile] = useState(false);
   const {
