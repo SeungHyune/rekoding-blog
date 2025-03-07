@@ -4,10 +4,9 @@ import {
 } from "@/constants/firebase/firebase";
 import { db } from "@/firebase";
 import { CategoryResponse } from "@/types/response/category";
-import { useQuery } from "@tanstack/react-query";
 import { doc, getDoc } from "firebase/firestore";
 
-const getCategorys = async () => {
+export const getCategorys = async () => {
   try {
     const response = await getDoc(
       doc(db, FIREBASE_COLLECTION.CATEGORY_LIST, FIREBASE_ID.CATEGORY),
@@ -23,16 +22,3 @@ const getCategorys = async () => {
     throw new Error(`error: ${error}`);
   }
 };
-
-const useCategorys = () => {
-  const { data: categorys } = useQuery<CategoryResponse[] | undefined>({
-    queryKey: ["categorys"],
-    queryFn: getCategorys,
-  });
-
-  return {
-    categorys,
-  };
-};
-
-export default useCategorys;

@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { useCategorys, useToggle } from "@/hooks";
+import { useCategorysQuery, useToggle } from "@/hooks";
 import styles from "./editor.module.css";
 import { IMAGE_TYPES } from "./editor.constants";
 import { db, storage } from "@/firebase";
@@ -24,7 +24,7 @@ const Editor = () => {
 
   const [contentValue, setContentValue] = useState("");
 
-  const { categorys = [] } = useCategorys();
+  const { categorys = [] } = useCategorysQuery();
 
   const { isToggle, handleToggleClose, handleToggleOpen } = useToggle();
 
