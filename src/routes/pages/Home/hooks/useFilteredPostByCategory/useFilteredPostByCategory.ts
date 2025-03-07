@@ -1,4 +1,4 @@
-import { useCategorysQuery, usePosts } from "@/hooks";
+import { useCategorysQuery, usePostsQuery } from "@/hooks";
 import { useMemo } from "react";
 
 interface UseFilteredPostByCategoryProps {
@@ -6,7 +6,7 @@ interface UseFilteredPostByCategoryProps {
 }
 
 const useFilteredPostByCategory = ({ tab }: UseFilteredPostByCategoryProps) => {
-  const { posts = [] } = usePosts();
+  const { posts = [] } = usePostsQuery();
   const { categorys = [] } = useCategorysQuery();
 
   const postList = useMemo(() => {

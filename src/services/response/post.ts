@@ -1,7 +1,14 @@
 import { FIREBASE_COLLECTION } from "@/constants/firebase/firebase";
 import { db } from "@/firebase";
+import { PostListResponse, PostListType } from "@/types/response/post";
 import { firebasePostConverter } from "@/utils";
-import { doc, getDoc } from "firebase/firestore";
+import {
+  collection,
+  CollectionReference,
+  doc,
+  getDoc,
+  getDocs,
+} from "firebase/firestore";
 
 export const getPostDetail = async (id: string) => {
   try {
@@ -18,6 +25,26 @@ export const getPostDetail = async (id: string) => {
     }
 
     return post;
+  } catch (error) {
+    throw new Error(`error: ${error}`);
+  }
+};
+
+export const getPosts = async () => {
+  try {
+    const postsCollection: CollectionReference<PostListResponse> =
+      await collection(db, FIREBASE_COLLECTION.POSTS).withConverter(
+        firebasePostConverter,
+      );
+
+    const response = await getDocs(postsCollection);
+
+    const postList: PostListType[] = response.docs.map((post) => ({
+      ...post.data(),
+      id: post.id,
+    }));
+
+    return postList;
   } catch (error) {
     throw new Error(`error: ${error}`);
   }

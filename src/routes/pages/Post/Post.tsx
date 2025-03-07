@@ -9,7 +9,7 @@ import {
 import { formatDate } from "@/utils";
 import {
   useCategorysQuery,
-  usePosts,
+  usePostsQuery,
   useToggle,
   usePostDetailQuery,
 } from "@/hooks";
@@ -34,7 +34,7 @@ function extractTitles(markdown: string) {
 const Post = () => {
   const { id } = useParams();
 
-  const { posts = [] } = usePosts();
+  const { posts = [] } = usePostsQuery();
   const { categorys = [] } = useCategorysQuery();
   const { postDetail } = usePostDetailQuery({ id });
 

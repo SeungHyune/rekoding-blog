@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { PostItem } from "../Home/components";
 
 import { SEARCH_PARAMS } from "@/constants/searchParams/searchParams";
-import { usePosts } from "@/hooks";
+import { usePostsQuery } from "@/hooks";
 
 import styles from "./search.module.css";
 
@@ -15,7 +15,7 @@ const Search = () => {
     [searchParams],
   );
 
-  const { posts = [] } = usePosts();
+  const { posts = [] } = usePostsQuery();
 
   const searchPosts = useMemo(() => {
     return posts.filter(
