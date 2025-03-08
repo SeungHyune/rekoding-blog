@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useMemo, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLoaderData, useParams } from "react-router-dom";
 import {
   CommentIcon,
   LikeIcon,
@@ -34,9 +34,16 @@ function extractTitles(markdown: string) {
 const Post = () => {
   const { id } = useParams();
 
+  const loaderData = useLoaderData();
+
   const { posts = [] } = usePostsQuery();
   const { categorys = [] } = useCategorysQuery();
-  const { postDetail } = usePostDetailQuery({ id });
+  const { postDetail } = usePostDetailQuery({
+    id,
+    options: {
+      initialData: loaderData,
+    },
+  });
 
   const [isMobile, setIsMobile] = useState(false);
   const {
