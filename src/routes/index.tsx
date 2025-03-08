@@ -1,6 +1,14 @@
+import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Home, Post, Search, Editor, NotFound, Admin } from "./pages";
 import { DefaultLayout } from "./layouts";
+import { getPostDetail } from "@/services/response/post";
+
+const Home = React.lazy(() => import("./pages/Home/Home"));
+const Post = React.lazy(() => import("./pages/Post/Post"));
+const Search = React.lazy(() => import("./pages/Search/Search"));
+const Editor = React.lazy(() => import("./pages/Editor/Editor"));
+const NotFound = React.lazy(() => import("./pages/NotFound/NotFound"));
+const Admin = React.lazy(() => import("./pages/Admin/Admin"));
 
 const router = createBrowserRouter([
   {
@@ -13,6 +21,11 @@ const router = createBrowserRouter([
       {
         path: "/post/:id",
         element: <Post />,
+        loader: async ({ params }) => {
+          const { id = "" } = params;
+          const postDetail = await getPostDetail(id);
+          return postDetail;
+        },
       },
       {
         path: "/search",
