@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useMemo, useState } from "react";
+import { Fragment, useMemo } from "react";
 import { useLoaderData, useParams } from "react-router-dom";
 import {
   CommentIcon,
@@ -18,6 +18,7 @@ import { CategoryPostList } from "./components";
 import NotFound from "../NotFound/NotFound";
 import { extractTitles } from "./utils";
 import styles from "./post.module.css";
+import { useMobile } from "./hooks";
 
 const Post = () => {
   const { id } = useParams();
@@ -33,19 +34,13 @@ const Post = () => {
     },
   });
 
-  const [isMobile, setIsMobile] = useState(false);
   const {
     isToggle: isPostListNav,
     handleToggleClose: handlePostListNavClose,
     handleToggle: handlePostListNavToggle,
   } = useToggle(true);
 
-  useEffect(() => {
-    if (window.innerWidth <= 1260) {
-      handlePostListNavClose();
-      setIsMobile(true);
-    }
-  }, []);
+  const { isMobile } = useMobile({ handlePostListNavClose });
 
   const postList = useMemo(() => {
     return categorys.map(({ value }) => {
