@@ -6,7 +6,7 @@ import { db } from "@/firebase";
 import { CategoryResponse } from "@/types/response/category";
 import { doc, getDoc } from "firebase/firestore";
 
-export const getCategorys = async () => {
+export const getCategories = async () => {
   try {
     const response = await getDoc(
       doc(db, FIREBASE_COLLECTION.CATEGORY_LIST, FIREBASE_ID.CATEGORY),

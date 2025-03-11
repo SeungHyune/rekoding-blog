@@ -4,7 +4,7 @@ import styles from "./home.module.css";
 
 const Home = () => {
   const { tab, handleClickTab } = useTabState();
-  const { categorys, postList } = UseFilteredPostByCategoryProps({ tab });
+  const { categories, postList } = UseFilteredPostByCategoryProps({ tab });
 
   const tabActiveStyle = {
     backgroundColor: "#fef0d3",
@@ -32,7 +32,7 @@ const Home = () => {
         >
           전체
         </button>
-        {categorys.map(({ value }) => (
+        {categories.map(({ value }) => (
           <button
             type="button"
             key={value}

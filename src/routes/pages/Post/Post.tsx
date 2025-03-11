@@ -8,7 +8,7 @@ import {
 } from "@components/icons";
 import { formatDate } from "@/utils";
 import {
-  useCategorysQuery,
+  useCategoriesQuery,
   usePostsQuery,
   useToggle,
   usePostDetailQuery,
@@ -26,7 +26,7 @@ const Post = () => {
   const loaderData = useLoaderData();
 
   const { posts = [] } = usePostsQuery();
-  const { categorys = [] } = useCategorysQuery();
+  const { categories = [] } = useCategoriesQuery();
   const { postDetail } = usePostDetailQuery({
     id,
     options: {
@@ -43,7 +43,7 @@ const Post = () => {
   const { isMobile } = useMobile({ handlePostListNavClose });
 
   const postList = useMemo(() => {
-    return categorys.map(({ value }) => {
+    return categories.map(({ value }) => {
       const postList = posts.filter(
         ({ category }) => category.toUpperCase() === value,
       );
