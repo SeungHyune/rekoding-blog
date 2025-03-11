@@ -1,39 +1,19 @@
-import { Fragment, useMemo } from "react";
-import { useLoaderData, useParams } from "react-router-dom";
+import { Fragment } from "react";
 import {
   CommentIcon,
   LikeIcon,
   NavMenuIcon,
   ShareIcon,
 } from "@components/icons";
-import { formatDate } from "@/utils";
-import {
-  useCategoriesQuery,
-  usePostsQuery,
-  useToggle,
-  usePostDetailQuery,
-} from "@/hooks";
+import { useToggle } from "@/hooks";
+import { useMobile, usePostData } from "./hooks";
 import { ReactMarkdownPreview } from "@/components";
 import { CategoryPostList } from "./components";
 import NotFound from "../NotFound/NotFound";
-import { extractTitles } from "./utils";
+
 import styles from "./post.module.css";
-import { useMobile } from "./hooks";
 
 const Post = () => {
-  const { id } = useParams();
-
-  const loaderData = useLoaderData();
-
-  const { posts = [] } = usePostsQuery();
-  const { categories = [] } = useCategoriesQuery();
-  const { postDetail } = usePostDetailQuery({
-    id,
-    options: {
-      initialData: loaderData,
-    },
-  });
-
   const {
     isToggle: isPostListNav,
     handleToggleClose: handlePostListNavClose,
@@ -42,48 +22,12 @@ const Post = () => {
 
   const { isMobile } = useMobile({ handlePostListNavClose });
 
-  const postList = useMemo(() => {
-    return categories.map(({ value }) => {
-      const postList = posts.filter(
-        ({ category }) => category.toUpperCase() === value,
-      );
-
-      return {
-        category: value,
-        posts: postList,
-      };
-    });
-  }, [posts]);
+  const { postDetail, postList, tocList, postDetailDate, handleTocClick } =
+    usePostData();
 
   if (!postDetail) {
     return <NotFound />;
   }
-
-  const TOC_LIST = extractTitles(postDetail.content);
-
-  const smoothScrollTo = (targetId: string) => {
-    const targetElement = document.getElementById(targetId);
-
-    window.scrollTo({
-      top: targetElement?.offsetTop,
-      behavior: "smooth",
-    });
-  };
-
-  const handleTocClick = (event: React.MouseEvent) => {
-    event.preventDefault();
-
-    const targetId = event.currentTarget.getAttribute("href")?.substring(1);
-
-    if (!targetId) {
-      return;
-    }
-
-    smoothScrollTo(targetId);
-  };
-
-  const postDetailDateAt = new Date(postDetail.dateAt);
-  const postDetailDate = formatDate(postDetailDateAt);
 
   return (
     <section className={styles.postContainer}>
@@ -156,7 +100,7 @@ const Post = () => {
           </button>
         </div>
         <ul className={styles.tocList}>
-          {TOC_LIST.map(({ text, gapRemoveText }) => (
+          {tocList.map(({ text, gapRemoveText }) => (
             <li key={`${gapRemoveText}`}>
               <a
                 href={`#${gapRemoveText}`}
