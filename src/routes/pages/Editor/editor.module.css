@@ -134,25 +134,25 @@
   line-height: 1.4rem;
 }
 
-.categorys ul {
+.categories ul {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
 }
 
-.categorys ul li {
+.categories ul li {
   display: flex;
   align-items: center;
 }
 
-.categorys label {
+.categories label {
   padding: 0.5rem 1rem;
   border-radius: 5rem;
   color: #fff;
   font-size: 1.2rem;
 }
 
-.categorys button {
+.categories button {
   background-color: #fff;
   border: 1px solid #eee;
   outline: none;

@@ -201,7 +201,7 @@ const Editor = () => {
               )}
             </div>
           </article>
-          <article className={styles.categorys}>
+          <article className={styles.categories}>
             <div className={styles.fieldTitle}>
               카테고리 <mark>*</mark>
             </div>
