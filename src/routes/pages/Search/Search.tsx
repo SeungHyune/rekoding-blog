@@ -1,29 +1,9 @@
-import { useMemo } from "react";
-import { useSearchParams } from "react-router-dom";
 import { PostItem } from "../Home/components";
-
-import { SEARCH_PARAMS } from "@/constants/searchParams/searchParams";
-import { usePostsQuery } from "@/hooks";
-
+import { useFilteredPostsBySearch } from "./hooks";
 import styles from "./search.module.css";
 
 const Search = () => {
-  const [searchParams] = useSearchParams();
-
-  const searchValue = useMemo(
-    () => searchParams.get(SEARCH_PARAMS.GET.SEARCH) || "",
-    [searchParams],
-  );
-
-  const { posts = [] } = usePostsQuery();
-
-  const searchPosts = useMemo(() => {
-    return posts.filter(
-      ({ title }) =>
-        title.toUpperCase().includes(searchValue.toUpperCase()) ||
-        searchValue.trim() === "",
-    );
-  }, [posts, searchValue]);
+  const { searchValue, searchPosts } = useFilteredPostsBySearch();
 
   return (
     <section className={styles.search}>
