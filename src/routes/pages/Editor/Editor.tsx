@@ -1,169 +1,50 @@
-import { useRef, useState } from "react";
 import { useCategoriesQuery, useToggle } from "@/hooks";
-import styles from "./editor.module.css";
-import { IMAGE_TYPES } from "./editor.constants";
-import { db, storage } from "@/firebase";
-import { addDoc, collection } from "firebase/firestore";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { FIREBASE_COLLECTION } from "@/constants/firebase/firebase";
-import { PostListResponse } from "@/types/response/post";
 import { AlertModal, ReactEditor, ReactMarkdownPreview } from "@/components";
+import {
+  useCategoryInput,
+  useHashTagInput,
+  useImageUploadWithPreview,
+  useFormSubmit,
+} from "./hooks";
+import styles from "./editor.module.css";
 
 const Editor = () => {
-  const [title, setTitle] = useState("");
-  const [isPreview, setIsPreview] = useState(false);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [preview, setPreview] = useState<string | null>(null);
-  const [hashTagList, setHashTagList] = useState<string[]>([]);
-
-  const [category, setCategory] = useState("");
-  const [categoryColor, setCategoryColor] = useState("");
-
-  const uploadInputRef = useRef<HTMLInputElement | null>(null);
-  const hashTagInputRef = useRef<HTMLInputElement | null>(null);
-
-  const [contentValue, setContentValue] = useState("");
-
   const { categories = [] } = useCategoriesQuery();
 
   const { isToggle, handleToggleClose, handleToggleOpen } = useToggle();
 
-  const handleTitleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setTitle(event.target.value);
-  };
+  const {
+    isPreview,
+    selectedFile,
+    preview,
+    uploadInputRef,
+    handleUploadImage,
+    handleShowPreview,
+    handleHidePreview,
+  } = useImageUploadWithPreview();
 
-  const handleHashTagKeydown = (
-    event: React.KeyboardEvent<HTMLInputElement>,
-  ) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
+  const {
+    hashTagInputRef,
+    hashTagList,
+    handleHashTagKeydown,
+    handleRemoveHashTag,
+  } = useHashTagInput();
 
-      const hashTagInputValue = event.currentTarget.value.trim();
-      const isHashTagCreated = hashTagList.includes(hashTagInputValue);
+  const { category, categoryColor, handleChangeCategory } = useCategoryInput();
 
-      if (isHashTagCreated || hashTagInputValue === "") {
-        if (hashTagInputRef.current) {
-          hashTagInputRef.current.value = "";
-        }
-        return;
-      }
-
-      setHashTagList([...hashTagList, event.currentTarget.value]);
-
-      if (hashTagInputRef.current) {
-        hashTagInputRef.current.value = "";
-      }
-    }
-
-    if (event.key === "Backspace") {
-      if (!hashTagInputRef.current) {
-        return;
-      }
-
-      if (hashTagInputRef.current.value === "" && hashTagList.length > 0) {
-        const updatedHashTagList = hashTagList.slice(0, -1);
-        setHashTagList(updatedHashTagList);
-      }
-    }
-  };
-
-  const handleRemoveHashTag = (idx: number) => {
-    const removeHashTagList = hashTagList.filter((_, index) => index !== idx);
-    setHashTagList(removeHashTagList);
-  };
-
-  // 카테고리 변경
-  const handleChangeCategory = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    color: string,
-  ) => {
-    console.log(event.target.value);
-    setCategory(event.target.value);
-    setCategoryColor(color);
-  };
-
-  // 썸네일 업로드
-  const handleUploadImage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!event.target.files) {
-      return;
-    }
-
-    const file = event.target.files[0];
-    const fileType = file.type;
-
-    if (!IMAGE_TYPES[fileType]) {
-      alert("파일 형식이 올바르지 않습니다. 이미지 파일을 업로드해 주세요.");
-      event.target.value = "";
-      return;
-    }
-
-    setSelectedFile(file);
-
-    if (uploadInputRef.current) {
-      uploadInputRef.current.value = file.name;
-    }
-
-    const fileURL = URL.createObjectURL(file);
-    setPreview(fileURL);
-  };
-
-  const handleInputContent = (event: React.ChangeEvent<HTMLDivElement>) => {
-    setContentValue(event.target.innerText);
-  };
-
-  // 글 작성
-  const handlePostSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    // 유효성 검사 필요.
-    // 포스트 제목: 2 글자 이상 ~ 30글자 이하
-    // 썸네일 이미지: 필수?
-    // 해시태그 : 필수 X, 빈 값 가능
-    // category : 필수,
-    // categoryColor: 필수,
-    // dateAt: 기본값 오늘 (필수),
-    // likeCount: 무조건 0
-
-    // 1. 제목 유효성 검사
-
-    // const convertTitle = title.trim();
-
-    if (!selectedFile) {
-      alert("업로드할 이미지를 선택하세요.");
-      return;
-    }
-
-    const storageRef = ref(storage, `images/${selectedFile.name}`);
-
-    const fetchStorage = async () => {
-      try {
-        await uploadBytes(storageRef, selectedFile);
-        const url = await getDownloadURL(storageRef);
-
-        const post = {
-          title,
-          imageUrl: url,
-          hashTag: hashTagList,
-          content: contentValue,
-          category: category,
-          categoryColor: categoryColor,
-          dateAt: new Date(),
-          likeCount: 0,
-        };
-
-        fetchPost(post);
-      } catch (error) {
-        console.error("업로드 실패:", error);
-        handleToggleOpen();
-      }
-    };
-
-    const fetchPost = async (post: PostListResponse) => {
-      await addDoc(collection(db, FIREBASE_COLLECTION.POSTS), post);
-    };
-
-    fetchStorage();
-  };
+  const {
+    title,
+    contentValue,
+    handleTitleChange,
+    handleInputContent,
+    handlePostSubmit,
+  } = useFormSubmit({
+    hashTagList,
+    selectedFile,
+    category,
+    categoryColor,
+    handleToggleOpen,
+  });
 
   return (
     <section className={`${styles.editorContainer} editorSection`}>
@@ -188,8 +69,8 @@ const Editor = () => {
                 className={styles.uploadName}
                 placeholder="첨부파일"
                 ref={uploadInputRef}
-                onMouseOver={() => setIsPreview(true)}
-                onMouseOut={() => setIsPreview(false)}
+                onMouseOver={handleShowPreview}
+                onMouseOut={handleHidePreview}
               />
               <label htmlFor="file">파일찾기</label>
               <input type="file" id="file" onChange={handleUploadImage} />
