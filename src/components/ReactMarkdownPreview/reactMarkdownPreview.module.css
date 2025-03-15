@@ -81,6 +81,7 @@
   padding: 1em;
   margin: 0.5em 0px;
   line-height: 2rem;
+  border-radius: 0.4rem;
   overflow: auto;
 }
 
