@@ -1,17 +1,18 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { db, storage } from "@/firebase";
 import { addDoc, collection } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { PostListResponse } from "@/types/response/post";
 import { FIREBASE_COLLECTION } from "@/constants/firebase/firebase";
-import { useNavigate } from "react-router-dom";
+import { MODAL_MESSAGES } from "../../editor.constants";
 
 interface UseFormSubmitProps {
   hashTagList: string[];
   category: string;
   categoryColor: string;
   selectedFile: File | null;
-  handleToggleOpen: () => void;
+  handleOpenModalWithMessage: (title: string, message: string) => void;
 }
 
 const useFormSubmit = ({
@@ -19,7 +20,7 @@ const useFormSubmit = ({
   category,
   categoryColor,
   selectedFile,
-  handleToggleOpen,
+  handleOpenModalWithMessage,
 }: UseFormSubmitProps) => {
   const navigate = useNavigate();
 
@@ -37,21 +38,11 @@ const useFormSubmit = ({
   const handlePostSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // 유효성 검사 필요.
-    // 포스트 제목: 2 글자 이상 ~ 30글자 이하
-    // 썸네일 이미지: 필수?
-    // 해시태그 : 필수 X, 빈 값 가능
-    // category : 필수,
-    // categoryColor: 필수,
-    // dateAt: 기본값 오늘 (필수),
-    // likeCount: 무조건 0
-
-    // 1. 제목 유효성 검사
-
-    // const convertTitle = title.trim();
-
     if (!selectedFile) {
-      alert("업로드할 이미지를 선택하세요.");
+      handleOpenModalWithMessage(
+        MODAL_MESSAGES.THUMBNAIL_SELECTION.title,
+        MODAL_MESSAGES.THUMBNAIL_SELECTION.message,
+      );
       return;
     }
 
@@ -76,7 +67,10 @@ const useFormSubmit = ({
         fetchPost(post);
       } catch (error) {
         console.error("업로드 실패:", error);
-        handleToggleOpen();
+        handleOpenModalWithMessage(
+          MODAL_MESSAGES.PERMISSION_DENIED.title,
+          MODAL_MESSAGES.PERMISSION_DENIED.message,
+        );
       }
     };
 

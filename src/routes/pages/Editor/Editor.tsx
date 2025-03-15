@@ -1,4 +1,4 @@
-import { useCategoriesQuery, useToggle } from "@/hooks";
+import { useCategoriesQuery } from "@/hooks";
 import { AlertModal, ReactEditor, ReactMarkdownPreview } from "@/components";
 import {
   useCategoryInput,
@@ -7,11 +7,17 @@ import {
   useFormSubmit,
 } from "./hooks";
 import styles from "./editor.module.css";
+import useFormModal from "./hooks/useFormModal/useFormModal";
 
 const Editor = () => {
   const { categories = [] } = useCategoriesQuery();
 
-  const { isToggle, handleToggleClose, handleToggleOpen } = useToggle();
+  const {
+    modalMessage,
+    isToggle,
+    handleToggleClose,
+    handleOpenModalWithMessage,
+  } = useFormModal();
 
   const {
     isPreview,
@@ -21,7 +27,9 @@ const Editor = () => {
     handleUploadImage,
     handleShowPreview,
     handleHidePreview,
-  } = useImageUploadWithPreview();
+  } = useImageUploadWithPreview({
+    handleOpenModalWithMessage,
+  });
 
   const {
     hashTagInputRef,
@@ -43,7 +51,7 @@ const Editor = () => {
     selectedFile,
     category,
     categoryColor,
-    handleToggleOpen,
+    handleOpenModalWithMessage,
   });
 
   return (
@@ -71,6 +79,7 @@ const Editor = () => {
                 ref={uploadInputRef}
                 onMouseOver={handleShowPreview}
                 onMouseOut={handleHidePreview}
+                readOnly
               />
               <label htmlFor="file">파일찾기</label>
               <input type="file" id="file" onChange={handleUploadImage} />
@@ -157,8 +166,8 @@ const Editor = () => {
       </article>
       <AlertModal
         isShow={isToggle}
-        title="게시물을 등록할 권한이 없어요"
-        message={`게시물은 관리자만 등록할 수 있어요. \n 권한을 확인해주세요.`}
+        title={modalMessage.title}
+        message={modalMessage.message}
         handleToggleClose={handleToggleClose}
       />
     </section>

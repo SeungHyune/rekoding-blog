@@ -1,7 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import { IMAGE_TYPES } from "../../editor.constants";
+import { IMAGE_TYPES, MODAL_MESSAGES } from "../../editor.constants";
 
-const useImageUploadWithPreview = () => {
+interface UseImageUploadWithPreviewProps {
+  handleOpenModalWithMessage: (title: string, message: string) => void;
+}
+
+const useImageUploadWithPreview = ({
+  handleOpenModalWithMessage,
+}: UseImageUploadWithPreviewProps) => {
   const uploadInputRef = useRef<HTMLInputElement | null>(null);
 
   const [isPreview, setIsPreview] = useState(false);
@@ -25,8 +31,16 @@ const useImageUploadWithPreview = () => {
     const fileType = file.type;
 
     if (!IMAGE_TYPES[fileType]) {
-      alert("파일 형식이 올바르지 않습니다. 이미지 파일을 업로드해 주세요.");
+      handleOpenModalWithMessage(
+        MODAL_MESSAGES.INVALID_FILE_TYPE.title,
+        MODAL_MESSAGES.INVALID_FILE_TYPE.message,
+      );
       event.target.value = "";
+
+      if (uploadInputRef.current) {
+        uploadInputRef.current.value = "";
+      }
+
       return;
     }
 
