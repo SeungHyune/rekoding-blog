@@ -1,5 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { IMAGE_TYPES, MODAL_MESSAGES } from "../../editor.constants";
+import {
+  IMAGE_FILE_MAX_SIZE,
+  IMAGE_TYPES,
+  MODAL_MESSAGES,
+} from "../../editor.constants";
 
 interface UseImageUploadWithPreviewProps {
   handleOpenModalWithMessage: (title: string, message: string) => void;
@@ -30,17 +34,27 @@ const useImageUploadWithPreview = ({
     const file = event.target.files[0];
     const fileType = file.type;
 
-    if (!IMAGE_TYPES[fileType]) {
-      handleOpenModalWithMessage(
-        MODAL_MESSAGES.INVALID_FILE_TYPE.title,
-        MODAL_MESSAGES.INVALID_FILE_TYPE.message,
-      );
+    const showErrorAndResetInput = (modalMessage: {
+      title: string;
+      message: string;
+    }) => {
+      handleOpenModalWithMessage(modalMessage.title, modalMessage.message);
+      setPreview(null);
+
       event.target.value = "";
 
       if (uploadInputRef.current) {
         uploadInputRef.current.value = "";
       }
+    };
 
+    if (file.size >= IMAGE_FILE_MAX_SIZE) {
+      showErrorAndResetInput(MODAL_MESSAGES.MAX_FILE_SIZE_EXCEEDED);
+      return;
+    }
+
+    if (!IMAGE_TYPES[fileType]) {
+      showErrorAndResetInput(MODAL_MESSAGES.INVALID_FILE_TYPE);
       return;
     }
 
