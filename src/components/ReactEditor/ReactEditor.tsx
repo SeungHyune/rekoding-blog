@@ -37,6 +37,8 @@ const ReactEditor = ({ style, handleInputContent }: ReactEditorProps) => {
         width: "100%",
         outline: "none",
         whiteSpace: "pre-wrap",
+        fontSize: "1.6rem",
+        lineHeight: "2.7rem",
         ...style,
       }}
       contentEditable
