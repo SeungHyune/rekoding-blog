@@ -6,6 +6,7 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { PostListResponse } from "@/types/response/post";
 import { FIREBASE_COLLECTION } from "@/constants/firebase/firebase";
 import { MODAL_MESSAGES } from "../../editor.constants";
+import Resizer from "react-image-file-resizer";
 
 interface UseFormSubmitProps {
   hashTagList: string[];
@@ -27,6 +28,23 @@ const useFormSubmit = ({
   const [title, setTitle] = useState("");
   const [contentValue, setContentValue] = useState("");
 
+  const resizeFile = (file: File) => {
+    return new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        780,
+        780,
+        "WEBP",
+        80,
+        0,
+        (url) => {
+          resolve(url);
+        },
+        "file",
+      );
+    });
+  };
+
   const handleTitleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTitle(event.target.value);
   };
@@ -35,7 +53,7 @@ const useFormSubmit = ({
     setContentValue(event.target.innerText);
   };
 
-  const handlePostSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handlePostSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!selectedFile) {
@@ -46,11 +64,12 @@ const useFormSubmit = ({
       return;
     }
 
-    const storageRef = ref(storage, `images/${selectedFile.name}`);
+    const resizerFile = (await resizeFile(selectedFile)) as File;
+    const storageRef = ref(storage, `images/${resizerFile.name}`);
 
     const fetchStorage = async () => {
       try {
-        await uploadBytes(storageRef, selectedFile);
+        await uploadBytes(storageRef, resizerFile);
         const url = await getDownloadURL(storageRef);
 
         const post = {
