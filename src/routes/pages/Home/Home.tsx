@@ -1,4 +1,4 @@
-import { CategoryTabs, PostItem } from "./components";
+import { CategoryTabs, PostList } from "./components";
 import { useTabState, UseFilteredPostByCategoryProps } from "./hooks";
 import styles from "./home.module.css";
 
@@ -25,34 +25,7 @@ const Home = () => {
         categories={categories}
         handleClickTab={handleClickTab}
       />
-      <article className={styles.mainPosts}>
-        <ul>
-          {postList.map(
-            ({
-              id,
-              title,
-              content,
-              imageUrl,
-              dateAt,
-              hashTag,
-              category,
-              categoryColor,
-            }) => (
-              <PostItem
-                key={id}
-                id={id}
-                title={title}
-                content={content}
-                imageUrl={imageUrl}
-                dateAt={dateAt}
-                hashTag={hashTag}
-                category={category}
-                categoryColor={categoryColor}
-              />
-            ),
-          )}
-        </ul>
-      </article>
+      <PostList styles={styles} postList={postList} />
     </section>
   );
 };
