@@ -1,15 +1,10 @@
-import { PostItem } from "./components";
+import { CategoryTabs, PostItem } from "./components";
 import { useTabState, UseFilteredPostByCategoryProps } from "./hooks";
 import styles from "./home.module.css";
 
 const Home = () => {
   const { tab, handleClickTab } = useTabState();
   const { categories, postList } = UseFilteredPostByCategoryProps({ tab });
-
-  const tabActiveStyle = {
-    backgroundColor: "#fef0d3",
-    color: "#ffaa00",
-  };
 
   return (
     <section>
@@ -24,25 +19,12 @@ const Home = () => {
           지식을 공유하기 위해 개설한 블로그입니다.
         </p>
       </article>
-      <article className={styles.mainPostTab}>
-        <button
-          type="button"
-          style={tab === "TOTAL" ? tabActiveStyle : {}}
-          onClick={() => handleClickTab("TOTAL")}
-        >
-          전체
-        </button>
-        {categories.map(({ value }) => (
-          <button
-            type="button"
-            key={value}
-            style={tab === value ? tabActiveStyle : {}}
-            onClick={() => handleClickTab(value)}
-          >
-            {value}
-          </button>
-        ))}
-      </article>
+      <CategoryTabs
+        styles={styles}
+        tab={tab}
+        categories={categories}
+        handleClickTab={handleClickTab}
+      />
       <article className={styles.mainPosts}>
         <ul>
           {postList.map(
