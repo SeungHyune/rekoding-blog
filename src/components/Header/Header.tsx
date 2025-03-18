@@ -39,7 +39,7 @@ const Header = () => {
       <section className={styles.headerContainer}>
         <Link className={styles.logo} to="/" title="Logo">
           <div className={styles.imgBox}>
-            <img src="/logo.png" alt="블로그 로고 이미지" />
+            <img src="/images/logo.png" alt="블로그 로고 이미지" />
           </div>
           <div className={styles.textBox}>
             <span>REKODING</span>

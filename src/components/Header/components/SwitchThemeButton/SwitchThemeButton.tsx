@@ -15,12 +15,12 @@ const SwitchThemeButton = () => {
 
   return (
     <article className={styles.switchContainer} onClick={handleSwitchToggle}>
-      <img src="/src/assets/images/light-icon.svg" />
+      <img src="/images/light-icon.svg" />
       <Switch
         isSwitch={theme === "DARK"}
         handleSwitchToggle={handleSwitchToggle}
       />
-      <img src="/src/assets/images/dark-icon.svg" />
+      <img src="/images/dark-icon.svg" />
     </article>
   );
 };

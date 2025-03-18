@@ -19,9 +19,9 @@ const ThemeButton = () => {
       onClick={handleToggleTheme}
     >
       {theme === "LIGHT" ? (
-        <img src="/src/assets/images/light-icon.svg" />
+        <img src="/images/light-icon.svg" />
       ) : (
-        <img src="/src/assets/images/dark-icon.svg" />
+        <img src="/images/dark-icon.svg" />
       )}
     </div>
   );

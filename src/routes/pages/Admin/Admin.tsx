@@ -28,7 +28,7 @@ const Admin = () => {
             {isLogin ? "관리자 페이지입니다." : "관리자 로그인을 진행해주세요."}
           </p>
         </div>
-        <img src="public/images/picture.png" alt="admin login picture" />
+        <img src="/images/Picture.png" alt="admin login picture" />
       </article>
       <article className={styles.loginContainer}>
         <Link to="/" title="메인 페이지로 되돌아가기">
