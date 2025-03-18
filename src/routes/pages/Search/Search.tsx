@@ -5,6 +5,9 @@ import styles from "./search.module.css";
 const Search = () => {
   const { searchValue, searchPosts } = useFilteredPostsBySearch();
 
+  console.log("searchValue", searchValue);
+  console.log("searchPosts", searchPosts);
+
   return (
     <section className={styles.search}>
       <h2>검색 ({searchPosts.length})</h2>

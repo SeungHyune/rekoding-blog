@@ -1,24 +1,24 @@
 import { useEffect, useState } from "react";
 import { SearchIcon } from "@components/icons";
-import styles from "./searchBar.module.css";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useDebounce } from "@/hooks";
 import { ROUTES } from "@/constants/route/route";
+import styles from "./searchBar.module.css";
 
 const SearchBar = () => {
-  const [searchValue, setSearchValue] = useState("");
   const location = useLocation();
   const [searchParams] = useSearchParams();
+
+  const [searchValue, setSearchValue] = useState(
+    searchParams.get("search") || "",
+  );
 
   const debouncedValue = useDebounce({ value: searchValue, delay: 300 });
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (
-      debouncedValue ||
-      (debouncedValue === "" && location.pathname === ROUTES.SEARCH)
-    ) {
+    if (location.pathname === ROUTES.SEARCH || debouncedValue) {
       navigate(`/search?search=${debouncedValue}`);
     }
   }, [debouncedValue]);
@@ -30,13 +30,13 @@ const SearchBar = () => {
   const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const searchValue = searchParams.get("search") || "";
+    const currentSearchValue = searchParams.get("search") || "";
 
-    if (debouncedValue === searchValue) {
+    if (debouncedValue === currentSearchValue) {
       return;
     }
 
-    if (debouncedValue === "" || debouncedValue.trim() === "") {
+    if (!debouncedValue.trim()) {
       return;
     }
 
