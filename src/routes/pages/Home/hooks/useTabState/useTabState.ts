@@ -8,7 +8,7 @@ const useTabState = () => {
       return;
     }
 
-    setTab(newTab);
+    setTab(newTab.toUpperCase());
   };
 
   return {

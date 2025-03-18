@@ -21,7 +21,7 @@ const usePostData = () => {
   const postList = useMemo(() => {
     return categories.map(({ value }) => {
       const postList = posts.filter(
-        ({ category }) => category.toUpperCase() === value,
+        ({ category }) => category.toUpperCase() === value.toUpperCase(),
       );
 
       return {

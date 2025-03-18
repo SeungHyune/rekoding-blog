@@ -31,7 +31,7 @@ const CategoryTabs = ({
         <button
           type="button"
           key={value}
-          style={tab === value ? tabActiveStyle : {}}
+          style={tab === value.toUpperCase() ? tabActiveStyle : {}}
           onClick={() => handleClickTab(value)}
         >
           {value}
