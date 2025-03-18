@@ -8,6 +8,8 @@ import {
   doc,
   getDoc,
   getDocs,
+  orderBy,
+  query,
 } from "firebase/firestore";
 
 export const getPostDetail = async (id: string) => {
@@ -37,7 +39,9 @@ export const getPosts = async () => {
         firebasePostConverter,
       );
 
-    const response = await getDocs(postsCollection);
+    const response = await getDocs(
+      query(postsCollection, orderBy("dateAt", "desc")),
+    );
 
     const postList: PostListType[] = response.docs.map((post) => ({
       ...post.data(),
