@@ -1,10 +1,5 @@
 import { Fragment } from "react";
-import {
-  CommentIcon,
-  LikeIcon,
-  NavMenuIcon,
-  ShareIcon,
-} from "@components/icons";
+import { NavMenuIcon } from "@components/icons";
 import { useToggle } from "@/hooks";
 import { useMobile, usePostData } from "./hooks";
 import { ReactMarkdownPreview } from "@/components";
@@ -87,18 +82,6 @@ const Post = () => {
         </article>
       </section>
       <aside className={`${styles.rightSidebar} rightSidebar`}>
-        <div className={styles.socialButtons}>
-          <button type="button">
-            <LikeIcon />
-            <span>{postDetail.likeCount}</span>
-          </button>
-          <button type="button">
-            <ShareIcon />
-          </button>
-          <button type="button">
-            <CommentIcon />
-          </button>
-        </div>
         <ul className={styles.tocList}>
           {tocList.map(({ text, gapRemoveText }) => (
             <li key={`${gapRemoveText}`}>
