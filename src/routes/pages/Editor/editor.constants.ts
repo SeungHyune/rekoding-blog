@@ -4,6 +4,7 @@ export const IMAGE_TYPES: { [key: string]: boolean } = {
   "image/png": true,
   "image/jpg": true,
   "image/svg+xml": true,
+  "image/webp": true,
 };
 
 export const MODAL_MESSAGES = {
