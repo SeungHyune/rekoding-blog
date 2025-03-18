@@ -1,21 +1,15 @@
 import { Fragment } from "react";
 import { NavMenuIcon } from "@components/icons";
-import { useToggle } from "@/hooks";
-import { useMobile, usePostData } from "./hooks";
+import { usePostData } from "./hooks";
 import { ReactMarkdownPreview } from "@/components";
 import { CategoryPostList } from "./components";
 import NotFound from "../NotFound/NotFound";
-
+import { useToggleMobileNav } from "@/hooks";
 import styles from "./post.module.css";
 
 const Post = () => {
-  const {
-    isToggle: isPostListNav,
-    handleToggleClose: handlePostListNavClose,
-    handleToggle: handlePostListNavToggle,
-  } = useToggle(true);
-
-  const { isMobile } = useMobile({ handlePostListNavClose });
+  const { isMobile, isNavOpen, handleCloseNav, handleToggleNav } =
+    useToggleMobileNav({ mobileWidth: 1280 });
 
   const { postDetail, postList, tocList, postDetailDate, handleTocClick } =
     usePostData();
@@ -24,12 +18,14 @@ const Post = () => {
     return <NotFound />;
   }
 
+  console.log(isNavOpen);
+
   return (
     <section className={styles.postContainer}>
       <aside className={`${styles.leftSidebar} leftSidebar`}>
         <ul
           style={{
-            transform: `translateX(${isPostListNav ? "0" : "-26rem"})`,
+            transform: `translateX(${isNavOpen ? "0" : "-26rem"})`,
           }}
         >
           {postList.map(({ category, posts }) => (
@@ -39,9 +35,7 @@ const Post = () => {
                   key={category}
                   category={category}
                   posts={posts}
-                  handlePostListNavClose={
-                    isMobile ? handlePostListNavClose : undefined
-                  }
+                  handleCloseNav={isMobile ? handleCloseNav : undefined}
                 />
               )}
             </Fragment>
@@ -50,10 +44,10 @@ const Post = () => {
         <button
           className={`${styles.leftSidebarMenu} leftSiderbarMenu`}
           style={{
-            transform: `translateX(${isPostListNav ? "0" : "-26rem"})`,
+            transform: `translateX(${isNavOpen ? "0" : "-26rem"})`,
           }}
           type="button"
-          onClick={handlePostListNavToggle}
+          onClick={handleToggleNav}
         >
           목록
           <NavMenuIcon />

@@ -5,23 +5,20 @@ import styles from "./categoryPostList.module.css";
 interface CategoryPostListProps {
   category: string;
   posts: PostListType[];
-  handlePostListNavClose?: () => void;
+  handleCloseNav?: () => void;
 }
 
 const CategoryPostList = ({
   category,
   posts,
-  handlePostListNavClose,
+  handleCloseNav,
 }: CategoryPostListProps) => {
   return (
     <li>
       <strong className={styles.category}>{category}</strong>
       <ul className={styles.categoryPostList}>
         {posts.map(({ id, title }) => (
-          <li
-            key={id}
-            onClick={() => handlePostListNavClose && handlePostListNavClose()}
-          >
+          <li key={id} onClick={() => handleCloseNav && handleCloseNav()}>
             <NavLink to={`/post/${id}`} title={title}>
               {title}
             </NavLink>
