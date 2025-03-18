@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import {
   GithubIcon,
@@ -10,27 +9,15 @@ import {
 } from "@/components/icons";
 import { SwitchThemeButton, SearchBar, ThemeButton } from "./components";
 import useThemeStore from "@/stores/useThemeStore/useThemeStore";
-import { useToggle } from "@/hooks";
+import { useToggleMobileNav } from "@/hooks";
 import styles from "./header.module.css";
 
 const Header = () => {
   const { theme } = useThemeStore();
 
-  const {
-    isToggle: isNavToggle,
-    handleToggleClose: handleNavToggleOff,
-    handleToggle: handleNavToggle,
-  } = useToggle(true);
-
-  useEffect(() => {
-    if (window.innerWidth <= 940) {
-      handleNavToggleOff();
-    }
-  }, []);
-
-  const handleNavShowToggle = () => {
-    handleNavToggle();
-  };
+  const { isNavOpen, handleToggleNav } = useToggleMobileNav({
+    mobileWidth: 940,
+  });
 
   return (
     <header
@@ -51,8 +38,8 @@ const Header = () => {
           <article
             className={`${styles.headerNavigation} headerNavigation`}
             style={{
-              transform: isNavToggle ? `translateX(0)` : `translateX(100%)`,
-              opacity: isNavToggle ? "1" : "0",
+              transform: isNavOpen ? `translateX(0)` : `translateX(100%)`,
+              opacity: isNavOpen ? "1" : "0",
             }}
           >
             <nav className={`${styles.navigation} navigation`}>
@@ -94,10 +81,10 @@ const Header = () => {
         <button
           className={`${styles.navMenuBtn} navMenuBtn`}
           type="button"
-          onClick={handleNavShowToggle}
+          onClick={handleToggleNav}
         >
-          {isNavToggle ? "닫기" : "메뉴"}
-          {isNavToggle ? <NavMenuCloseIcon /> : <NavMenuIcon />}
+          {isNavOpen ? "닫기" : "메뉴"}
+          {isNavOpen ? <NavMenuCloseIcon /> : <NavMenuIcon />}
         </button>
       </section>
     </header>
