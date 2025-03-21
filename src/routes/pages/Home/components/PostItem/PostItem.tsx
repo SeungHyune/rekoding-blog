@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import styles from "./postItem.module.css";
 import { formatDate } from "@/utils";
+import styles from "./postItem.module.css";
 
 interface PostItemProps {
   id: string;
@@ -37,28 +37,24 @@ const PostItem = ({
     .trim(); // 앞뒤 공백 제거
 
   return (
-    <li>
-      <Link to={`/post/${id}`} title="">
-        <div className={styles.imgBox}>
-          <img src={imageUrl} alt={`${title} 이미지`} />
-          <span style={{ backgroundColor: `#${categoryColor}` }}>
-            {category}
-          </span>
-        </div>
-        <div className={styles.contentBox}>
-          <strong>{title}</strong>
-          <p>{formatContent}</p>
-          <div className={styles.infoBox}>
-            <span>{formattedDate}</span>
-            <div className={styles.tagBox}>
-              {hashTag.map((tag) => (
-                <span key={tag}>#{tag}</span>
-              ))}
-            </div>
+    <Link to={`/post/${id}`} title="">
+      <div className={styles.imgBox}>
+        <img src={imageUrl} alt={`${title} 이미지`} loading="lazy" />
+        <span style={{ backgroundColor: `#${categoryColor}` }}>{category}</span>
+      </div>
+      <div className={styles.contentBox}>
+        <strong>{title}</strong>
+        <p>{formatContent}</p>
+        <div className={styles.infoBox}>
+          <span>{formattedDate}</span>
+          <div className={styles.tagBox}>
+            {hashTag.map((tag) => (
+              <span key={tag}>#{tag}</span>
+            ))}
           </div>
         </div>
-      </Link>
-    </li>
+      </div>
+    </Link>
   );
 };
 

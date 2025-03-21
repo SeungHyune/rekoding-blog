@@ -1,15 +1,17 @@
 import { PostListType } from "@/types/response/post";
 import PostItem from "../PostItem/PostItem";
+import { motion } from "framer-motion";
 
 interface PostListProps {
   styles: CSSModuleClasses;
+  tab?: string;
   postList: PostListType[];
 }
 
-const PostList = ({ styles, postList }: PostListProps) => {
+const PostList = ({ styles, tab, postList }: PostListProps) => {
   return (
     <article className={styles.mainPosts}>
-      <ul>
+      <motion.ul key={tab}>
         {postList.map(
           ({
             id,
@@ -21,20 +23,27 @@ const PostList = ({ styles, postList }: PostListProps) => {
             category,
             categoryColor,
           }) => (
-            <PostItem
+            <motion.li
               key={id}
-              id={id}
-              title={title}
-              content={content}
-              imageUrl={imageUrl}
-              dateAt={dateAt}
-              hashTag={hashTag}
-              category={category}
-              categoryColor={categoryColor}
-            />
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 100 }}
+              transition={{ ease: "easeOut", duration: 0.5 }}
+            >
+              <PostItem
+                id={id}
+                title={title}
+                content={content}
+                imageUrl={imageUrl}
+                dateAt={dateAt}
+                hashTag={hashTag}
+                category={category}
+                categoryColor={categoryColor}
+              />
+            </motion.li>
           ),
         )}
-      </ul>
+      </motion.ul>
     </article>
   );
 };

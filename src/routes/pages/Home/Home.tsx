@@ -15,7 +15,7 @@ const Home = () => {
         categories={categories}
         handleClickTab={handleClickTab}
       />
-      <PostList styles={styles} postList={postList} />
+      <PostList styles={styles} tab={tab} postList={postList} />
     </section>
   );
 };
