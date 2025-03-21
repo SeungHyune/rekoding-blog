@@ -11,14 +11,18 @@ const Post = () => {
   const { isMobile, isNavOpen, handleCloseNav, handleToggleNav } =
     useToggleMobileNav({ mobileWidth: 1280 });
 
-  const { postDetail, postList, tocList, postDetailDate, handleTocClick } =
-    usePostData();
+  const {
+    postDetail,
+    postContentList,
+    postList,
+    tocList,
+    postDetailDate,
+    handleTocClick,
+  } = usePostData();
 
   if (!postDetail) {
     return <NotFound />;
   }
-
-  console.log(isNavOpen);
 
   return (
     <section className={styles.postContainer}>
@@ -72,13 +76,21 @@ const Post = () => {
           <div className={styles.thumbnailBox}>
             <img src={postDetail.imageUrl} alt={postDetail.title} />
           </div>
-          <ReactMarkdownPreview content={postDetail.content} />
+          {postContentList.map((content, index) => (
+            <div
+              className="markdownSection"
+              id={String(index)}
+              key={`${index}${content.header}`}
+            >
+              <ReactMarkdownPreview content={content.fullText} />
+            </div>
+          ))}
         </article>
       </section>
       <aside className={`${styles.rightSidebar} rightSidebar`}>
         <ul className={styles.tocList}>
           {tocList.map(({ text, gapRemoveText }) => (
-            <li key={`${gapRemoveText}`}>
+            <li data-title={gapRemoveText} key={`${gapRemoveText}`}>
               <a
                 href={`#${gapRemoveText}`}
                 title={`${text} 타이틀로 이동`}
