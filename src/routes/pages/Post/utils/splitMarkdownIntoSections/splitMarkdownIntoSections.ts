@@ -8,9 +8,6 @@ const splitMarkdownIntoSections = (markdownText: string) => {
 
   // 헤더가 아닌 문자열부터 처음 헤더까지의 문자열
   const initialContent = markdownText.match(/^([\s\S]*?)(?=\n?#{1,6} )/m);
-  if (initialContent && initialContent[0]) {
-    headerIndices.push(0);
-  }
 
   let match;
   while ((match = SECTION_REGEX.exec(markdownText)) !== null) {
@@ -22,8 +19,13 @@ const splitMarkdownIntoSections = (markdownText: string) => {
     const start = headerIndices[i];
     const end = headerIndices[i + 1] || markdownText.length;
 
-    const sectionText = markdownText.slice(start, end).trim();
+    let sectionText = markdownText.slice(start, end).trim();
+
     const [header, ...contentLines] = sectionText.split("\n");
+
+    if (i === 0 && initialContent && initialContent[0]) {
+      sectionText = initialContent[0] + markdownText.slice(start, end).trim();
+    }
 
     sections.push({
       header: header.trim(),
