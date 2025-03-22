@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { NavMenuIcon } from "@components/icons";
-import { usePostData } from "./hooks";
+import { usePostsByCategory, usePostDetail } from "./hooks";
 import { ReactMarkdownPreview } from "@/components";
 import { CategoryPostList } from "./components";
 import NotFound from "../NotFound/NotFound";
@@ -11,14 +11,14 @@ const Post = () => {
   const { isMobile, isNavOpen, handleCloseNav, handleToggleNav } =
     useToggleMobileNav({ mobileWidth: 1280 });
 
+  const { postList } = usePostsByCategory();
   const {
     postDetail,
     postContentList,
-    postList,
-    tocList,
     postDetailDate,
+    tocList,
     handleTocClick,
-  } = usePostData();
+  } = usePostDetail();
 
   if (!postDetail) {
     return <NotFound />;
