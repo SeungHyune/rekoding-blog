@@ -65,6 +65,10 @@
   line-height: 1.8rem;
 }
 
+.postContent .markdownSection {
+  margin-bottom: 5rem;
+}
+
 .thumbnailBox {
   margin-top: 2rem;
 }

@@ -78,7 +78,7 @@ const Post = () => {
           </div>
           {postContentList.map((content, index) => (
             <div
-              className="markdownSection"
+              className={`${styles.markdownSection} markdownSection`}
               id={String(index)}
               key={`${index}${content.header}`}
             >
