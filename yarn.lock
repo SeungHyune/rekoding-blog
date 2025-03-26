@@ -1654,6 +1654,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:^22.13.13":
+  version: 22.13.13
+  resolution: "@types/node@npm:22.13.13"
+  dependencies:
+    undici-types: "npm:~6.20.0"
+  checksum: 10c0/daf792ba5dcff1316abf4b33680f94b792f8d54d6ae495efc8929531e0ba1284a248d29aab117d2259f9280284d986ad5799b193b0516e2b926d713aab835f7d
+  languageName: node
+  linkType: hard
+
 "@types/prop-types@npm:*":
   version: 15.7.14
   resolution: "@types/prop-types@npm:15.7.14"
@@ -5704,6 +5713,7 @@ __metadata:
     "@tanstack/eslint-plugin-query": "npm:^5.66.1"
     "@tanstack/react-query": "npm:^5.66.7"
     "@tanstack/react-query-devtools": "npm:^5.66.7"
+    "@types/node": "npm:^22.13.13"
     "@types/react": "npm:^18.3.18"
     "@types/react-dom": "npm:^18.3.5"
     "@typescript-eslint/eslint-plugin": "npm:^8.21.0"
