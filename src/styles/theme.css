@@ -28,6 +28,10 @@
   color: #fff;
 }
 
+.rootSection.dark button {
+  color: #fff;
+}
+
 /* PostDetail 페이지 */
 
 .rootSection.dark .leftSidebar {
