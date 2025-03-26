@@ -5,3 +5,5 @@ export { default as AlertModal } from "./AlertModal/AlertModal";
 export { default as ReactEditor } from "./ReactEditor/ReactEditor";
 export { default as ReactMarkdownPreview } from "./ReactMarkdownPreview/ReactMarkdownPreview";
 export { default as Switch } from "./Switch/Switch";
+export { default as Skeleton } from "./Skeleton/Skeleton";
+export { default as LazyImage } from "./LazyImage/LazyImage";
