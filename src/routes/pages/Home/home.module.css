@@ -4,7 +4,7 @@
 
 .mainTitle h2 {
   font-size: 3.2rem;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 4rem;
   margin-bottom: 1.2rem;
 }
@@ -29,7 +29,7 @@
   cursor: pointer;
   background: transparent;
   border: none;
-  font-family: "pretendard";
+  font-family: "Pretendard Variable";
   padding: 1rem;
   border-radius: 1.2rem;
   transition: all 0.2s;

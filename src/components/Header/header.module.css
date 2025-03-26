@@ -24,7 +24,7 @@
   align-items: center;
   gap: 0.5rem;
   font-size: 1.6rem;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.6rem;
   margin-right: 8.3rem;
 }
@@ -58,7 +58,7 @@
 
 .header .headerNavigation .navigation ul li {
   font-size: 1.6rem;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 2rem;
 }
 
@@ -170,7 +170,7 @@
   .header .headerNavigation .infoList li a span {
     display: inline;
     font-size: 1.6rem;
-    font-weight: 600;
+    font-weight: 700;
   }
 
   .switchThemeButton {

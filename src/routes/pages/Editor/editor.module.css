@@ -28,7 +28,7 @@
 
 .fieldTitle {
   width: 12rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .fieldContent {
@@ -96,7 +96,7 @@
 .title textarea {
   width: 100%;
   height: 4rem;
-  font-family: "pretendard";
+  font-family: "Pretendard Variable";
   font-size: 3rem;
   line-height: 4rem;
   background-color: transparent;
@@ -196,7 +196,7 @@
 }
 
 .btnBox button {
-  font-family: "pretendard";
+  font-family: "Pretendard Variable";
   font-size: 1.6rem;
   border: 0;
   cursor: pointer;

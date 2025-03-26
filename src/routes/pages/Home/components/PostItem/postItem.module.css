@@ -19,7 +19,7 @@
   top: 1rem;
   right: 1rem;
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.5rem;
   background-color: #00b2ff;
   color: #fff;
@@ -33,7 +33,7 @@
 
 .contentBox strong {
   font-size: 2rem;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 2.5rem;
   display: -webkit-box;
   -webkit-box-orient: vertical;

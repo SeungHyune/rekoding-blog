@@ -108,7 +108,7 @@
 
 .rightSidebar .socialButtons button span {
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.5rem;
   color: #5a5a5a;
 }
@@ -152,7 +152,7 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.3rem;
-    font-family: "pretendard";
+    font-family: "Pretendard Variable";
     background-color: #fff;
     border: 0;
     border-right: 0.1rem solid #e8e8e8;
