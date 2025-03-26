@@ -22,7 +22,7 @@
   overflow-y: auto;
   overscroll-behavior: contain;
   padding: 5.2rem 1rem 0 0;
-  max-height: calc(100dvh - 16.2rem);
+  max-height: calc(100vh - 16.2rem);
   scrollbar-width: none;
 }
 
@@ -173,7 +173,6 @@
 
   .leftSidebar > ul {
     width: 26rem;
-    height: 100%;
     max-height: max-content;
     background-color: #fff;
     padding: 2rem;
