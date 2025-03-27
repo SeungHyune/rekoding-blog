@@ -39,13 +39,7 @@ const LazyImage = ({ src, alt }: LazyImageProps) => {
   return (
     <>
       {isLoading && <Skeleton height="100%" />}
-      <img
-        ref={imgRef}
-        src=""
-        alt={alt}
-        loading="lazy"
-        onLoad={handleImageLoad}
-      />
+      <img ref={imgRef} src="" alt={alt} onLoad={handleImageLoad} />
     </>
   );
 };
