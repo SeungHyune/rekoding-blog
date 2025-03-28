@@ -12,16 +12,21 @@ const LazyImage = ({ src, alt }: LazyImageProps) => {
   const imgRef = useRef<HTMLImageElement | null>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          observer.unobserve(entry.target);
-          if (imgRef.current) {
-            imgRef.current.src = src;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            observer.unobserve(entry.target);
+            if (imgRef.current) {
+              imgRef.current.src = src;
+            }
           }
-        }
-      });
-    }, {});
+        });
+      },
+      {
+        rootMargin: "200px",
+      },
+    );
 
     if (imgRef.current) {
       observer.observe(imgRef.current);
@@ -39,7 +44,13 @@ const LazyImage = ({ src, alt }: LazyImageProps) => {
   return (
     <>
       {isLoading && <Skeleton height="100%" />}
-      <img ref={imgRef} src="" alt={alt} onLoad={handleImageLoad} />
+      <img
+        ref={imgRef}
+        src=""
+        alt={alt}
+        onLoad={handleImageLoad}
+        loading="lazy"
+      />
     </>
   );
 };
