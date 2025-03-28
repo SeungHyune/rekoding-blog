@@ -16,6 +16,7 @@ const LazyImage = ({ src, alt }: LazyImageProps) => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            console.log(entry.target);
             observer.unobserve(entry.target);
             if (imgRef.current) {
               imgRef.current.src = src;
@@ -24,7 +25,7 @@ const LazyImage = ({ src, alt }: LazyImageProps) => {
         });
       },
       {
-        rootMargin: "200px",
+        rootMargin: "300px",
       },
     );
 
