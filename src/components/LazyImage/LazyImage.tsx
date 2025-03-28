@@ -8,6 +8,7 @@ interface LazyImageProps {
 
 const LazyImage = ({ src, alt }: LazyImageProps) => {
   const [isLoading, setIsLoading] = useState(true);
+  const [imgSrc, setImgSrc] = useState("");
 
   const imgRef = useRef<HTMLImageElement | null>(null);
 
@@ -16,16 +17,13 @@ const LazyImage = ({ src, alt }: LazyImageProps) => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            console.log(entry.target);
             observer.unobserve(entry.target);
-            if (imgRef.current) {
-              imgRef.current.src = src;
-            }
+            setImgSrc(src);
           }
         });
       },
       {
-        rootMargin: "300px",
+        rootMargin: "200px",
       },
     );
 
@@ -45,7 +43,13 @@ const LazyImage = ({ src, alt }: LazyImageProps) => {
   return (
     <>
       {isLoading && <Skeleton height="100%" />}
-      <img ref={imgRef} src="" alt={alt} onLoad={handleImageLoad} />
+      <img
+        ref={imgRef}
+        src={imgSrc}
+        alt={alt}
+        onLoad={handleImageLoad}
+        loading="lazy"
+      />
     </>
   );
 };
