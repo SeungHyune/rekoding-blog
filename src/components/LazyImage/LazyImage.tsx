@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import Skeleton from "../Skeleton/Skeleton";
+import { Skeleton } from "@/components";
+import styles from "./lazyImage.module.css";
 
 interface LazyImageProps {
   src: string;
@@ -8,7 +9,6 @@ interface LazyImageProps {
 
 const LazyImage = ({ src, alt }: LazyImageProps) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [imgSrc, setImgSrc] = useState("");
 
   const imgRef = useRef<HTMLImageElement | null>(null);
 
@@ -18,7 +18,10 @@ const LazyImage = ({ src, alt }: LazyImageProps) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             observer.unobserve(entry.target);
-            setImgSrc(src);
+
+            if (imgRef.current) {
+              imgRef.current.src = src;
+            }
           }
         });
       },
@@ -44,8 +47,9 @@ const LazyImage = ({ src, alt }: LazyImageProps) => {
     <>
       {isLoading && <Skeleton height="100%" />}
       <img
+        className={styles.img}
         ref={imgRef}
-        src={imgSrc}
+        src={""}
         alt={alt}
         onLoad={handleImageLoad}
         loading="lazy"

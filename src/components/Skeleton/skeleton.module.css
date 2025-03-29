@@ -1,6 +1,8 @@
 .skeleton {
+  position: relative;
   background-color: #f2f2f2;
   animation: skeleton-gradient 2s infinite ease-in-out;
+  z-index: 1;
 }
 
 @keyframes skeleton-gradient {

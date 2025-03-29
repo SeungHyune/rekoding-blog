@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { formatDate } from "@/utils";
+import { LazyImage } from "@/components";
 import styles from "./postItem.module.css";
 
 interface PostItemProps {
@@ -39,7 +40,7 @@ const PostItem = ({
   return (
     <Link to={`/post/${id}`} title="">
       <div className={styles.imgBox}>
-        <img src={imageUrl} loading="lazy" />
+        <LazyImage src={imageUrl} alt={`${title}`} />
         <span style={{ backgroundColor: `#${categoryColor}` }}>{category}</span>
       </div>
       <div className={styles.contentBox}>
