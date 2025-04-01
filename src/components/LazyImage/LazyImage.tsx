@@ -4,7 +4,7 @@ import styles from "./lazyImage.module.css";
 
 interface LazyImageProps {
   src: string;
-  alt: string;
+  alt?: string;
 }
 
 const LazyImage = ({ src, alt }: LazyImageProps) => {
