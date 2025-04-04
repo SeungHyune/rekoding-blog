@@ -25,10 +25,10 @@ const usePostDetail = () => {
         entries.forEach((entry) => {
           const entryId = Number(entry.target.id);
           const tocId = tocList[entryId].gapRemoveText;
-          const toc = document.querySelector(`li[data-title="${tocId}"]`);
+          const toc = document.querySelector(`li[data-title="${tocId}"] a`);
 
           if (entry.isIntersecting) {
-            toc?.setAttribute("style", "color: #ffaa00");
+            toc?.setAttribute("style", "color: #ffaa00; background: #fff9ee");
           } else {
             toc?.setAttribute("style", "");
           }
