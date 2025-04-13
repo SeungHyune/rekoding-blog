@@ -93,8 +93,6 @@ const Post = () => {
           {tocList.map(({ heading, text, gapRemoveText }) => {
             const className = `tocList${heading}`;
 
-            console.log("className", className);
-
             return (
               <li
                 className={styles[className]}
