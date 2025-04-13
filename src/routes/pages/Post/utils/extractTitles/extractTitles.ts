@@ -3,11 +3,12 @@ const extractTitles = (markdown: string) => {
   if (!titles) return [];
 
   return titles.map((title) => {
+    const heading = title.match(/^(#+)/)[0].length || 0;
     const text = title.replace(/^(#+)\s+/, "").trim();
     const textLowerCase = text.replace(/[.()\\/,:'`]/g, "").toLowerCase();
     const gapRemoveText = textLowerCase.replace(/\s+/g, "-");
 
-    return { text, gapRemoveText }; // 레벨, 텍스트, HTML 태그 포함
+    return { heading, text, gapRemoveText }; // 레벨, 텍스트, HTML 태그 포함
   });
 };
 
