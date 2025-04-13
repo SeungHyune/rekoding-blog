@@ -61,6 +61,10 @@
   color: #ffaa00;
 }
 
+.rootSection.dark .rightSidebar ul li a {
+  background-color: transparent !important;
+}
+
 .rootSection.dark .reactMarkdown {
   color: #ececec;
 }
