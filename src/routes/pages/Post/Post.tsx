@@ -88,18 +88,29 @@ const Post = () => {
         </article>
       </section>
       <aside className={`${styles.rightSidebar} rightSidebar`}>
+        <strong>Table of Contents</strong>
         <ul className={styles.tocList}>
-          {tocList.map(({ text, gapRemoveText }) => (
-            <li data-title={gapRemoveText} key={`${gapRemoveText}`}>
-              <a
-                href={`#${gapRemoveText}`}
-                title={`${text} 타이틀로 이동`}
-                onClick={handleTocClick}
+          {tocList.map(({ heading, text, gapRemoveText }) => {
+            const className = `tocList${heading}`;
+
+            console.log("className", className);
+
+            return (
+              <li
+                className={styles[className]}
+                data-title={gapRemoveText}
+                key={gapRemoveText}
               >
-                {text}
-              </a>
-            </li>
-          ))}
+                <a
+                  href={`#${gapRemoveText}`}
+                  title={`${text} 타이틀로 이동`}
+                  onClick={handleTocClick}
+                >
+                  {text}
+                </a>
+              </li>
+            );
+          })}
         </ul>
       </aside>
     </section>

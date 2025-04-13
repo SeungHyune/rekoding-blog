@@ -90,6 +90,10 @@
   color: #5a5a5a;
 }
 
+.rightSidebar > strong {
+  font-size: 1.8rem;
+}
+
 .rightSidebar .socialButtons {
   display: flex;
   gap: 1.5rem;
@@ -124,7 +128,7 @@
 .rightSidebar .tocList {
   display: flex;
   flex-direction: column;
-  margin-top: 2.7rem;
+  margin-top: 1.5rem;
 }
 
 .rightSidebar .tocList li {
@@ -141,6 +145,25 @@
 .rightSidebar .tocList li:hover a {
   color: #ffaa00;
   background-color: #fff9ee;
+}
+
+.rightSidebar .tocList .tocList2 a {
+  padding-left: 1.5rem;
+}
+
+.rightSidebar .tocList .tocList3 a {
+  background-color: transparent !important;
+  padding-left: 2.5rem;
+}
+
+.rightSidebar .tocList .tocList4 a {
+  background-color: transparent !important;
+  padding-left: 3.5rem;
+}
+
+.rightSidebar .tocList .tocList5 a {
+  background-color: transparent !important;
+  padding-left: 4.5rem;
 }
 
 .leftSidebarMenu {
