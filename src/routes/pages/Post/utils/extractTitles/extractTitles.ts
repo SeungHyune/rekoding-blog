@@ -3,7 +3,8 @@ const extractTitles = (markdown: string) => {
   if (!titles) return [];
 
   return titles.map((title) => {
-    const heading = title.match(/^(#+)/)[0].length || 0;
+    const match = title.match(/^(#+)/);
+    const heading = match ? match[0].length : 0;
     const text = title.replace(/^(#+)\s+/, "").trim();
     const textLowerCase = text.replace(/[.()\\/,:'`]/g, "").toLowerCase();
     const gapRemoveText = textLowerCase.replace(/\s+/g, "-");
