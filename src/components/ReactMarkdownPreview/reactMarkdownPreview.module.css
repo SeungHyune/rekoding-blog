@@ -79,7 +79,24 @@
   margin: 0.5em 0px;
   line-height: 2rem;
   border-radius: 0.4rem;
+  max-width: 78rem;
   overflow: auto;
+  box-sizing: border-box;
+}
+
+/* Webkit 브라우저 (Chrome, Safari 등)에서 스크롤바 스타일 설정 */
+.reactMarkdown pre::-webkit-scrollbar {
+  width: 5px; /* 스크롤바 너비 */
+  height: 10px;
+}
+
+.reactMarkdown pre::-webkit-scrollbar-thumb {
+  background-color: darkgrey; /* 스크롤바 색상 */
+  border-radius: 10px; /* 스크롤바 모서리 둥글게 */
+}
+
+.reactMarkdown pre::-webkit-scrollbar-track {
+  background: #f1f1f1; /* 스크롤바 배경 */
 }
 
 .reactMarkdown pre code {
