@@ -27,8 +27,9 @@
 }
 
 .postContent {
-  flex: 1;
+  width: calc(100% - 27rem - 23rem);
   padding: 5.2rem 8rem;
+  box-sizing: border-box;
 }
 
 .postContent .titleBox h1 {
@@ -214,11 +215,19 @@
     transition: transform 0.2s ease-in-out;
     box-sizing: border-box;
   }
+
+  .postContent {
+    width: calc(100% - 23rem);
+  }
 }
 
 @media (max-width: 1024px) {
   .postContainer {
     display: block;
+  }
+
+  .postContent {
+    width: 100%;
   }
 
   .rightSidebar {
