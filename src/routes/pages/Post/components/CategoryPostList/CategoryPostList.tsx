@@ -1,5 +1,6 @@
 import { PostListType } from "@/types/response/post";
-import { NavLink } from "react-router-dom";
+import { useImagePreload } from "./hooks";
+
 import styles from "./categoryPostList.module.css";
 
 interface CategoryPostListProps {
@@ -13,15 +14,15 @@ const CategoryPostList = ({
   posts,
   handleCloseNav,
 }: CategoryPostListProps) => {
+  const { handlePostClick } = useImagePreload({ handleCloseNav });
+
   return (
     <li>
       <strong className={styles.category}>{category}</strong>
       <ul className={styles.categoryPostList}>
         {posts.map(({ id, title }) => (
-          <li key={id} onClick={() => handleCloseNav && handleCloseNav()}>
-            <NavLink to={`/post/${id}`} title={title}>
-              {title}
-            </NavLink>
+          <li key={id} onClick={() => handlePostClick(id)}>
+            {title}
           </li>
         ))}
       </ul>
