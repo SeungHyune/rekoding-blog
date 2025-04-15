@@ -8,7 +8,7 @@ interface UseImagePreloadProps {
 const useImagePreload = ({ handleCloseNav }: UseImagePreloadProps) => {
   const navigate = useNavigate();
 
-  const handlePostClick = async (event, postId) => {
+  const handlePostClick = async (event: React.MouseEvent, postId: string) => {
     event.preventDefault();
 
     try {

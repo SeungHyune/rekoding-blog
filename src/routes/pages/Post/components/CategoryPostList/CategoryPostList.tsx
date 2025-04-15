@@ -26,7 +26,7 @@ const CategoryPostList = ({
             <NavLink
               to={`/post/${id}`}
               title={title}
-              onClick={(event) => handlePostClick(event, id)}
+              onClick={(event: React.MouseEvent) => handlePostClick(event, id)}
             >
               {title}
             </NavLink>
