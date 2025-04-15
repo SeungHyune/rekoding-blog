@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { Header } from "@/components";
+import { Header, ScrollToTop } from "@/components";
 import useThemeStore from "@/stores/useThemeStore/useThemeStore";
 import "@/styles/theme.css";
 import { ArrowDownIcon, ArrowUpIcon } from "@/components/icons";
@@ -9,38 +9,43 @@ const DefaultLayout = () => {
   const { theme } = useThemeStore();
 
   return (
-    <section className={`rootSection ${theme === "LIGHT" ? "light" : "dark"}`}>
-      <Header />
-      <main id="app" className={styles.mainSection}>
-        <Outlet />
-        <div className={styles.scrollButtons}>
-          <button
-            className={styles.up}
-            type="button"
-            onClick={() =>
-              window.scrollTo({
-                top: 0,
-                behavior: "smooth",
-              })
-            }
-          >
-            <ArrowUpIcon />
-          </button>
-          <button
-            className={styles.down}
-            type="button"
-            onClick={() =>
-              window.scrollTo({
-                top: document.body.scrollHeight,
-                behavior: "smooth",
-              })
-            }
-          >
-            <ArrowDownIcon />
-          </button>
-        </div>
-      </main>
-    </section>
+    <>
+      <ScrollToTop />
+      <section
+        className={`rootSection ${theme === "LIGHT" ? "light" : "dark"}`}
+      >
+        <Header />
+        <main id="app" className={styles.mainSection}>
+          <Outlet />
+          <div className={styles.scrollButtons}>
+            <button
+              className={styles.up}
+              type="button"
+              onClick={() =>
+                window.scrollTo({
+                  top: 0,
+                  behavior: "smooth",
+                })
+              }
+            >
+              <ArrowUpIcon />
+            </button>
+            <button
+              className={styles.down}
+              type="button"
+              onClick={() =>
+                window.scrollTo({
+                  top: document.body.scrollHeight,
+                  behavior: "smooth",
+                })
+              }
+            >
+              <ArrowDownIcon />
+            </button>
+          </div>
+        </main>
+      </section>
+    </>
   );
 };
 
