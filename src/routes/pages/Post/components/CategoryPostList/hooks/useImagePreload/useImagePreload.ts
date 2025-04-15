@@ -8,18 +8,24 @@ interface UseImagePreloadProps {
 const useImagePreload = ({ handleCloseNav }: UseImagePreloadProps) => {
   const navigate = useNavigate();
 
-  const handlePostClick = async (postId) => {
-    const post = await getPostDetail(postId);
+  const handlePostClick = async (event, postId) => {
+    event.preventDefault();
 
-    const image = new Image();
-    image.src = post.imageUrl;
+    try {
+      const post = await getPostDetail(postId);
 
-    image.onload = () => {
-      navigate(`/post/${postId}`);
-    };
+      const image = new Image();
+      image.src = post.imageUrl;
 
-    if (handleCloseNav) {
-      handleCloseNav();
+      image.onload = () => {
+        navigate(`/post/${postId}`);
+      };
+
+      if (handleCloseNav) {
+        handleCloseNav();
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 

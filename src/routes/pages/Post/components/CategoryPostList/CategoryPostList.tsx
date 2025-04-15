@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import { PostListType } from "@/types/response/post";
 import { useImagePreload } from "./hooks";
 
@@ -21,8 +22,14 @@ const CategoryPostList = ({
       <strong className={styles.category}>{category}</strong>
       <ul className={styles.categoryPostList}>
         {posts.map(({ id, title }) => (
-          <li key={id} onClick={() => handlePostClick(id)}>
-            {title}
+          <li key={id}>
+            <NavLink
+              to={`/post/${id}`}
+              title={title}
+              onClick={(event) => handlePostClick(event, id)}
+            >
+              {title}
+            </NavLink>
           </li>
         ))}
       </ul>
