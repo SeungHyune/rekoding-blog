@@ -1,4 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
+import { useState, useEffect } from "react";
 import {
   GithubIcon,
   EmailIcon,
@@ -14,14 +15,23 @@ import styles from "./header.module.css";
 
 const Header = () => {
   const { theme } = useThemeStore();
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const { isNavOpen, handleToggleNav } = useToggleMobileNav({
     mobileWidth: 940,
   });
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <header
-      className={`${styles.header} ${theme === "DARK" ? "dark" : "light"}`}
+      className={`${styles.header} ${isScrolled ? styles.scrolled : ""} ${theme === "DARK" ? "dark" : "light"}`}
     >
       <section className={styles.headerContainer}>
         <Link className={styles.logo} to="/" title="Logo">

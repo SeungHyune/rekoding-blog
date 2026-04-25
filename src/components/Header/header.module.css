@@ -3,12 +3,23 @@
   width: 100%;
   max-width: 100vw;
   height: 10rem;
-  border-bottom: 1px solid #e8e8e8;
+  border-bottom: 1px solid transparent;
   z-index: 999;
   box-sizing: border-box;
-  transition: all 0.2s;
-  background-color: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(0.8rem);
+  transition: all 0.3s ease;
+  background-color: transparent;
+}
+
+.scrolled {
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+:global(.dark) .scrolled {
+  background-color: rgba(10, 15, 25, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .headerContainer {

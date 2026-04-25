@@ -1,9 +1,9 @@
 /* header */
 
 .rootSection.dark header {
-  background-color: rgba(18, 18, 18, 0.75);
+  background-color: transparent;
   color: #fff;
-  border-bottom: 0.1rem solid #4f4f4f;
+  border-bottom: 0.1rem solid rgba(255, 255, 255, 0.1);
 }
 
 .rootSection.dark header > section > article > a {
@@ -18,14 +18,28 @@
   stroke: #fff;
 }
 
-.rootSection.light {
-  background-color: #fff;
-  color: #000;
+/* Global CSS Variables for consistency */
+:root {
+  --text-primary: #333;
+  --text-secondary: #666;
+  --bg-primary: #fff;
+  --bg-secondary: #f9f9f9;
+  --border-color: #ddd;
 }
 
 .rootSection.dark {
-  background-color: #121212;
-  color: #fff;
+  --text-primary: #f0f0f0;
+  --text-secondary: #a0a0a0;
+  --bg-primary: transparent; /* Changed to transparent */
+  --bg-secondary: rgba(30, 30, 30, 0.5); /* translucent */
+  --border-color: rgba(79, 79, 79, 0.5);
+  background-color: transparent;
+  color: var(--text-primary);
+}
+
+.rootSection.light {
+  background-color: transparent; /* Changed to transparent */
+  color: var(--text-primary);
 }
 
 .rootSection.dark button {

@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { Header, ScrollToTop } from "@/components";
+import { Header, ScrollToTop, GlobalBackground } from "@/components";
 import useThemeStore from "@/stores/useThemeStore/useThemeStore";
 import "@/styles/theme.css";
 import { ArrowDownIcon, ArrowUpIcon } from "@/components/icons";
@@ -10,6 +10,7 @@ const DefaultLayout = () => {
 
   return (
     <>
+      <GlobalBackground />
       <ScrollToTop />
       <section
         className={`rootSection ${theme === "LIGHT" ? "light" : "dark"}`}
