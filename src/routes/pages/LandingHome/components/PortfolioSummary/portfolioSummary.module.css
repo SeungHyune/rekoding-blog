@@ -1,54 +1,134 @@
 .portfolioSummary {
+  padding: 10rem 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  max-width: 100rem;
+  width: 100%;
+  text-align: left;
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.title {
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.1rem;
+}
+
+.line {
+  flex: 1;
+  height: 1px;
+  background-color: var(--border-color);
+}
+
+.list {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 8rem 2rem;
+  margin-bottom: 6rem;
 }
 
-.sectionTitle {
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 2rem;
-}
-
-.content {
-  width: 100%;
-  max-width: 100rem;
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.cardContainer {
+.item {
+  padding: 4rem 0;
+  border-bottom: 1px solid var(--border-color);
   display: flex;
+  flex-direction: column;
   gap: 2rem;
-  justify-content: center;
-  margin-top: 3rem;
 }
 
-.card {
-  width: 30rem;
-  height: 20rem;
-  background-color: var(--bg-secondary);
+.itemMain {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+}
+
+.number {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.itemInfo {
+  flex: 1;
+}
+
+.projectTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.projectDesc {
+  font-size: 1.4rem;
+  color: var(--text-secondary);
+}
+
+.arrowButton {
+  width: 5rem;
+  height: 5rem;
   border: 1px solid var(--border-color);
-  border-radius: 1.2rem;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.6rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.item:hover .arrowButton {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border-color: var(--button-bg);
+  transform: rotate(45deg);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-left: 6.2rem; /* offset for number */
+}
+
+.tag {
+  padding: 0.6rem 1.4rem;
+  border: 1px solid var(--border-color);
+  border-radius: 2rem;
+  font-size: 1.2rem;
   font-weight: 600;
+  color: var(--text-secondary);
 }
 
 .moreButton {
+  display: inline-block;
   padding: 1.2rem 2.4rem;
   border-radius: 0.8rem;
   background-color: var(--button-bg);
   color: var(--button-text);
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s, transform 0.2s;
 }
 
 .moreButton:hover {
   opacity: 0.8;
+  transform: translateX(5px);
+}
+
+@media (max-width: 768px) {
+  .itemMain {
+    gap: 2rem;
+  }
+  .tags {
+    margin-left: 0;
+  }
 }

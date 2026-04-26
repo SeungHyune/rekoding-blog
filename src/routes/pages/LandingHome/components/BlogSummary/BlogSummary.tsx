@@ -10,15 +10,17 @@ const BlogSummary = () => {
 
   return (
     <section className={styles.blogSummary}>
-      <h2 className={styles.sectionTitle}>Recent Posts</h2>
-      <div className={styles.content}>
-        <p>최근 작성한 기술 블로그 포스트입니다.</p>
+      <div className={styles.container}>
+        <div className={styles.header}>
+          <h2 className={styles.title}>RECENT POSTS</h2>
+          <div className={styles.line}></div>
+        </div>
         <div className={styles.listContainer}>
           {recentPosts.map((post) => (
             <div
               key={post.id}
               className={styles.listItem}
-              onClick={() => navigate(`/post/${post.id}`)}
+              onClick={() => navigate(`/blog`)} // TODO: navigate to post detail
             >
               <h3 className={styles.postTitle}>{post.title}</h3>
               <p className={styles.postContent}>{post.content}</p>
@@ -37,10 +39,10 @@ const BlogSummary = () => {
             <div className={styles.emptyMessage}>포스트가 없습니다.</div>
           )}
         </div>
+        <Link to="/blog" className={styles.moreButton}>
+          READ ALL POSTS →
+        </Link>
       </div>
-      <Link to="/blog" className={styles.moreButton}>
-        블로그 전체보기
-      </Link>
     </section>
   );
 };

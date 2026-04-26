@@ -1,35 +1,45 @@
 .blogSummary {
+  padding: 10rem 2rem;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 8rem 2rem;
+  justify-content: center;
 }
 
-.sectionTitle {
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 2rem;
-}
-
-.content {
+.container {
+  max-width: 100rem;
   width: 100%;
-  max-width: 80rem;
-  text-align: center;
-  margin-bottom: 3rem;
+  text-align: left;
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.title {
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.1rem;
+}
+
+.line {
+  flex: 1;
+  height: 1px;
+  background-color: var(--border-color);
 }
 
 .listContainer {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  margin-top: 3rem;
+  margin-bottom: 6rem;
   width: 100%;
-  border-top: 1px solid var(--border-color);
 }
 
 .listItem {
   width: 100%;
-  padding: 2.4rem 0;
+  padding: 4rem 0;
   border-bottom: 1px solid var(--border-color);
   text-align: left;
   cursor: pointer;
@@ -42,9 +52,8 @@
 }
 
 .postTitle {
-  font-size: 1.8rem;
+  font-size: 2.2rem;
   font-weight: 700;
-  margin-top: 0;
   margin-bottom: 1rem;
   white-space: nowrap;
   overflow: hidden;
@@ -53,7 +62,7 @@
 }
 
 .postContent {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   color: var(--text-secondary);
   margin-bottom: 2rem;
   display: -webkit-box;
@@ -61,14 +70,14 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .postMeta {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  font-size: 1.3rem;
+  gap: 2rem;
+  font-size: 1.4rem;
   font-weight: 500;
 }
 
@@ -87,16 +96,18 @@
 }
 
 .moreButton {
+  display: inline-block;
   padding: 1.2rem 2.4rem;
   border-radius: 0.8rem;
   background-color: var(--button-bg);
   color: var(--button-text);
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s, transform 0.2s;
 }
 
 .moreButton:hover {
   opacity: 0.8;
+  transform: translateX(5px);
 }

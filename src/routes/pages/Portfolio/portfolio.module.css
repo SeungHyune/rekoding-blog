@@ -1,20 +1,133 @@
-.portfolioContainer {
+.portfolioPage {
+  padding: 12rem 2rem;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 6rem 2rem;
-  min-height: 80vh;
+  justify-content: center;
+  min-height: 100vh;
 }
 
-.pageTitle {
-  font-size: 4rem;
-  font-weight: 700;
-  margin-bottom: 4rem;
+.container {
+  max-width: 110rem;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  gap: 3rem;
+  margin-bottom: 6rem;
+}
+
+.title {
+  font-size: 5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: 0.2rem;
+}
+
+.headerLine {
+  flex: 1;
+  height: 1px;
+  background-color: var(--border-color);
+}
+
+.projectList {
+  display: flex;
+  flex-direction: column;
+}
+
+.projectItem {
+  padding: 5rem 0;
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease;
+}
+
+.itemMain {
+  display: flex;
+  align-items: flex-start;
+  gap: 5rem;
+}
+
+.number {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-top: 0.5rem;
 }
 
 .content {
-  width: 100%;
-  max-width: 100rem;
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+
+.projectTitle {
+  font-size: 2.4rem;
+  font-weight: 800;
+  margin-bottom: 0.8rem;
+  color: var(--text-primary);
+  letter-spacing: 0.05rem;
+}
+
+.projectSubtitle {
   font-size: 1.6rem;
-  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.projectInfo {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.tag {
+  padding: 0.6rem 1.4rem;
+  border: 1px solid var(--border-color);
+  border-radius: 2rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.arrowButton {
+  width: 6rem;
+  height: 6rem;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.projectItem:hover .arrowButton {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border-color: var(--button-bg);
+  transform: rotate(45deg) scale(1.1);
+}
+
+@media (max-width: 940px) {
+  .itemMain {
+    gap: 2.5rem;
+  }
+  .content {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
 }

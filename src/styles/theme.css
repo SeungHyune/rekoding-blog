@@ -27,22 +27,24 @@
   --border-color: #ddd;
   --button-bg: #333;
   --button-text: #fff;
+  --accent-color: #00d2ff; /* Cyan accent */
 }
 
 .rootSection.dark {
   --text-primary: #f0f0f0;
   --text-secondary: #a0a0a0;
-  --bg-primary: #121212; /* Changed from transparent to solid dark */
-  --bg-secondary: rgba(255, 255, 255, 0.05); /* subtle translucent light */
+  --bg-primary: #050505; /* Deeper black */
+  --bg-secondary: rgba(255, 255, 255, 0.03); 
   --border-color: rgba(255, 255, 255, 0.1);
-  --button-bg: #f0f0f0;
-  --button-text: #121212;
+  --button-bg: #fff;
+  --button-text: #050505;
+  --accent-color: #00d2ff;
   background-color: transparent;
   color: var(--text-primary);
 }
 
 .rootSection.light {
-  background-color: transparent; /* Changed to transparent */
+  background-color: transparent; 
   color: var(--text-primary);
 }
 
