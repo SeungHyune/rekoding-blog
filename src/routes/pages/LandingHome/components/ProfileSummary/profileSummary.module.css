@@ -1,0 +1,35 @@
+.profileSummary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6rem 2rem;
+  background-color: var(--bg-secondary);
+}
+
+.sectionTitle {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+.content {
+  max-width: 80rem;
+  text-align: center;
+  font-size: 1.6rem;
+  line-height: 1.6;
+  margin-bottom: 3rem;
+}
+
+.moreButton {
+  padding: 1rem 2rem;
+  border-radius: 0.8rem;
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.moreButton:hover {
+  opacity: 0.8;
+}

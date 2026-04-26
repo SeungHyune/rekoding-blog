@@ -1,8 +1,8 @@
 import { CategoryTabs, HomeIntro, PostList } from "./components";
 import { useTabState, UseFilteredPostByCategoryProps } from "./hooks";
-import styles from "./home.module.css";
+import styles from "./blog.module.css";
 
-const Home = () => {
+const Blog = () => {
   const { tab, handleClickTab } = useTabState();
   const { categories, postList } = UseFilteredPostByCategoryProps({ tab });
 
@@ -20,4 +20,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Blog;

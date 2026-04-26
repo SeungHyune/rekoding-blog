@@ -55,7 +55,13 @@ const Header = () => {
             <nav className={`${styles.navigation} navigation`}>
               <ul>
                 <li>
-                  <NavLink to="/">Home</NavLink>
+                  <NavLink to="/profile">Profile</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/portfolio">Portfolio</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/blog">Blog</NavLink>
                 </li>
               </ul>
             </nav>
