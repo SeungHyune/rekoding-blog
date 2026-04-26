@@ -10,22 +10,32 @@ interface Point {
 
 const CLOUD_IMAGES = [
   "/images/cloud/clouds-1-by-PhotoshopSupply.png",
+  "/images/cloud/clouds-2-by-PhotoshopSupply.png",
+  "/images/cloud/clouds-3-by-PhotoshopSupply.png",
   "/images/cloud/clouds-4-by-PhotoshopSupply.png",
+  "/images/cloud/clouds-5-by-PhotoshopSupply.png",
+  "/images/cloud/clouds-6-by-PhotoshopSupply.png",
   "/images/cloud/clouds-7-by-PhotoshopSupply.png",
+  "/images/cloud/clouds-8-by-PhotoshopSupply.png",
+  "/images/cloud/clouds-9-by-PhotoshopSupply.png",
+  "/images/cloud/clouds-10-by-PhotoshopSupply.png",
   "/images/cloud/clouds-11-by-PhotoshopSupply.png",
+  "/images/cloud/clouds-12-by-PhotoshopSupply.png",
+  "/images/cloud/clouds-13-by-PhotoshopSupply.png",
+  "/images/cloud/clouds-13-1-by-PhotoshopSupply.png",
+  "/images/cloud/clouds-14-by-PhotoshopSupply.png",
+  "/images/cloud/clouds-15-by-PhotoshopSupply.png",
+  "/images/cloud/clouds-16-by-PhotoshopSupply.png",
+  "/images/cloud/clouds-17-by-PhotoshopSupply.png",
   "/images/cloud/clouds-18-by-PhotoshopSupply.png",
+  "/images/cloud/clouds-19-by-PhotoshopSupply.png",
 ];
 
-export const GlobalBackground = () => {
+const GlobalBackground = () => {
   const { theme } = useThemeStore();
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const trailRef = useRef<Point[]>([]);
-
-  const { initTheme } = useThemeStore();
-  useEffect(() => {
-    initTheme();
-  }, [initTheme]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -68,19 +78,26 @@ export const GlobalBackground = () => {
           ctx.moveTo(p1.x, p1.y);
           ctx.lineTo(p2.x, p2.y);
 
-          const width = Math.max(0.1, 4 * (1 - progress));
           const alpha = Math.max(0, 1 - progress);
 
-          ctx.lineWidth = width;
-          ctx.lineCap = "round";
-          ctx.lineJoin = "round";
-
           if (isDay) {
-            ctx.strokeStyle = `rgba(180, 180, 180, ${alpha})`;
+            // Day: Airplane contrail (thick, white, cloudy, high blur)
+            const width = Math.max(1, 10 * (1 - progress));
+            ctx.lineWidth = width;
+            ctx.lineCap = "round";
+            ctx.lineJoin = "round";
+            ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.7})`;
+            ctx.shadowBlur = 25; // Increased blur for softer cloud
+            ctx.shadowColor = `rgba(255, 255, 255, ${alpha})`;
           } else {
-            ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
-            ctx.shadowBlur = 8;
-            ctx.shadowColor = `rgba(150, 200, 255, ${alpha})`;
+            // Night: Shooting star (sharp, matching exact star color #ffd700)
+            const width = Math.max(0.1, 5 * Math.pow(1 - progress, 2));
+            ctx.lineWidth = width;
+            ctx.lineCap = "round";
+            ctx.lineJoin = "round";
+            ctx.strokeStyle = `rgba(255, 215, 0, ${alpha})`; // Matched exactly to star color
+            ctx.shadowBlur = 20; // Increased blur
+            ctx.shadowColor = `rgba(255, 215, 0, ${alpha * 0.8})`; // Glow matches star exactly
           }
 
           ctx.stroke();
@@ -215,3 +232,5 @@ export const GlobalBackground = () => {
     </div>
   );
 };
+
+export default GlobalBackground;

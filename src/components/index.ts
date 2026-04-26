@@ -8,4 +8,4 @@ export { default as Switch } from "./Switch/Switch";
 export { default as Skeleton } from "./Skeleton/Skeleton";
 export { default as LazyImage } from "./LazyImage/LazyImage";
 export { default as ScrollToTop } from "./ScrollToTop/ScrollToTop";
-export * from "./GlobalBackground";
+export { default as GlobalBackground } from "./GlobalBackground/GlobalBackground";

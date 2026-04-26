@@ -1,23 +1,27 @@
 import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
 
 interface UseThemeStoreProps {
   theme: "LIGHT" | "DARK";
   setTheme: (theme: "LIGHT" | "DARK") => void;
-  initTheme: () => void;
 }
 
 const getThemeByTime = (): "LIGHT" | "DARK" => {
   const hour = new Date().getHours();
-  if (hour >= 6 && hour < 18) {
-    return "LIGHT";
-  }
-  return "DARK";
+  return hour >= 6 && hour < 18 ? "LIGHT" : "DARK";
 };
 
-const useThemeStore = create<UseThemeStoreProps>((set) => ({
-  theme: getThemeByTime(),
-  setTheme: (newTheme) => set({ theme: newTheme }),
-  initTheme: () => set({ theme: getThemeByTime() }),
-}));
+const useThemeStore = create<UseThemeStoreProps>()(
+  persist(
+    (set) => ({
+      theme: getThemeByTime(),
+      setTheme: (newTheme) => set({ theme: newTheme }),
+    }),
+    {
+      name: "theme-storage",
+      storage: createJSONStorage(() => sessionStorage),
+    },
+  ),
+);
 
 export default useThemeStore;
