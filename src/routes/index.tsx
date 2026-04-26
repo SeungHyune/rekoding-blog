@@ -7,6 +7,9 @@ const LandingHome = React.lazy(() => import("./pages/LandingHome/LandingHome"));
 const Blog = React.lazy(() => import("./pages/Blog/Blog"));
 const Profile = React.lazy(() => import("./pages/Profile/Profile"));
 const Portfolio = React.lazy(() => import("./pages/Portfolio/Portfolio"));
+const PortfolioDetail = React.lazy(
+  () => import("./pages/PortfolioDetail/PortfolioDetail"),
+);
 const Post = React.lazy(() => import("./pages/Post/Post"));
 const Search = React.lazy(() => import("./pages/Search/Search"));
 const Editor = React.lazy(() => import("./pages/Editor/Editor"));
@@ -32,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "/portfolio",
         element: <Portfolio />,
+      },
+      {
+        path: "/portfolio/:id",
+        element: <PortfolioDetail />,
       },
       {
         path: "/post/:id",

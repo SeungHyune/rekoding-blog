@@ -1,4 +1,4 @@
-import { PostItem } from "../Home/components";
+import { PostItem } from "../Blog/components";
 import { useFilteredPostsBySearch } from "./hooks";
 import styles from "./search.module.css";
 

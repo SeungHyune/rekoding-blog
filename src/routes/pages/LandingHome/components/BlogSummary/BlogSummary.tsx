@@ -20,7 +20,7 @@ const BlogSummary = () => {
             <div
               key={post.id}
               className={styles.listItem}
-              onClick={() => navigate(`/blog`)} // TODO: navigate to post detail
+              onClick={() => navigate(`/post/${post.id}`)}
             >
               <h3 className={styles.postTitle}>{post.title}</h3>
               <p className={styles.postContent}>{post.content}</p>

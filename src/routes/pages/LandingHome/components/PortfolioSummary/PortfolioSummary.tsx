@@ -18,7 +18,7 @@ const PortfolioSummary = () => {
             <div
               key={project.id}
               className={styles.item}
-              onClick={() => navigate("/portfolio")}
+              onClick={() => navigate(`/portfolio/${project.id}`)}
             >
               <div className={styles.itemMain}>
                 <span className={styles.number}>{project.id}</span>

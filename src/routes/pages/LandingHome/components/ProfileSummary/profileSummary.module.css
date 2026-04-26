@@ -63,6 +63,10 @@
   gap: 1.5rem;
 }
 
+.infoGroup:last-child {
+  grid-column: 1 / -1;
+}
+
 .infoTitle {
   font-size: 1.4rem;
   font-weight: 700;

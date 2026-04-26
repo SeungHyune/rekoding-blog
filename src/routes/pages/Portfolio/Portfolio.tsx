@@ -1,19 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./portfolio.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { PORTFOLIO_PROJECTS } from "@/constants/projects";
 
 const Portfolio = () => {
-  const [selectedProject, setSelectedProject] = useState<
-    (typeof PORTFOLIO_PROJECTS)[0] | null
-  >(null);
+  const navigate = useNavigate();
 
-  const handleCardClick = (project: (typeof PORTFOLIO_PROJECTS)[0]) => {
-    setSelectedProject(project);
-  };
-
-  const handleCloseModal = () => {
-    setSelectedProject(null);
+  const handleCardClick = (id: string) => {
+    navigate(`/portfolio/${id}`);
   };
 
   return (
@@ -29,7 +23,7 @@ const Portfolio = () => {
             <div
               key={project.id}
               className={styles.projectCard}
-              onClick={() => handleCardClick(project)}
+              onClick={() => handleCardClick(project.id)}
             >
               <div className={styles.imageBox}>
                 <img src={project.image} alt={`${project.title} 썸네일`} />
@@ -92,77 +86,6 @@ const Portfolio = () => {
           ))}
         </div>
       </div>
-
-      {selectedProject && (
-        <div className={styles.modalOverlay} onClick={handleCloseModal}>
-          <div
-            className={styles.modalContent}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              className={styles.modalCloseButton}
-              onClick={handleCloseModal}
-            >
-              &times;
-            </button>
-            <div className={styles.modalImage}>
-              <img src={selectedProject.image} alt={selectedProject.title} />
-            </div>
-            <div className={styles.modalBody}>
-              <h2 className={styles.modalTitle}>{selectedProject.title}</h2>
-              <span className={styles.modalPeriod}>
-                {selectedProject.period}
-              </span>
-              <p className={styles.modalDesc}>{selectedProject.description}</p>
-
-              <h3 className={styles.modalSectionTitle}>Key Achievements</h3>
-              <ul className={styles.modalAchievementList}>
-                {selectedProject.achievements.map((achieve, idx) => (
-                  <li key={idx}>{achieve}</li>
-                ))}
-              </ul>
-
-              <div className={styles.modalTags}>
-                {selectedProject.tags.map((tag) => (
-                  <span key={tag} className={styles.modalTag}>
-                    #{tag}
-                  </span>
-                ))}
-              </div>
-
-              <div className={styles.modalLinks}>
-                {selectedProject.links.site && (
-                  <Link
-                    to={selectedProject.links.site}
-                    target="_blank"
-                    className={styles.modalLinkButton}
-                  >
-                    Visit Site
-                  </Link>
-                )}
-                {selectedProject.links.github && (
-                  <Link
-                    to={selectedProject.links.github}
-                    target="_blank"
-                    className={styles.modalLinkButton}
-                  >
-                    GitHub
-                  </Link>
-                )}
-                {selectedProject.links.article && (
-                  <Link
-                    to={selectedProject.links.article}
-                    target="_blank"
-                    className={styles.modalLinkButton}
-                  >
-                    Article
-                  </Link>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
