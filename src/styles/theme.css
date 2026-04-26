@@ -25,14 +25,18 @@
   --bg-primary: #fff;
   --bg-secondary: #f9f9f9;
   --border-color: #ddd;
+  --button-bg: #333;
+  --button-text: #fff;
 }
 
 .rootSection.dark {
   --text-primary: #f0f0f0;
   --text-secondary: #a0a0a0;
-  --bg-primary: transparent; /* Changed to transparent */
-  --bg-secondary: rgba(30, 30, 30, 0.5); /* translucent */
-  --border-color: rgba(79, 79, 79, 0.5);
+  --bg-primary: #121212; /* Changed from transparent to solid dark */
+  --bg-secondary: rgba(255, 255, 255, 0.05); /* subtle translucent light */
+  --border-color: rgba(255, 255, 255, 0.1);
+  --button-bg: #f0f0f0;
+  --button-text: #121212;
   background-color: transparent;
   color: var(--text-primary);
 }
