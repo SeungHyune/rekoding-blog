@@ -41,7 +41,14 @@ const PostItem = ({
     <Link to={`/post/${id}`} title="">
       <div className={styles.imgBox}>
         <LazyImage src={imageUrl} />
-        <span style={{ backgroundColor: `#${categoryColor}` }}>{category}</span>
+        <span
+          className={styles.category}
+          style={
+            { "--category-color": `#${categoryColor}` } as React.CSSProperties
+          }
+        >
+          {category}
+        </span>
       </div>
       <div className={styles.contentBox}>
         <strong>{title}</strong>

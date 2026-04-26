@@ -152,6 +152,10 @@
   font-size: 1.2rem;
 }
 
+.categoryLabel {
+  background-color: var(--category-color);
+}
+
 .categories button {
   background-color: #fff;
   border: 1px solid #eee;

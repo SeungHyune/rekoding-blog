@@ -1,22 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./portfolioSummary.module.css";
-
-const PROJECTS = [
-  {
-    id: "01",
-    title: "UX/UI RENEWAL WEBSITE",
-    description: "무인양품 웹사이트 UX/UI 개선 프로젝트",
-    tags: ["#추진력과 실행력", "#사용성테스트", "#ASIS-TOBE"],
-  },
-  {
-    id: "02",
-    title: "UX/UI RESPONSIVE WEBSITE",
-    description: "디무브 웹사이트 UX/UI 기획 프로젝트",
-    tags: ["#기획과 아이디어", "#소통하고 협업하는", "#UX분석"],
-  },
-];
+import { PORTFOLIO_PROJECTS } from "@/constants/projects";
 
 const PortfolioSummary = () => {
+  const navigate = useNavigate();
+  const recentProjects = PORTFOLIO_PROJECTS.slice(0, 3);
+
   return (
     <section className={styles.portfolioSummary}>
       <div className={styles.container}>
@@ -25,8 +14,12 @@ const PortfolioSummary = () => {
           <div className={styles.line}></div>
         </div>
         <div className={styles.list}>
-          {PROJECTS.map((project) => (
-            <div key={project.id} className={styles.item}>
+          {recentProjects.map((project) => (
+            <div
+              key={project.id}
+              className={styles.item}
+              onClick={() => navigate("/portfolio")}
+            >
               <div className={styles.itemMain}>
                 <span className={styles.number}>{project.id}</span>
                 <div className={styles.itemInfo}>
@@ -50,9 +43,9 @@ const PortfolioSummary = () => {
                 </div>
               </div>
               <div className={styles.tags}>
-                {project.tags.map((tag) => (
+                {project.tags.slice(0, 3).map((tag) => (
                   <span key={tag} className={styles.tag}>
-                    {tag}
+                    #{tag}
                   </span>
                 ))}
               </div>

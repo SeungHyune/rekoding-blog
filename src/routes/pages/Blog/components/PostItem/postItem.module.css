@@ -21,7 +21,7 @@
   font-size: 1.2rem;
   font-weight: 700;
   line-height: 1.5rem;
-  background-color: #00b2ff;
+  background-color: var(--category-color, #00b2ff);
   color: #fff;
   padding: 0.2rem 0.5rem;
   border-radius: 0.4rem;

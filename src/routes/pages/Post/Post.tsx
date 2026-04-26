@@ -27,11 +27,7 @@ const Post = () => {
   return (
     <section className={styles.postContainer}>
       <aside className={`${styles.leftSidebar} leftSidebar`}>
-        <ul
-          style={{
-            transform: `translateX(${isNavOpen ? "0" : "-26rem"})`,
-          }}
-        >
+        <ul className={isNavOpen ? styles.navOpen : ""}>
           {postList.map(({ category, posts }) => (
             <Fragment key={category}>
               {posts.length > 0 && (
@@ -46,10 +42,7 @@ const Post = () => {
           ))}
         </ul>
         <button
-          className={`${styles.leftSidebarMenu} leftSiderbarMenu`}
-          style={{
-            transform: `translateX(${isNavOpen ? "0" : "-26rem"})`,
-          }}
+          className={`${styles.leftSidebarMenu} leftSiderbarMenu ${isNavOpen ? styles.navOpen : ""}`}
           type="button"
           onClick={handleToggleNav}
         >

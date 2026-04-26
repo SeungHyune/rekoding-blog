@@ -68,8 +68,7 @@
 .particle {
   position: absolute;
   border-radius: 50%;
-  background-color: #ffd700;
-  /* Box shadow is now applied inline dynamically based on star size */
+  /* background-color and box-shadow applied dynamically inline */
   animation: fadePulse 3s infinite alternate ease-in-out;
 }
 

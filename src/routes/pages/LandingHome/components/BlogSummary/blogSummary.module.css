@@ -82,7 +82,7 @@
 }
 
 .category {
-  /* color dynamically set inline */
+  color: var(--category-color);
 }
 
 .date {

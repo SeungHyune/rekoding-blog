@@ -14,7 +14,7 @@
   display: flex;
   align-items: center;
   gap: 2rem;
-  margin-bottom: 6rem;
+  margin-bottom: 4rem;
 }
 
 .badge {
@@ -33,10 +33,27 @@
   color: var(--text-primary);
 }
 
+.introBox {
+  margin-bottom: 5rem;
+  padding-left: 2rem;
+  border-left: 3px solid var(--accent-color);
+}
+
+.introText {
+  font-size: 1.8rem;
+  line-height: 1.8;
+  color: var(--text-primary);
+  word-break: keep-all;
+}
+
+.introText strong {
+  color: var(--accent-color);
+}
+
 .content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  gap: 4rem 2rem;
   margin-bottom: 6rem;
 }
 
@@ -55,8 +72,8 @@
 }
 
 .infoText {
-  font-size: 1.8rem;
-  line-height: 1.6;
+  font-size: 1.6rem;
+  line-height: 1.5;
   color: var(--text-primary);
   word-break: keep-all;
 }

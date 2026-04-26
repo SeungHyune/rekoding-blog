@@ -49,6 +49,7 @@ const GlobalBackground = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     };
+
     window.addEventListener("resize", resizeCanvas);
     resizeCanvas();
 
@@ -137,12 +138,20 @@ const GlobalBackground = () => {
         const left = c * cellWidth + Math.random() * (cellWidth * 0.8);
         const top = r * cellHeight + Math.random() * (cellHeight * 0.8);
         const size = Math.random() * 2.5 + 1; // 1px to 3.5px
+        // 50% yellow, 50% white
+        const isYellow = Math.random() > 0.5;
+        const color = isYellow ? "#ffd700" : "#f0f0f0";
+        const shadowColor = isYellow
+          ? "rgba(255, 215, 0, 0.9)"
+          : "rgba(255, 255, 255, 0.9)";
 
         result.push({
           id: id++,
           left: `${left}%`,
           top: `${top}%`,
           size,
+          color,
+          shadowColor,
           animationDelay: `${Math.random() * 3}s`,
           animationDuration: `${Math.random() * 2 + 2}s`,
         });
@@ -196,8 +205,9 @@ const GlobalBackground = () => {
                 top: star.top,
                 width: `${star.size}px`,
                 height: `${star.size}px`,
-                // Dynamic glow based on star size for realistic variety
-                boxShadow: `0 0 ${star.size * 6}px ${star.size * 2}px rgba(255, 215, 0, 0.9)`,
+                backgroundColor: star.color,
+                // Dynamic glow based on star size and color
+                boxShadow: `0 0 ${star.size * 6}px ${star.size * 2}px ${star.shadowColor}`,
                 animationDelay: star.animationDelay,
                 animationDuration: star.animationDuration,
               }}

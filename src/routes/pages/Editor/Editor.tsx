@@ -109,7 +109,12 @@ const Editor = () => {
                     />
                     <label
                       htmlFor={value}
-                      style={{ backgroundColor: `#${color}` }}
+                      style={
+                        {
+                          "--category-color": `#${color}`,
+                        } as React.CSSProperties
+                      }
+                      className={styles.categoryLabel}
                     >
                       {value}
                     </label>

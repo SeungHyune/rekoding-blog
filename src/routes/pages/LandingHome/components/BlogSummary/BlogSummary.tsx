@@ -27,7 +27,11 @@ const BlogSummary = () => {
               <div className={styles.postMeta}>
                 <span
                   className={styles.category}
-                  style={{ color: post.categoryColor }}
+                  style={
+                    {
+                      "--category-color": post.categoryColor,
+                    } as React.CSSProperties
+                  }
                 >
                   {post.category}
                 </span>
