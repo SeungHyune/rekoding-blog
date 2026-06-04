@@ -45,7 +45,7 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .profileImgBox {
@@ -66,7 +66,7 @@
 
 .personalInfo {
   width: 100%;
-  text-align: center;
+  text-align: left;
 }
 
 .name {

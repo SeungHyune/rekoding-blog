@@ -40,6 +40,17 @@ const PortfolioDetail = () => {
               ))}
             </ul>
 
+            {project.detailSections?.map((section) => (
+              <section key={section.title} className={styles.detailSection}>
+                <h2 className={styles.sectionTitle}>{section.title}</h2>
+                <ul className={styles.detailList}>
+                  {section.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </section>
+            ))}
+
             <div className={styles.tags}>
               {project.tags.map((tag) => (
                 <span key={tag} className={styles.tag}>

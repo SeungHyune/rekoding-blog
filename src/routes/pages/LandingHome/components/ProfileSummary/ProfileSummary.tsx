@@ -12,12 +12,14 @@ const ProfileSummary = () => {
 
         <div className={styles.introBox}>
           <p className={styles.introText}>
-            일상 속 불편함을 해결하는 개발자 <strong>조승현</strong>입니다.
+            사용자와 가장 가까운 곳에서 시작해 시스템 전체를 고민하는 개발자{" "}
+            <strong>조승현</strong>입니다.
             <br />
-            개발의 시작은 불편함을 인식하고 이를 코드로 해결하는 데서 비롯된다고
-            생각합니다.
+            화면과 경험을 개선하는 일에서 출발해, AI 상담 플랫폼의 백엔드
+            아키텍처와 인프라까지 확장하고 있습니다.
             <br />
-            이를 통해 사용자 경험을 개선하는 개발자가 되고 싶습니다.
+            복잡한 비즈니스 요구사항을 실제 동작하는 서비스로 구현하는 것을
+            좋아합니다.
           </p>
         </div>
 
@@ -34,7 +36,7 @@ const ProfileSummary = () => {
           <div className={styles.infoGroup}>
             <h3 className={styles.infoTitle}>Careers</h3>
             <p className={styles.infoText}>
-              클레비씨에스 개발팀/풀스택 개발자 (2025.06-2026.05)
+              클레비씨에스 소프트웨어개발자/풀스택·AI (2025.06-2026.04)
             </p>
             <p className={styles.infoText}>
               메드소프트 운영팀/웹퍼블리셔 (2021.03-2023.06)
@@ -54,9 +56,15 @@ const ProfileSummary = () => {
               <span className={styles.skillBadge}>Next.js</span>
               <span className={styles.skillBadge}>NestJS</span>
               <span className={styles.skillBadge}>Node.js</span>
+              <span className={styles.skillBadge}>Prisma</span>
               <span className={styles.skillBadge}>PostgreSQL</span>
+              <span className={styles.skillBadge}>Socket.IO</span>
+              <span className={styles.skillBadge}>Gemini Live API</span>
+              <span className={styles.skillBadge}>Qdrant</span>
               <span className={styles.skillBadge}>Docker</span>
               <span className={styles.skillBadge}>Zustand</span>
+              <span className={styles.skillBadge}>next-intl</span>
+              <span className={styles.skillBadge}>Tiptap</span>
               <span className={styles.skillBadge}>React Query</span>
               <span className={styles.skillBadge}>Recoil</span>
               <span className={styles.skillBadge}>Styled Component</span>
