@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./portfolio.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { PORTFOLIO_PROJECTS } from "@/constants/projects";

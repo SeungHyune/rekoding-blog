@@ -1,4 +1,8 @@
-export { default as Home } from "./Home/Home";
+export { default as LandingHome } from "./LandingHome/LandingHome";
+export { default as Blog } from "./Blog/Blog";
+export { default as Profile } from "./Profile/Profile";
+export { default as Portfolio } from "./Portfolio/Portfolio";
+export { default as PortfolioDetail } from "./PortfolioDetail/PortfolioDetail";
 export { default as Post } from "./Post/Post";
 export { default as Search } from "./Search/Search";
 export { default as Editor } from "./Editor/Editor";
