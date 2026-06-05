@@ -35,9 +35,20 @@ const Portfolio = () => {
                       className={styles.linkButton}
                       onClick={(e) => e.stopPropagation()}
                     >
-                      Visit Site
+                      {project.links.siteLabel ?? "사이트 방문"}
                     </Link>
                   )}
+                  {project.links.additionalSites?.map((site) => (
+                    <Link
+                      key={site.url}
+                      to={site.url}
+                      target="_blank"
+                      className={styles.linkButton}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      {site.label}
+                    </Link>
+                  ))}
                   {project.links.github && (
                     <Link
                       to={project.links.github}
@@ -45,7 +56,7 @@ const Portfolio = () => {
                       className={styles.linkButton}
                       onClick={(e) => e.stopPropagation()}
                     >
-                      GitHub
+                      깃허브
                     </Link>
                   )}
                   {project.links.article && (
@@ -55,7 +66,7 @@ const Portfolio = () => {
                       className={styles.linkButton}
                       onClick={(e) => e.stopPropagation()}
                     >
-                      Article
+                      기술 블로그
                     </Link>
                   )}
                 </div>

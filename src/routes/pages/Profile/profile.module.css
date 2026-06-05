@@ -365,13 +365,13 @@
     gap: 6rem;
   }
   .sidebar {
-    text-align: center;
+    text-align: left;
   }
   .contactList {
-    text-align: center;
-    align-items: center;
+    text-align: left;
+    align-items: stretch;
   }
   .contactItem {
-    justify-content: center;
+    justify-content: flex-start;
   }
 }
