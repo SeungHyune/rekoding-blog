@@ -30,7 +30,7 @@ const SKILL_GROUPS = [
 
 const CAREERS = [
   {
-    company: "클레비씨에스 (Clevi CES)",
+    company: "클레비씨에스 (Clevics)",
     role: "풀스택 개발자 (소프트웨어개발자/AI)",
     period: "2025.06 — 2026.04",
     keywords: [

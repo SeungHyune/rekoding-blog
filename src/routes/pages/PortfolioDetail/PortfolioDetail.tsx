@@ -1,4 +1,4 @@
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { PORTFOLIO_PROJECTS } from "@/constants/projects";
 import styles from "./portfolioDetail.module.css";
 import NotFound from "../NotFound/NotFound";
@@ -35,41 +35,58 @@ const PortfolioDetail = () => {
 
             <div className={styles.links}>
               {project.links.site && (
-                <Link
-                  to={project.links.site}
+                <a
+                  href={project.links.site}
                   target="_blank"
-                  className={styles.linkButton}
+                  rel="noreferrer"
+                  className={styles.linkItem}
                 >
-                  {project.links.siteLabel ?? "사이트 방문"}
-                </Link>
+                  <span className={styles.linkLabel}>
+                    🔗{" "}
+                    {project.links.siteDetailLabel ??
+                      project.links.siteLabel ??
+                      "사이트 방문"}
+                  </span>
+                  <span className={styles.linkUrl}>{project.links.site}</span>
+                </a>
               )}
               {project.links.additionalSites?.map((site) => (
-                <Link
+                <a
                   key={site.url}
-                  to={site.url}
+                  href={site.url}
                   target="_blank"
-                  className={styles.linkButton}
+                  rel="noreferrer"
+                  className={styles.linkItem}
                 >
-                  {site.label}
-                </Link>
+                  <span className={styles.linkLabel}>
+                    🔗 {site.detailLabel ?? site.label}
+                  </span>
+                  <span className={styles.linkUrl}>{site.url}</span>
+                </a>
               ))}
               {project.links.github && (
-                <Link
-                  to={project.links.github}
+                <a
+                  href={project.links.github}
                   target="_blank"
-                  className={styles.linkButton}
+                  rel="noreferrer"
+                  className={styles.linkItem}
                 >
-                  깃허브
-                </Link>
+                  <span className={styles.linkLabel}>💻 깃허브</span>
+                  <span className={styles.linkUrl}>{project.links.github}</span>
+                </a>
               )}
               {project.links.article && (
-                <Link
-                  to={project.links.article}
+                <a
+                  href={project.links.article}
                   target="_blank"
-                  className={styles.linkButton}
+                  rel="noreferrer"
+                  className={styles.linkItem}
                 >
-                  기술 블로그
-                </Link>
+                  <span className={styles.linkLabel}>📝 기술 블로그</span>
+                  <span className={styles.linkUrl}>
+                    {project.links.articleLabel ?? project.links.article}
+                  </span>
+                </a>
               )}
             </div>
 

@@ -186,6 +186,24 @@
 }
 
 @media (max-width: 768px) {
+  .portfolioPage {
+    padding: 8rem 2rem 6rem;
+  }
+
+  .projectCard:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--border-color);
+  }
+
+  .projectCard:hover .imageBox img {
+    transform: none;
+  }
+
+  .imageOverlay {
+    display: none;
+  }
+
   .projectGrid {
     grid-template-columns: 1fr;
   }

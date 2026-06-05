@@ -1,5 +1,8 @@
 .header {
   position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   width: 100%;
   max-width: 100vw;
   height: 10rem;
@@ -144,6 +147,11 @@
   .header .headerNavigation .navigation {
     width: 100%;
     padding-top: 10rem;
+  }
+
+  .header .headerNavigation .navigation ul {
+    flex-direction: column;
+    gap: 0;
   }
 
   .header .headerNavigation .navigation ul li {

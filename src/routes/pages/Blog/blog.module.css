@@ -37,6 +37,7 @@
 
 .mainPosts {
   padding: 3rem 0;
+  overflow-x: hidden;
 }
 
 .mainPosts ul {

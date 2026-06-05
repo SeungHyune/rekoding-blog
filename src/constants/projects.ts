@@ -7,12 +7,15 @@ type PortfolioProject = {
   links: {
     site: string;
     siteLabel?: string;
+    siteDetailLabel?: string;
     additionalSites?: {
       label: string;
+      detailLabel?: string;
       url: string;
     }[];
     github: string;
     article?: string;
+    articleLabel?: string;
   };
   achievements: string[];
   detailSections?: {
@@ -33,15 +36,19 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     links: {
       site: "https://ivyfinsult-gai.clevics.co.kr",
       siteLabel: "[1차] AI 사전 접수 서비스",
+      siteDetailLabel: "[1차] AI 사전 접수 서비스 (고객 인증 및 상담 예약)",
       additionalSites: [
         {
           label: "[2차] AI 심층 상담 서비스",
+          detailLabel: "[2차] AI 심층 상담 서비스 (보장분석 및 상품 추천)",
           url: "https://ivyfinsult.clevics.co.kr",
         },
       ],
       github: "",
       article:
         "https://velog.io/@rekoding/AI-%EC%9D%8C%EC%84%B1-%EC%83%81%EB%8B%B4%EB%B6%80%ED%84%B0-RAG-%EC%83%81%ED%92%88-%EC%B6%94%EC%B2%9C%EA%B9%8C%EC%A7%80-IvyFin-%ED%92%80%EC%8A%A4%ED%83%9D-%EA%B0%9C%EB%B0%9C-%ED%9A%8C%EA%B3%A0",
+      articleLabel:
+        "AI 음성 상담부터 RAG 상품 추천까지: IvyFin 풀스택 개발 회고",
     },
     achievements: [
       "Gemini Live와 Socket.IO 기반 실시간 웹소켓 파이프라인으로 본인 확인부터 상담 예약까지 자동화",
@@ -104,6 +111,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
       github: "",
       article:
         "https://velog.io/@rekoding/%EB%B9%84%EC%A0%84%EA%B3%B5-%EC%8B%A0%EC%9E%85-%EA%B0%9C%EB%B0%9C%EC%9E%90%EC%9D%98-%EB%8F%84%EC%A0%84%EA%B8%B0-%ED%9A%8C%EC%82%AC-%ED%99%88%ED%8E%98%EC%9D%B4%EC%A7%80%EB%A5%BC-%EC%A7%81%EC%A0%91-%EB%A7%8C%EB%93%A4%EB%8B%A4",
+      articleLabel: "비전공 신입 개발자의 도전기: 회사 홈페이지를 직접 만들다",
     },
     achievements: [
       "Clevi 공식 홈페이지를 단독으로 기획, 디자인, 프론트엔드, 백엔드까지 개발",

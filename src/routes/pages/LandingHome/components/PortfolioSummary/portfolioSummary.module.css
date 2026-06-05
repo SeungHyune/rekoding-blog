@@ -125,6 +125,10 @@
 }
 
 @media (max-width: 768px) {
+  .portfolioSummary {
+    padding: 6rem 2rem;
+  }
+
   .itemMain {
     gap: 2rem;
   }

@@ -116,6 +116,10 @@
 }
 
 @media (max-width: 768px) {
+  .profileSummary {
+    padding: 6rem 2rem;
+  }
+
   .content {
     grid-template-columns: 1fr;
   }

@@ -167,28 +167,45 @@
 
 .links {
   display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.4rem;
   margin-bottom: 5rem;
 }
 
-.linkButton {
-  padding: 1.5rem 3rem;
-  background-color: var(--button-bg);
-  color: var(--button-text);
-  border-radius: 4rem;
+.linkItem {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.8rem;
   font-size: 1.6rem;
-  font-weight: 700;
+  line-height: 1.6;
+  color: var(--text-primary);
   text-decoration: none;
-  transition: opacity 0.2s, transform 0.2s;
 }
 
-.linkButton:hover {
-  opacity: 0.9;
-  transform: translateY(-2px);
+.linkLabel {
+  font-weight: 700;
+}
+
+.linkUrl {
+  color: var(--text-secondary);
+  text-decoration: underline;
+  text-underline-offset: 0.4rem;
+  text-decoration-thickness: 1px;
+  word-break: break-all;
+  transition: color 0.2s;
+}
+
+.linkItem:hover .linkUrl {
+  color: var(--accent-color);
 }
 
 @media (max-width: 768px) {
+  .portfolioDetailPage {
+    padding: 8rem 2rem 6rem;
+  }
+
   .body {
     padding: 3rem 2rem;
   }

@@ -111,3 +111,9 @@
   opacity: 0.8;
   transform: translateX(5px);
 }
+
+@media (max-width: 768px) {
+  .blogSummary {
+    padding: 6rem 2rem;
+  }
+}

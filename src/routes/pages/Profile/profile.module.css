@@ -360,6 +360,10 @@
 }
 
 @media (max-width: 940px) {
+  .profilePage {
+    padding: 8rem 2rem 6rem;
+  }
+
   .resumeLayout {
     grid-template-columns: 1fr;
     gap: 6rem;
