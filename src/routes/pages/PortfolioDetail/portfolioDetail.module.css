@@ -148,6 +148,99 @@
   background-color: var(--accent-color);
 }
 
+.problemSolutionList {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.problemSolutionItem {
+  padding: 2.4rem;
+  border: 1px solid var(--border-color);
+  border-radius: 1.6rem;
+  background-color: var(--bg-secondary);
+}
+
+.problemBlock {
+  margin-bottom: 1.8rem;
+}
+
+.problemBlock strong,
+.solutionBlock strong {
+  display: block;
+  margin-bottom: 0.8rem;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--accent-color);
+}
+
+.problemBlock p {
+  font-size: 1.7rem;
+  line-height: 1.7;
+  color: var(--text-primary);
+  word-break: keep-all;
+}
+
+.solutionBlock ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding-left: 1.8rem;
+}
+
+.solutionBlock li {
+  font-size: 1.6rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  word-break: keep-all;
+}
+
+.tableWrap {
+  width: 100%;
+  margin-top: 2.4rem;
+  overflow-x: auto;
+}
+
+.tableTitle {
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.resultTable {
+  width: 100%;
+  min-width: 64rem;
+  border-collapse: collapse;
+  border: 1px solid var(--border-color);
+  font-size: 1.5rem;
+  color: var(--text-primary);
+}
+
+.resultTable th,
+.resultTable td {
+  padding: 1.4rem 1.6rem;
+  border: 1px solid var(--border-color);
+  text-align: left;
+  line-height: 1.5;
+  word-break: keep-all;
+}
+
+.resultTable th {
+  background-color: var(--bg-secondary);
+  font-weight: 800;
+}
+
+.resultTable tbody td:first-child {
+  background-color: var(--bg-secondary);
+  font-weight: 700;
+}
+
+.highlightCell {
+  color: #ff3b30;
+  font-weight: 800;
+}
+
 .tags {
   display: flex;
   flex-wrap: wrap;
@@ -217,5 +310,19 @@
   }
   .achievementList li {
     font-size: 1.6rem;
+  }
+  .problemSolutionItem {
+    padding: 2rem;
+  }
+  .tableWrap {
+    margin-top: 2rem;
+  }
+  .resultTable {
+    min-width: 58rem;
+    font-size: 1.4rem;
+  }
+  .resultTable th,
+  .resultTable td {
+    padding: 1.2rem;
   }
 }
