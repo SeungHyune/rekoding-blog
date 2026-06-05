@@ -24,11 +24,20 @@
   background-color: transparent;
   border: 0;
   outline: none;
+  color: var(--text-primary);
 }
 
 .searchForm input::placeholder {
   font-family: "Pretendard Variable";
   color: #c7c7c7;
+}
+
+:global(.dark) .searchForm input {
+  color: #fff;
+}
+
+:global(.dark) .searchForm input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .searchForm button {
