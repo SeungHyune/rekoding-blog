@@ -34,7 +34,7 @@
   --text-primary: #f0f0f0;
   --text-secondary: #a0a0a0;
   --bg-primary: #050505; /* Deeper black */
-  --bg-secondary: rgba(255, 255, 255, 0.03); 
+  --bg-secondary: rgba(255, 255, 255, 0.03);
   --border-color: rgba(255, 255, 255, 0.1);
   --button-bg: #fff;
   --button-text: #050505;
@@ -44,7 +44,7 @@
 }
 
 .rootSection.light {
-  background-color: transparent; 
+  background-color: transparent;
   color: var(--text-primary);
 }
 
@@ -132,7 +132,6 @@
 
 .rootSection.dark .adminSection input {
   color: #fff;
-  background-color: #000;
 }
 
 /* Editor 페이지 */
