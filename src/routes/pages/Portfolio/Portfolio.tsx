@@ -2,6 +2,8 @@ import styles from "./portfolio.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { PORTFOLIO_PROJECTS } from "@/constants/projects";
 
+const isInternalLink = (href: string) => href.startsWith("/");
+
 const Portfolio = () => {
   const navigate = useNavigate();
 
@@ -61,7 +63,11 @@ const Portfolio = () => {
                   {project.links.article && (
                     <Link
                       to={project.links.article}
-                      target="_blank"
+                      target={
+                        isInternalLink(project.links.article)
+                          ? undefined
+                          : "_blank"
+                      }
                       className={styles.linkButton}
                       onClick={(e) => e.stopPropagation()}
                     >

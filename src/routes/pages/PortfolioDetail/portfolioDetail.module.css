@@ -148,6 +148,17 @@
   background-color: var(--accent-color);
 }
 
+.inlineLink {
+  color: var(--accent-color);
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 0.4rem;
+}
+
+.inlineLink:hover {
+  color: var(--text-primary);
+}
+
 .problemSolutionList {
   display: flex;
   flex-direction: column;

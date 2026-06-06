@@ -5,6 +5,13 @@ type DetailTable = {
   highlightColumns?: number[];
 };
 
+type DetailTextItem =
+  | string
+  | {
+      text: string;
+      href: string;
+    };
+
 type PortfolioProject = {
   id: string;
   title: string;
@@ -28,10 +35,10 @@ type PortfolioProject = {
   achievements: string[];
   detailSections?: {
     title: string;
-    items: string[];
+    items: DetailTextItem[];
     problemSolutions?: {
       problem: string;
-      solutions: string[];
+      solutions: DetailTextItem[];
     }[];
     table?: DetailTable;
     tables?: DetailTable[];
@@ -59,8 +66,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
         },
       ],
       github: "",
-      article:
-        "https://velog.io/@rekoding/AI-%EC%9D%8C%EC%84%B1-%EC%83%81%EB%8B%B4%EB%B6%80%ED%84%B0-RAG-%EC%83%81%ED%92%88-%EC%B6%94%EC%B2%9C%EA%B9%8C%EC%A7%80-IvyFin-%ED%92%80%EC%8A%A4%ED%83%9D-%EA%B0%9C%EB%B0%9C-%ED%9A%8C%EA%B3%A0",
+      article: "/post/yFQcOJePdHfRym1ozEwv",
       articleLabel:
         "AI 음성 상담부터 RAG 상품 추천까지: IvyFin 풀스택 개발 회고",
     },
@@ -125,8 +131,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
       siteLabel: "프로젝트",
       siteDetailLabel: "프로젝트",
       github: "",
-      article:
-        "https://velog.io/@rekoding/%EB%B9%84%EC%A0%84%EA%B3%B5-%EC%8B%A0%EC%9E%85-%EA%B0%9C%EB%B0%9C%EC%9E%90%EC%9D%98-%EB%8F%84%EC%A0%84%EA%B8%B0-%ED%9A%8C%EC%82%AC-%ED%99%88%ED%8E%98%EC%9D%B4%EC%A7%80%EB%A5%BC-%EC%A7%81%EC%A0%91-%EB%A7%8C%EB%93%A4%EB%8B%A4",
+      article: "/post/ZorvteO3lPSF1zxWxzDl",
       articleLabel: "비전공 신입 개발자의 도전기: 회사 홈페이지를 직접 만들다",
     },
     achievements: [
@@ -198,6 +203,10 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
         title: "불필요한 API 호출 및 속도 지연 문제 해결",
         items: [
           "API 호출을 병렬 처리하여 처리 속도를 개선하고, Zustand Persist 기반 캐싱으로 반복 호출을 줄였습니다.",
+          {
+            text: "zustand persist를 통한 API 호출 최적화: 기존 5번 방문 시 5번 호출 → 개선 5번 방문 시 1번 호출 (80% 감소)",
+            href: "/post/3ch3jrFFiZI8BZanhd3w",
+          },
           "지연 로딩 UI를 추가해 완료된 데이터부터 먼저 보여주며 사용자 경험을 개선했습니다.",
         ],
         problemSolutions: [

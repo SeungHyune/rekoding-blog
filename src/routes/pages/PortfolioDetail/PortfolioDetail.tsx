@@ -1,7 +1,46 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { PORTFOLIO_PROJECTS } from "@/constants/projects";
 import styles from "./portfolioDetail.module.css";
 import NotFound from "../NotFound/NotFound";
+
+type LinkedText = {
+  text: string;
+  href: string;
+};
+
+const isInternalLink = (href: string) => href.startsWith("/");
+
+const isLinkedText = (item: unknown): item is LinkedText => {
+  return (
+    typeof item === "object" &&
+    item !== null &&
+    "text" in item &&
+    "href" in item
+  );
+};
+
+const renderDetailText = (item: string | LinkedText) => {
+  if (!isLinkedText(item)) return item;
+
+  if (isInternalLink(item.href)) {
+    return (
+      <Link to={item.href} className={styles.inlineLink}>
+        {item.text}
+      </Link>
+    );
+  }
+
+  return (
+    <a
+      href={item.href}
+      target="_blank"
+      rel="noreferrer"
+      className={styles.inlineLink}
+    >
+      {item.text}
+    </a>
+  );
+};
 
 const PortfolioDetail = () => {
   const { id } = useParams();
@@ -78,17 +117,23 @@ const PortfolioDetail = () => {
                 </a>
               )}
               {project.links.article && (
-                <a
-                  href={project.links.article}
-                  target="_blank"
-                  rel="noreferrer"
+                <Link
+                  to={project.links.article}
+                  target={
+                    isInternalLink(project.links.article) ? undefined : "_blank"
+                  }
+                  rel={
+                    isInternalLink(project.links.article)
+                      ? undefined
+                      : "noreferrer"
+                  }
                   className={styles.linkItem}
                 >
                   <span className={styles.linkLabel}>📝 기술 블로그</span>
                   <span className={styles.linkUrl}>
                     {project.links.articleLabel ?? project.links.article}
                   </span>
-                </a>
+                </Link>
               )}
             </div>
 
@@ -105,7 +150,9 @@ const PortfolioDetail = () => {
                 {section.items.length > 0 && (
                   <ul className={styles.detailList}>
                     {section.items.map((item) => (
-                      <li key={item}>{item}</li>
+                      <li key={isLinkedText(item) ? item.text : item}>
+                        {renderDetailText(item)}
+                      </li>
                     ))}
                   </ul>
                 )}
@@ -125,7 +172,15 @@ const PortfolioDetail = () => {
                           <strong>{index + 1}. 해결방안</strong>
                           <ul>
                             {item.solutions.map((solution) => (
-                              <li key={solution}>{solution}</li>
+                              <li
+                                key={
+                                  isLinkedText(solution)
+                                    ? solution.text
+                                    : solution
+                                }
+                              >
+                                {renderDetailText(solution)}
+                              </li>
                             ))}
                           </ul>
                         </div>
