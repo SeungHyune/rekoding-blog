@@ -1,7 +1,14 @@
+import { createUniqueHeadingId } from "../createHeadingId/createHeadingId";
+
 const splitMarkdownIntoSections = (markdownText: string) => {
   const SECTION_REGEX = /^#{1,6} .+$/gm;
-  const sections: Array<{ header: string; content: string; fullText: string }> =
-    [];
+  const sections: Array<{
+    id: string;
+    header: string;
+    content: string;
+    fullText: string;
+  }> = [];
+  const headingIdCountMap = new Map<string, number>();
 
   // 모든 헤더 위치 찾기
   const headerIndices: number[] = [];
@@ -22,12 +29,14 @@ const splitMarkdownIntoSections = (markdownText: string) => {
     let sectionText = markdownText.slice(start, end).trim();
 
     const [header, ...contentLines] = sectionText.split("\n");
+    const headerText = header.replace(/^#{1,6}\s+/, "").trim();
 
     if (i === 0 && initialContent && initialContent[0]) {
       sectionText = initialContent[0] + markdownText.slice(start, end).trim();
     }
 
     sections.push({
+      id: createUniqueHeadingId(headerText, headingIdCountMap),
       header: header.trim(),
       content: contentLines.join("\n").trim(),
       fullText: sectionText,

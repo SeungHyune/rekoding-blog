@@ -23,8 +23,7 @@ const usePostDetail = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          const entryId = Number(entry.target.id);
-          const tocId = tocList[entryId].gapRemoveText;
+          const tocId = entry.target.id;
           const toc = document.querySelector(`li[data-title="${tocId}"] a`);
 
           if (entry.isIntersecting) {

@@ -83,7 +83,7 @@ const Post = () => {
           {postContentList.map((content, index) => (
             <div
               className={`${styles.markdownSection} markdownSection`}
-              id={String(index)}
+              id={content.id}
               key={`${index}${content.header}`}
             >
               <ReactMarkdownPreview content={content.fullText} />
