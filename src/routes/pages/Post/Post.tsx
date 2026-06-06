@@ -4,15 +4,19 @@ import { usePostsByCategory, usePostDetail } from "./hooks";
 import { ReactMarkdownPreview } from "@/components";
 import { CategoryPostList } from "./components";
 import NotFound from "../NotFound/NotFound";
+import { Link } from "react-router-dom";
 import { useToggleMobileNav } from "@/hooks";
+import useLogin from "@/stores/useLogin/useLogin";
 import styles from "./post.module.css";
 
 const Post = () => {
+  const { isLogin } = useLogin();
   const { isMobile, isNavOpen, handleCloseNav, handleToggleNav } =
     useToggleMobileNav({ mobileWidth: 1280 });
 
   const { postList } = usePostsByCategory();
   const {
+    id,
     postDetail,
     postContentList,
     postDetailDate,
@@ -53,7 +57,14 @@ const Post = () => {
 
       <section className={`${styles.postContent} postContent`}>
         <article className={styles.titleBox}>
-          <h1>{postDetail.title}</h1>
+          <div className={styles.titleHeader}>
+            <h1>{postDetail.title}</h1>
+            {isLogin && (
+              <Link className={styles.editButton} to={`/editor/${id}`}>
+                수정하기
+              </Link>
+            )}
+          </div>
           <div className={styles.infoBox}>
             <ul className={styles.hashTagList}>
               {postDetail.hashTag.map((tag) => (

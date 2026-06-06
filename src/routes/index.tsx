@@ -1,6 +1,7 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { DefaultLayout } from "./layouts";
+import { ProtectedRoute } from "./components";
 import { getPostDetail } from "@/services/response/post";
 
 const LandingHome = React.lazy(() => import("./pages/LandingHome/LandingHome"));
@@ -54,8 +55,22 @@ const router = createBrowserRouter([
         element: <Search />,
       },
       {
-        path: "/editor",
-        element: <Editor />,
+        element: <ProtectedRoute />,
+        children: [
+          {
+            path: "/editor",
+            element: <Editor />,
+          },
+          {
+            path: "/editor/:id",
+            element: <Editor />,
+            loader: async ({ params }) => {
+              const { id = "" } = params;
+              const postDetail = await getPostDetail(id);
+              return postDetail;
+            },
+          },
+        ],
       },
       {
         path: "/admin",

@@ -64,6 +64,7 @@ const usePostDetail = () => {
   const postDetailDate = formatDate(new Date(postDetail?.dateAt || ""));
 
   return {
+    id,
     postDetail,
     postContentList,
     postDetailDate,

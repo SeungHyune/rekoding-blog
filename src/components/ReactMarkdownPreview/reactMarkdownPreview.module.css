@@ -28,6 +28,11 @@
   margin: 1rem 0;
 }
 
+.reactMarkdown strong {
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
 .reactMarkdown ul,
 .reactMarkdown ol {
   display: flex;

@@ -168,17 +168,38 @@
   box-sizing: border-box;
 }
 
+.dateField input {
+  height: 3.2rem;
+  padding: 0 1rem;
+  border: 1px solid #dddddd;
+  border-radius: 0.6rem;
+  color: var(--text-primary);
+  background-color: transparent;
+  font-family: "Pretendard Variable";
+  font-size: 1.4rem;
+}
+
 .contentEditor {
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
-.contentEditor > div {
+.contentEditor > textarea {
   flex: 1;
   padding-bottom: 5rem;
   max-height: 48rem;
   overflow: auto;
+  font-family: "Pretendard Variable";
+  color: var(--text-primary);
+  background-color: transparent;
+  border: 0;
+  resize: none;
+  box-sizing: border-box;
+}
+
+.contentEditor > textarea::placeholder {
+  color: #b5b5b5;
 }
 
 .contentEditor > .btnBox {

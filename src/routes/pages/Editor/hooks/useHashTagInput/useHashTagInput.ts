@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
 
-const useHashTagInput = () => {
+const useHashTagInput = (initialHashTagList: string[] = []) => {
   const hashTagInputRef = useRef<HTMLInputElement | null>(null);
 
-  const [hashTagList, setHashTagList] = useState<string[]>([]);
+  const [hashTagList, setHashTagList] = useState<string[]>(initialHashTagList);
 
   const clearInputField = () => {
     if (hashTagInputRef.current) {

@@ -32,11 +32,38 @@
   box-sizing: border-box;
 }
 
+.titleHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
 .postContent .titleBox h1 {
   font-size: 3.6rem;
   font-weight: 800;
   line-height: 4.5rem;
   margin: 0;
+}
+
+.editButton {
+  flex-shrink: 0;
+  padding: 0.9rem 1.6rem;
+  border: 1px solid #ffaa00;
+  border-radius: 999rem;
+  color: #ffaa00;
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.8rem;
+  text-decoration: none;
+  transition:
+    color 0.2s,
+    background-color 0.2s;
+}
+
+.editButton:hover {
+  color: #fff;
+  background-color: #ffaa00;
 }
 
 .postContent .infoBox {
@@ -48,6 +75,7 @@
 
 .postContent .infoBox .hashTagList {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
 }
 
@@ -56,6 +84,10 @@
   font-weight: 400;
   line-height: 1.8rem;
   color: #ffaa00;
+}
+
+.postContent .infoBox > div {
+  align-self: baseline;
 }
 
 .postContent .infoBox div span {
@@ -179,7 +211,9 @@
 
 @media (max-width: 1260px) {
   .leftSidebarMenu {
-    position: relative;
+    position: fixed;
+    top: 10rem;
+    left: 0;
     display: inline-flex;
     align-self: baseline;
     align-items: center;
@@ -235,6 +269,15 @@
   }
 
   .postContent {
+    width: 100%;
+  }
+
+  .titleHeader {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .postContent .titleBox h1 {
     width: 100%;
   }
 

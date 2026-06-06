@@ -1,5 +1,7 @@
 import { useCategoriesQuery } from "@/hooks";
 import { AlertModal, ReactEditor, ReactMarkdownPreview } from "@/components";
+import { useLoaderData, useParams } from "react-router-dom";
+import { PostListResponse } from "@/types/response/post";
 import {
   useCategoryInput,
   useHashTagInput,
@@ -10,6 +12,9 @@ import styles from "./editor.module.css";
 import useFormModal from "./hooks/useFormModal/useFormModal";
 
 const Editor = () => {
+  const { id } = useParams();
+  const loaderData = useLoaderData() as PostListResponse | undefined;
+  const isEditMode = Boolean(id && loaderData);
   const { categories = [] } = useCategoriesQuery();
 
   const {
@@ -36,17 +41,24 @@ const Editor = () => {
     hashTagList,
     handleHashTagKeydown,
     handleRemoveHashTag,
-  } = useHashTagInput();
+  } = useHashTagInput(loaderData?.hashTag);
 
-  const { category, categoryColor, handleChangeCategory } = useCategoryInput();
+  const { category, categoryColor, handleChangeCategory } = useCategoryInput(
+    loaderData?.category,
+    loaderData?.categoryColor,
+  );
 
   const {
     title,
     contentValue,
+    dateValue,
     handleTitleChange,
     handleInputContent,
+    handleDateChange,
     handlePostSubmit,
   } = useFormSubmit({
+    postId: id,
+    initialPost: loaderData,
     hashTagList,
     selectedFile,
     category,
@@ -75,7 +87,7 @@ const Editor = () => {
             <div className={styles.fieldContent}>
               <input
                 className={styles.uploadName}
-                placeholder="첨부파일"
+                placeholder={isEditMode ? "기존 썸네일 유지" : "첨부파일"}
                 ref={uploadInputRef}
                 onMouseOver={handleShowPreview}
                 onMouseOut={handleHidePreview}
@@ -105,6 +117,7 @@ const Editor = () => {
                       value={value}
                       name="category"
                       id={value}
+                      checked={category === value}
                       onChange={(event) => handleChangeCategory(event, color)}
                     />
                     <label
@@ -125,6 +138,19 @@ const Editor = () => {
                   <button type="button">+ 추가하기</button>
                 </li>
               </ul>
+            </div>
+          </article>
+          <article className={styles.dateField}>
+            <div className={styles.fieldTitle}>
+              작성일 <mark>*</mark>
+            </div>
+            <div className={styles.fieldContent}>
+              <input
+                type="date"
+                value={dateValue}
+                required
+                onChange={handleDateChange}
+              />
             </div>
           </article>
           <article className={styles.hashTagList}>
@@ -153,13 +179,16 @@ const Editor = () => {
             </div>
           </article>
           <article className={styles.contentEditor}>
-            <ReactEditor handleInputContent={handleInputContent} />
+            <ReactEditor
+              value={contentValue}
+              handleInputContent={handleInputContent}
+            />
             <div className={`${styles.btnBox} contentEditorBtnBox`}>
               <button className={styles.cancel} type="button">
                 취소하기
               </button>
               <button className={styles.submit} type="submit">
-                작성하기
+                {isEditMode ? "수정하기" : "작성하기"}
               </button>
             </div>
           </article>
