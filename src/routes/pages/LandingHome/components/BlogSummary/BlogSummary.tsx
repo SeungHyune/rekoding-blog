@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { usePostsQuery } from "@/hooks";
-import { formatDate } from "@/utils";
+import { formatDate, markdownToPlainText } from "@/utils";
 import styles from "./blogSummary.module.css";
 
 const BlogSummary = () => {
@@ -23,7 +23,9 @@ const BlogSummary = () => {
               onClick={() => navigate(`/post/${post.id}`)}
             >
               <h3 className={styles.postTitle}>{post.title}</h3>
-              <p className={styles.postContent}>{post.content}</p>
+              <p className={styles.postContent}>
+                {markdownToPlainText(post.content)}
+              </p>
               <div className={styles.postMeta}>
                 <span
                   className={styles.category}
